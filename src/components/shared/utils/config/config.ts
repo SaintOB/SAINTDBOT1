@@ -10,7 +10,7 @@ export const APP_IDS = {
     PRODUCTION: 65555,
     PRODUCTION_BE: 65556,
     PRODUCTION_ME: 65557,
-    SAINTDBOT: '33FCBGiyjs6CSnISZHJT3', // registered redirect: https://saintdbot-1.vercel.app (trade only)
+    SAINTDBOT: 133598, // registered redirect: https://saintdbot-1.vercel.app (trade only)
     TEAMSAINTFX: 133598, // registered redirect: https://teamsaintfx.com  (read+trade only)
 };
 export const OAUTH_CLIENT_IDS = {
