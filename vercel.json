@@ -1,0 +1,13 @@
+{
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/callback",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/callback/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
