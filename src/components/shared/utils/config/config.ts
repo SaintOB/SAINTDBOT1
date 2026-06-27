@@ -10,7 +10,7 @@ export const APP_IDS = {
     PRODUCTION: 65555,
     PRODUCTION_BE: 65556,
     PRODUCTION_ME: 65557,
-    SAINTDBOT: 134138, // registered redirect: https://saintdbot--saintob.replit.app  (read+trade only)
+    SAINTDBOT: '33FCBGiyjs6CSnISZHJT3', // registered redirect: https://saintdbot-1.vercel.app (trade only)
     TEAMSAINTFX: 133598, // registered redirect: https://teamsaintfx.com  (read+trade only)
 };
 export const OAUTH_CLIENT_IDS = {
@@ -19,6 +19,9 @@ export const OAUTH_CLIENT_IDS = {
 
 export const livechat_license_id = 12049137;
 export const livechat_client_id = '66aa088aad5a414484c1fd1fa8a5ace7';
+
+const isSaintDbotVercelHost = (hostname: string) =>
+    hostname === 'saintdbot-1.vercel.app' || (hostname.startsWith('saintdbot-1-') && hostname.endsWith('.vercel.app'));
 
 export const domain_app_ids = {
     'master.bot-standalone.pages.dev': APP_IDS.TMP_STAGING,
@@ -30,6 +33,7 @@ export const domain_app_ids = {
     'dbot.deriv.me': APP_IDS.PRODUCTION_ME,
 
     'saintdbot--saintob.replit.app': APP_IDS.SAINTDBOT,
+    'saintdbot-1.vercel.app': APP_IDS.SAINTDBOT,
     'teamsaintfx.com': APP_IDS.TEAMSAINTFX,
     'www.teamsaintfx.com': APP_IDS.TEAMSAINTFX,
 };
@@ -44,12 +48,14 @@ export const isProduction = () => {
 };
 
 export const isTestLink = () => {
+    const hostname = window.location.hostname;
     return (
         window.location.origin?.includes('.binary.sx') ||
         window.location.origin?.includes('bot-65f.pages.dev') ||
         window.location.origin?.includes('.replit.app') ||
-        window.location.hostname === 'teamsaintfx.com' ||
-        window.location.hostname === 'www.teamsaintfx.com' ||
+        isSaintDbotVercelHost(hostname) ||
+        hostname === 'teamsaintfx.com' ||
+        hostname === 'www.teamsaintfx.com' ||
         isLocal()
     );
 };
@@ -57,11 +63,16 @@ export const isTestLink = () => {
 export const isLocal = () => /localhost(:\d+)?$/i.test(window.location.hostname);
 
 // True on all SaintDBot-owned domains
-export const isSaintDbotDeploy = () =>
-    window.location.hostname.includes('.replit.app') ||
-    window.location.hostname.includes('.binary.sx') ||
-    window.location.hostname === 'teamsaintfx.com' ||
-    window.location.hostname === 'www.teamsaintfx.com';
+export const isSaintDbotDeploy = () => {
+    const hostname = window.location.hostname;
+    return (
+        hostname.includes('.replit.app') ||
+        hostname.includes('.binary.sx') ||
+        isSaintDbotVercelHost(hostname) ||
+        hostname === 'teamsaintfx.com' ||
+        hostname === 'www.teamsaintfx.com'
+    );
+};
 
 const getDefaultServerURL = () => {
     if (isTestLink()) {
@@ -155,7 +166,7 @@ export const checkAndSetEndpointFromUrl = () => {
             url_params.delete('qa_server');
             url_params.delete('app_id');
 
-            if (/^(^(www\.)?qa[0-9]{1,4}\.deriv.dev|(.*)\.derivws\.com)$/.test(qa_server) && /^[0-9]+$/.test(app_id)) {
+            if (/^(^(www\.)?qa[0-9]{1,4}\.deriv.dev|(.*)\.derivws\.com)$/.test(qa_server) && /^[a-zA-Z0-9]+$/.test(app_id)) {
                 localStorage.setItem('config.app_id', app_id);
                 localStorage.setItem('config.server_url', qa_server.replace(/"/g, ''));
             }
@@ -188,6 +199,7 @@ export const generateOAuthURL = () => {
     const isSaintDbotDomain =
         hostname.includes('.replit.app') ||
         hostname.includes('.binary.sx') ||
+        isSaintDbotVercelHost(hostname) ||
         hostname === 'teamsaintfx.com' ||
         hostname === 'www.teamsaintfx.com' ||
         hostname === 'localhost';
@@ -208,17 +220,15 @@ export const generateOAuthURL = () => {
             return url.toString();
         }
 
-        // saintdbot--saintob.replit.app — use its own registered app directly.
-        // prompt=login forces Deriv to show the login form even when the user already
-        // has an active Deriv session. Without it, Deriv silently "authenticates" and
-        // redirects to Trader's Hub (app.deriv.com) instead of back to our site.
-        // With prompt=login, Deriv goes to home.deriv.com/dashboard/login which runs
-        // the full OAuth flow and correctly lands back here with tokens in the URL.
+        // SaintDBot uses its own registered Deriv app directly.
+        // For Vercel preview URLs, always return to the production domain that is
+        // registered in the Deriv app settings.
+        const redirectOrigin = isSaintDbotVercelHost(hostname) ? 'https://saintdbot-1.vercel.app' : window.location.origin;
         const url = new URL('https://oauth.deriv.com/oauth2/authorize');
         url.searchParams.set('app_id', String(APP_IDS.SAINTDBOT));
         url.searchParams.set('l', 'en');
         url.searchParams.set('brand', 'deriv');
-        url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
+        url.searchParams.set('redirect_uri', redirectOrigin);
         return url.toString();
     }
 
@@ -260,6 +270,6 @@ export const generateOAuthURL = () => {
         return original_url.toString();
     } catch {
         // Ultimate fallback
-        return `https://oauth.deriv.com/oauth2/authorize?app_id=${APP_IDS.PRODUCTION}&l=en&brand=deriv`;
+        return `https://oauth.deriv.com/oauth2/authorize?app_id=${APP_IDS.SAINTDBOT}&l=en&brand=deriv&redirect_uri=https://saintdbot-1.vercel.app`;
     }
 };
