@@ -104,7 +104,7 @@ const SplashLogin = () => {
 
         const url = new URL('https://auth.deriv.com/oauth2/auth');
 
-        url.searchParams.set('client_id', OAUTH_CLIENT_IDS.TEAMSAINTFX);
+        url.searchParams.set('client_id', '33FCBGiyjs6CSnISZHJT3');
         url.searchParams.set('response_type', 'code');
         url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
         url.searchParams.set('scope', 'trade');
