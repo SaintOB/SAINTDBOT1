@@ -5,8 +5,8 @@ import { generateDerivApiInstance } from '@/external/bot-skeleton/services/api/a
 import { clearAuthData } from '@/utils/auth-utils';
 import { Callback } from '@deriv-com/auth-client';
 import { Button } from '@deriv-com/ui';
-import { OAUTH_CLIENT_IDS } from '@/components/shared/utils/config/config';
 
+const DERIV_OAUTH_CLIENT_ID = '33FCBGiyjs6CSnISZHJT3';
 const CALLBACK_TIMEOUT_MS = 5000;
 
 const withTimeout = <T,>(promise: Promise<T>, ms: number): Promise<T | null> =>
@@ -68,11 +68,18 @@ const CallbackPage = () => {
                                 code: oauthCode,
                                 code_verifier: codeVerifier,
                                 redirect_uri: `${window.location.origin}/callback`,
-                                client_id: OAUTH_CLIENT_IDS.TEAMSAINTFX,
+                                client_id: DERIV_OAUTH_CLIENT_ID,
                             }),
                         });
 
-                        const data = await response.json();
+                        const responseText = await response.text();
+                        let data: any;
+
+                        try {
+                            data = JSON.parse(responseText);
+                        } catch {
+                            throw new Error(`Token exchange returned non-JSON response: ${responseText.slice(0, 120)}`);
+                        }
 
                         if (!response.ok || data.error) {
                             throw new Error(
