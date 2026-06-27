@@ -200,7 +200,7 @@ const SplashLogin = () => {
                             We only request access to identify your Deriv account and place trades when you choose. We
                             cannot withdraw funds or see your password.
                         </p>
-                        <button className='splash-login__btn' onClick={handleNewDerivLogin}
+                       <button className='splash-login__btn' onClick={handleNewDerivLogin}>
                             <svg
                                 width='20'
                                 height='20'
