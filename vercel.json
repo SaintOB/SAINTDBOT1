@@ -2,11 +2,11 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/callback",
-      "destination": "/index.html"
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
     },
     {
-      "source": "/callback/:path*",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
