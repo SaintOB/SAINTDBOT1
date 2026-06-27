@@ -28,14 +28,12 @@ class PWAManager {
     }
 
     private init() {
-        // Listen for beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', e => {
             e.preventDefault();
             this.installPrompt = e as BeforeInstallPromptEvent;
             this.notifyInstallCallbacks(true);
         });
 
-        // Listen for app installed event
         window.addEventListener('appinstalled', () => {
             this.installPrompt = null;
             this.notifyInstallCallbacks(false);
@@ -43,60 +41,29 @@ class PWAManager {
     }
 
     /**
-     * Register service worker (for all devices to enable offline functionality)
+     * Service worker disabled during Deriv OAuth migration.
+     * The old worker was serving cached callback bundles and blocking login fixes.
      */
     async registerServiceWorker(): Promise<ServiceWorkerRegistration | null> {
-        if (!('serviceWorker' in navigator)) {
-            console.warn('[PWA] Service workers not supported');
-            return null;
-        }
-
-        // Only enable PWA service workers on Chrome browsers
-        const isChrome = /Chrome/.test(navigator.userAgent) && !isFirefox() && !isSafari();
-        if (!isChrome) {
-            const browser = isFirefox() ? 'Firefox' : isSafari() ? 'Safari' : 'Unknown';
-            console.log(
-                `[PWA] Service worker disabled on ${browser} - PWA only supported on Chrome to prevent chunk loading and login issues`
-            );
-            return null;
-        }
-
-        // Register service worker for Chrome only
-        console.log('[PWA] Registering service worker for Chrome browser offline capabilities');
+        if (!('serviceWorker' in navigator)) return null;
 
         try {
-            const registration = await navigator.serviceWorker.register('/sw.js', {
-                scope: '/',
-            });
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(registrations.map(registration => registration.unregister()));
 
-            // Listen for updates
-            registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
+            if ('caches' in window) {
+                const cacheKeys = await caches.keys();
+                await Promise.all(cacheKeys.map(key => caches.delete(key)));
+            }
 
-                if (newWorker) {
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            this.notifyUpdateCallbacks();
-                        }
-                    });
-                }
-            });
-
-            // Handle controller change (new service worker activated)
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                window.location.reload();
-            });
-
-            return registration;
+            console.log('[PWA] Service worker disabled and caches cleared for OAuth reliability');
         } catch (error) {
-            console.error('[PWA] Service worker registration failed:', error);
-            return null;
+            console.warn('[PWA] Failed to unregister service worker:', error);
         }
+
+        return null;
     }
 
-    /**
-     * Show install prompt
-     */
     async showInstallPrompt(): Promise<boolean> {
         if (!this.installPrompt) {
             console.warn('[PWA] Install prompt not available');
@@ -119,23 +86,14 @@ class PWAManager {
         }
     }
 
-    /**
-     * Check if app can be installed
-     */
     canInstall(): boolean {
         return this.installPrompt !== null;
     }
 
-    /**
-     * Check if app is installed (running in standalone mode)
-     */
     isInstalled(): boolean {
         return this.isStandalone();
     }
 
-    /**
-     * Check if app is running in standalone mode
-     */
     isStandalone(): boolean {
         return (
             window.matchMedia('(display-mode: standalone)').matches ||
@@ -144,9 +102,6 @@ class PWAManager {
         );
     }
 
-    /**
-     * Get PWA install state
-     */
     getInstallState(): PWAInstallState {
         return {
             canInstall: this.canInstall(),
@@ -156,13 +111,9 @@ class PWAManager {
         };
     }
 
-    /**
-     * Subscribe to install state changes
-     */
     onInstallStateChange(callback: (canInstall: boolean) => void): () => void {
         this.installCallbacks.push(callback);
 
-        // Return unsubscribe function
         return () => {
             const index = this.installCallbacks.indexOf(callback);
             if (index > -1) {
@@ -171,13 +122,9 @@ class PWAManager {
         };
     }
 
-    /**
-     * Subscribe to app updates
-     */
     onUpdateAvailable(callback: () => void): () => void {
         this.updateCallbacks.push(callback);
 
-        // Return unsubscribe function
         return () => {
             const index = this.updateCallbacks.indexOf(callback);
             if (index > -1) {
@@ -186,49 +133,26 @@ class PWAManager {
         };
     }
 
-    /**
-     * Update the app (reload with new service worker)
-     */
     async updateApp(): Promise<void> {
-        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-            navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
-        } else {
-            window.location.reload();
-        }
+        window.location.reload();
     }
 
-    /**
-     * Check if device is iOS
-     */
     isIOS(): boolean {
         return /iPad|iPhone|iPod/.test(navigator.userAgent);
     }
 
-    /**
-     * Check if device is Android
-     */
     isAndroid(): boolean {
         return /Android/.test(navigator.userAgent);
     }
 
-    /**
-     * Check if device is mobile
-     */
     isMobile(): boolean {
         return this.isIOS() || this.isAndroid() || /Mobile|Tablet/.test(navigator.userAgent);
     }
 
-    /**
-     * Check if browser is Safari Desktop (Safari with desktop screen width)
-     */
     isSafariDesktop(): boolean {
-        // Check if Safari and desktop width (typically > 768px for desktop)
         return isSafari() && window.innerWidth > 768;
     }
 
-    /**
-     * Get install instructions for current platform
-     */
     getInstallInstructions(): string {
         if (this.isIOS()) {
             return localize('Tap the Share button and then "Add to Home Screen"');
@@ -260,10 +184,8 @@ class PWAManager {
     }
 }
 
-// Create singleton instance
 export const pwaManager = new PWAManager();
 
-// Utility functions
 export const registerPWA = () => pwaManager.registerServiceWorker();
 export const showInstallPrompt = () => pwaManager.showInstallPrompt();
 export const canInstallPWA = () => pwaManager.canInstall();
@@ -278,7 +200,6 @@ export const isSafariDesktopBrowser = () => isSafari() && window.innerWidth > 76
 export const isUnsupportedPWABrowser = () => !(/Chrome/.test(navigator.userAgent) && !isFirefox() && !isSafari());
 export const isChromeOnlyPWA = () => /Chrome/.test(navigator.userAgent) && !isFirefox() && !isSafari();
 
-// Mobile source detection utilities
 export const isMobileSource = (): boolean => {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('source') === 'mobile';
@@ -301,7 +222,6 @@ export const getMobileSourceInfo = () => {
     };
 };
 
-// PWA Modal timing utilities
 export const PWA_MODAL_STORAGE_KEY = 'pwa-modal-timing';
 
 export interface PWAModalTiming {
@@ -339,64 +259,22 @@ export const shouldShowPWAModal = (): boolean => {
     const timing = getPWAModalTiming();
     const now = new Date();
 
-    // Don't show if already installed
-    if (pwaManager.isStandalone()) {
-        return false;
-    }
+    if (pwaManager.isStandalone()) return false;
 
-    // Only show PWA modal on Chrome browsers
     const isChrome = /Chrome/.test(navigator.userAgent) && !isFirefox() && !isSafari();
-    if (!isChrome) {
-        return false;
-    }
+    if (!isChrome) return false;
 
-    // Don't show on mobile (only desktop)
-    if (pwaManager.isMobile()) {
-        return false;
-    }
+    if (pwaManager.isMobile()) return false;
 
-    // Show on first visit if never shown before
-    if (!timing.hasBeenShown && !timing.firstVisit) {
-        return true;
-    }
+    if (!timing.hasBeenShown && !timing.firstVisit) return true;
 
-    // Don't show if dismissed more than 3 times
-    if (timing.dismissCount >= 3) {
-        return false;
-    }
+    if (timing.dismissCount >= 3) return false;
 
-    // Don't show if shown in the last 7 days
     if (timing.lastShown) {
         const lastShown = new Date(timing.lastShown);
         const daysSinceLastShown = (now.getTime() - lastShown.getTime()) / (1000 * 60 * 60 * 24);
-        if (daysSinceLastShown < 7) {
-            return false;
-        }
+        if (daysSinceLastShown < 7) return false;
     }
 
-    return true;
+    return !timing.hasBeenShown || timing.dismissCount < 3;
 };
-
-export const markPWAModalShown = (): void => {
-    const timing = getPWAModalTiming();
-    const now = new Date().toISOString();
-
-    setPWAModalTiming({
-        ...timing,
-        lastShown: now,
-        firstVisit: timing.firstVisit || now,
-        hasBeenShown: true,
-    });
-};
-
-export const markPWAModalDismissed = (): void => {
-    const timing = getPWAModalTiming();
-
-    setPWAModalTiming({
-        ...timing,
-        dismissCount: timing.dismissCount + 1,
-        lastShown: new Date().toISOString(),
-    });
-};
-
-export default pwaManager;
