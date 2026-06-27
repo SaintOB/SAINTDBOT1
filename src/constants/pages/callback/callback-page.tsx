@@ -7,10 +7,49 @@ import { Callback } from '@deriv-com/auth-client';
 import { Button } from '@deriv-com/ui';
 
 const DERIV_OAUTH_CLIENT_ID = '33FCBGiyjs6CSnISZHJT3';
-const CALLBACK_TIMEOUT_MS = 5000;
+const DERIV_WEBSOCKET_APP_ID = 133598;
+const CALLBACK_TIMEOUT_MS = 8000;
 
 const withTimeout = <T,>(promise: Promise<T>, ms: number): Promise<T | null> =>
     Promise.race([promise, new Promise<null>(resolve => setTimeout(() => resolve(null), ms))]);
+
+const authorizeWithDerivWebSocket = (accessToken: string): Promise<any> => {
+    return new Promise((resolve, reject) => {
+        const socket = new WebSocket(`wss://ws.derivws.com/websockets/v3?app_id=${DERIV_WEBSOCKET_APP_ID}`);
+        const timeout = window.setTimeout(() => {
+            socket.close();
+            reject(new Error('Deriv authorize request timed out.'));
+        }, CALLBACK_TIMEOUT_MS);
+
+        socket.onopen = () => {
+            socket.send(JSON.stringify({ authorize: accessToken }));
+        };
+
+        socket.onerror = () => {
+            window.clearTimeout(timeout);
+            socket.close();
+            reject(new Error('Could not connect to Deriv WebSocket.'));
+        };
+
+        socket.onmessage = event => {
+            window.clearTimeout(timeout);
+            socket.close();
+
+            try {
+                const message = JSON.parse(event.data);
+
+                if (message.error) {
+                    reject(new Error(message.error.message || message.error.code || 'Deriv authorize failed.'));
+                    return;
+                }
+
+                resolve(message.authorize);
+            } catch {
+                reject(new Error('Deriv authorize returned an invalid response.'));
+            }
+        };
+    });
+};
 
 /**
  * Gets the selected currency or falls back to appropriate defaults
@@ -41,7 +80,7 @@ const CallbackPage = () => {
 
     if (oauthCode) {
         const NewOAuthCallback = () => {
-            const [status, setStatus] = useState('Connecting your new Deriv account...');
+            const [status, setStatus] = useState('Connecting your Deriv account...');
             const [error, setError] = useState('');
 
             useEffect(() => {
@@ -93,31 +132,45 @@ const CallbackPage = () => {
                             throw new Error('No access token returned from Deriv.');
                         }
 
-                        const realLoginId =
-                            data.loginid ||
-                            data.login_id ||
-                            data.account ||
-                            data.accounts?.[0]?.loginid ||
-                            data.account_list?.[0]?.loginid ||
-                            'new_deriv_account';
+                        const authorize = await authorizeWithDerivWebSocket(accessToken);
 
-                        const clientAccounts = {
+                        if (!authorize?.loginid) {
+                            throw new Error('Deriv did not return a real login ID. Please try again.');
+                        }
+
+                        const realLoginId = authorize.loginid;
+                        const realCurrency = authorize.currency || authorize.account_list?.[0]?.currency || 'USD';
+                        const accountList = Array.isArray(authorize.account_list) ? authorize.account_list : [];
+
+                        const clientAccounts: Record<string, any> = {
                             [realLoginId]: {
                                 loginid: realLoginId,
                                 token: accessToken,
-                                currency: 'USD',
+                                currency: realCurrency,
                                 is_disabled: 0,
                             },
                         };
 
-                        const accountsList = {
+                        const accountsList: Record<string, string> = {
                             [realLoginId]: accessToken,
                         };
+
+                        accountList.forEach((account: any) => {
+                            if (!account?.loginid) return;
+                            accountsList[account.loginid] = accessToken;
+                            clientAccounts[account.loginid] = {
+                                loginid: account.loginid,
+                                token: accessToken,
+                                currency: account.currency || realCurrency || 'USD',
+                                is_disabled: 0,
+                            };
+                        });
 
                         localStorage.setItem('authToken', accessToken);
                         localStorage.setItem('active_loginid', realLoginId);
                         localStorage.setItem('clientAccounts', JSON.stringify(clientAccounts));
                         localStorage.setItem('accountsList', JSON.stringify(accountsList));
+                        localStorage.setItem('callback_token', JSON.stringify(authorize));
 
                         Cookies.set('logged_state', 'true', {
                             expires: 30,
@@ -128,17 +181,17 @@ const CallbackPage = () => {
                         sessionStorage.removeItem('deriv_oauth_code_verifier');
                         sessionStorage.removeItem('deriv_oauth_state');
 
-                        setStatus(`Login successful. Token saved. Login ID: ${realLoginId}`);
+                        setStatus(`Login successful. Login ID: ${realLoginId}`);
 
-                        window.location.href = '/free-bots?account=demo';
+                        window.location.href = '/free-bots';
                     } catch (err) {
-                        console.error('[New Deriv OAuth Error]', err);
+                        console.error('[Deriv OAuth Error]', err);
 
                         const message =
                             err instanceof Error ? err.message : typeof err === 'string' ? err : JSON.stringify(err);
 
-                        setError(message || 'New Deriv login failed.');
-                        setStatus('New Deriv login could not complete.');
+                        setError(message || 'Deriv login failed.');
+                        setStatus('Deriv login could not complete.');
                     }
                 };
 
@@ -147,7 +200,7 @@ const CallbackPage = () => {
 
             return (
                 <div style={{ padding: '40px', textAlign: 'center' }}>
-                    <h2>New Deriv Login</h2>
+                    <h2>Deriv Login</h2>
                     <p>{status}</p>
 
                     {error && <p style={{ color: '#d32f2f', maxWidth: '520px', margin: '16px auto' }}>{error}</p>}
@@ -210,7 +263,7 @@ const CallbackPage = () => {
                                 }
                                 is_token_set = true;
                             } else if (authorize) {
-                                localStorage.setItem('callback_token', authorize.toString());
+                                localStorage.setItem('callback_token', JSON.stringify(authorize));
                                 const clientAccountsArray = Object.values(clientAccounts);
                                 const firstId = authorize?.account_list?.[0]?.loginid;
                                 const filteredTokens = clientAccountsArray.filter(
