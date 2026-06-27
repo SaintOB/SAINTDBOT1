@@ -10,7 +10,7 @@ const POSSIBLE_PROFILE_ENDPOINTS = [
 const pickLoginId = data => {
     if (!data || typeof data !== 'object') return '';
 
-    return (
+    const legacyLoginId =
         data.loginid ||
         data.login_id ||
         data.account ||
@@ -22,8 +22,16 @@ const pickLoginId = data => {
         data.accounts?.[0]?.login_id ||
         data.account_list?.[0]?.loginid ||
         data.account_list?.[0]?.login_id ||
-        ''
-    );
+        '';
+
+    if (legacyLoginId) return legacyLoginId;
+
+    // New Deriv OAuth userinfo may not expose the old CR/VRTC login ID.
+    // The OAuth subject is still a unique user identity, so use it with a prefix.
+    if (data.sub) return `oauth_${data.sub}`;
+    if (data.cid) return `oauth_${data.cid}`;
+
+    return '';
 };
 
 export default async function handler(req, res) {
@@ -63,7 +71,12 @@ export default async function handler(req, res) {
 
             const loginid = pickLoginId(data);
 
-            attempts.push({ endpoint, status: response.status, loginid, keys: data && typeof data === 'object' ? Object.keys(data) : [] });
+            attempts.push({
+                endpoint,
+                status: response.status,
+                loginid,
+                keys: data && typeof data === 'object' ? Object.keys(data) : [],
+            });
 
             if (response.ok && loginid) {
                 return res.status(200).json({ loginid, profile: data, attempts });
