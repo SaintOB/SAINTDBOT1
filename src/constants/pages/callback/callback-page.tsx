@@ -12,6 +12,42 @@ const CALLBACK_TIMEOUT_MS = 8000;
 const withTimeout = <T,>(promise: Promise<T>, ms: number): Promise<T | null> =>
     Promise.race([promise, new Promise<null>(resolve => setTimeout(() => resolve(null), ms))]);
 
+const decodeJwtPayload = (token: string) => {
+    try {
+        const payload = token.split('.')[1];
+        if (!payload) return null;
+        const normalized = payload.replace(/-/g, '+').replace(/_/g, '/');
+        const padded = normalized.padEnd(normalized.length + ((4 - (normalized.length % 4)) % 4), '=');
+        return JSON.parse(atob(padded));
+    } catch {
+        return null;
+    }
+};
+
+const pickLoginId = (data: any): string => {
+    if (!data || typeof data !== 'object') return '';
+
+    return (
+        data.loginid ||
+        data.login_id ||
+        data.account ||
+        data.account_id ||
+        data.deriv_loginid ||
+        data.preferred_account ||
+        data.default_account ||
+        data.client_id ||
+        data.sub ||
+        data.profile?.loginid ||
+        data.profile?.login_id ||
+        data.profile?.account ||
+        data.accounts?.[0]?.loginid ||
+        data.accounts?.[0]?.login_id ||
+        data.account_list?.[0]?.loginid ||
+        data.account_list?.[0]?.login_id ||
+        ''
+    );
+};
+
 const getLoginIdFromProfile = async (accessToken: string) => {
     const response = await fetch('/api/deriv/oauth/profile', {
         method: 'POST',
@@ -27,12 +63,12 @@ const getLoginIdFromProfile = async (accessToken: string) => {
     try {
         data = JSON.parse(text);
     } catch {
-        throw new Error(`Profile lookup returned non-JSON response: ${text.slice(0, 120)}`);
+        return { loginid: '', profile: {}, error: 'profile_non_json', raw: text.slice(0, 120) };
     }
 
     if (!response.ok || data.error || !data.loginid) {
-        console.error('[Deriv OAuth Profile Lookup]', data);
-        throw new Error(data.error || 'Could not get real Deriv login ID from OAuth profile.');
+        console.warn('[Deriv OAuth Profile Lookup]', data);
+        return { loginid: '', profile: data?.profile || {}, error: data?.error || 'loginid_not_found', attempts: data?.attempts || [] };
     }
 
     return data;
@@ -120,7 +156,17 @@ const CallbackPage = () => {
                         }
 
                         const profileResult = await getLoginIdFromProfile(accessToken);
-                        const realLoginId = profileResult.loginid;
+                        const decodedAccessToken = decodeJwtPayload(accessToken) || {};
+                        const decodedIdToken = data.id_token ? decodeJwtPayload(data.id_token) || {} : {};
+
+                        const realLoginId =
+                            profileResult.loginid ||
+                            pickLoginId(profileResult.profile) ||
+                            pickLoginId(data) ||
+                            pickLoginId(decodedIdToken) ||
+                            pickLoginId(decodedAccessToken) ||
+                            'oauth_user';
+
                         const profile = profileResult.profile || {};
                         const realCurrency = profile.currency || profile.account_list?.[0]?.currency || profile.accounts?.[0]?.currency || 'USD';
                         const accountList = Array.isArray(profile.account_list)
@@ -154,11 +200,19 @@ const CallbackPage = () => {
                             };
                         });
 
+                        const oauthDebug = {
+                            tokenResponseKeys: Object.keys(data || {}),
+                            profileResult,
+                            decodedAccessToken,
+                            decodedIdToken,
+                        };
+
                         localStorage.setItem('authToken', accessToken);
                         localStorage.setItem('active_loginid', realLoginId);
                         localStorage.setItem('clientAccounts', JSON.stringify(clientAccounts));
                         localStorage.setItem('accountsList', JSON.stringify(accountsList));
                         localStorage.setItem('callback_token', JSON.stringify(profileResult));
+                        localStorage.setItem('deriv_oauth_debug', JSON.stringify(oauthDebug));
 
                         Cookies.set('logged_state', 'true', {
                             expires: 30,
