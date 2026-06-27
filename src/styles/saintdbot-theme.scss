@@ -1,0 +1,676 @@
+/* ═══════════════════════════════════════════════════════════
+   SaintDBot Theme — Dark Navy + Red (Deriv-familiar feel)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Core brand tokens ─────────────────────────────────── */
+:root {
+    --saint-red:           #e53535;
+    --saint-red-deep:      #b91c1c;
+    --saint-red-light:     #ff6b6b;
+    --saint-red-glow:      rgba(229, 53, 53, 0.18);
+    --saint-navy:          #1d3055;
+    --saint-navy-mid:      #284070;
+    --saint-navy-light:    #345088;
+    --saint-navy-card:     #223a64;
+    --saint-navy-border:   rgba(229, 53, 53, 0.25);
+
+    /* Keep gold alias for anything still referencing it */
+    --saint-gold:          #e53535;
+    --saint-gold-deep:     #b91c1c;
+    --saint-gold-light:    #ff6b6b;
+    --saint-gold-glow:     rgba(229, 53, 53, 0.18);
+
+    /* Override Deriv brand → our red */
+    --brand-red-coral:     #e53535;
+    --brand-orange:        #b91c1c;
+
+    /* Primary buttons → red */
+    --button-primary-default:       #e53535;
+    --button-primary-hover:         #ff6b6b;
+    --button-primary-light-default: rgba(229, 53, 53, 0.16);
+    --button-primary-light-hover:   rgba(229, 53, 53, 0.26);
+    --button-tertiary-hover:        rgba(229, 53, 53, 0.10);
+
+    /* Active borders/fills → red */
+    --border-active: #e53535;
+    --fill-active:   #e53535;
+}
+
+/* ── Dark theme overrides ──────────────────────────────── */
+.theme--dark {
+    --general-main-1:    #182a4a;
+    --general-main-2:    #1d3055;
+    --general-main-3:    #284070;
+    --general-section-1: #223a64;
+    --general-section-2: #1d3055;
+    --general-hover:     #345088;
+    --general-active:    #3f5c9c;
+    --border-divider:    rgba(229, 53, 53, 0.12);
+    --border-normal:     rgba(255, 255, 255, 0.08);
+    --button-primary-default:       #e53535;
+    --button-primary-hover:         #ff6b6b;
+    --button-secondary-default:     rgba(255, 255, 255, 0.12);
+    --button-toggle-secondary:      #284070;
+    --button-toggle-alternate:      #284070;
+    --text-prominent: #ffffff;
+    --text-general:   #dce8f4;
+}
+
+/* ── Light theme overrides ─────────────────────────────── */
+.theme--light {
+    --general-main-1:    #f8f9fc;
+    --general-main-2:    #ffffff;
+    --general-section-1: #eef1f8;
+    --general-section-2: #eef1f8;
+    --button-primary-default:       #e53535;
+    --button-primary-hover:         #b91c1c;
+    --button-secondary-default:     #1d3055;
+    --text-prominent: #1d3055;
+    --text-general:   #2c3e5a;
+}
+
+/* ── Force dark on all SaintDBot custom pages ──────────── */
+/* free-bots cards, buttons, panels always use dark navy   */
+.free-bots,
+.free-bots__card,
+.free-bots__analysis-panel {
+    --general-main-1:        #223a64;
+    --general-main-2:        #1d3055;
+    --general-section-1:     #1d3055;
+    --general-section-2:     #16263f;
+    --general-hover:         #345088;
+    --border-normal:         rgba(255, 255, 255, 0.08);
+    --border-divider:        rgba(229, 53, 53, 0.12);
+    --text-prominent:        #ffffff;
+    --text-general:          #dce8f4;
+    --text-less-prominent:   rgba(220, 232, 244, 0.60);
+    color: #dce8f4;
+}
+
+/* ══════════════════════════════════════════════════════════
+   HEADER  — deep navy with red accent bar (DARK THEME ONLY)
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+.deriv-header,
+[class*='deriv-header'],
+header.main-header,
+.app-header,
+.header {
+    background: var(--saint-navy) !important;
+    border-bottom: 2px solid var(--saint-red-deep) !important;
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.6) !important;
+
+    span, a, p, button:not(.deriv-button--primary) {
+        color: #e8dfc8 !important;
+    }
+
+    svg path {
+        fill: #e8dfc8 !important;
+    }
+
+    /* Currency/flag icons — restore their original colours */
+    .deriv-account-switcher svg path,
+    .deriv-account-switcher svg g path,
+    .deriv-account-switcher svg circle,
+    .deriv-account-switcher svg rect,
+    .deriv-account-switcher-item__icon svg path,
+    .deriv-account-switcher-item__icon svg g path,
+    [class*='currency'] svg path,
+    [class*='currency'] svg g path,
+    [class*='currency'] svg circle,
+    [class*='currency'] svg rect {
+        fill: unset !important;
+        stroke: unset !important;
+    }
+
+    a:hover, a.active, [class*='active'] {
+        color: var(--saint-red-light) !important;
+        svg path { fill: var(--saint-red-light) !important; }
+    }
+}
+} /* end .theme--dark header overrides */
+
+/* ── App logo area ─────────────────────────────────────── */
+.app-logo {
+    background: transparent !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BODY / WORKSPACE BACKGROUND
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+    body,
+    .bot-dashboard,
+    .bot-builder,
+    #scratch_div {
+        background: #1d3055 !important;
+    }
+
+    .dc-tabs__list {
+        background: #1d3055 !important;
+        border-bottom: 1px solid rgba(229, 53, 53, 0.2) !important;
+    }
+
+    .dc-tabs__active {
+        border-bottom-color: var(--saint-red) !important;
+        color: var(--text-prominent) !important;
+    }
+
+    .run-panel,
+    .db-drawer,
+    .db-drawer__tab-content {
+        background: #1d3055 !important;
+        border-left: 1px solid rgba(229, 53, 53, 0.15) !important;
+    }
+
+    .journal {
+        background: #182a4a !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PRIMARY BUTTONS — red (Deposit, confirm, etc.)
+   ══════════════════════════════════════════════════════════ */
+.deriv-button--primary,
+.dc-btn--primary,
+button[class*='primary'],
+.btn-primary {
+    background: linear-gradient(135deg, var(--saint-red) 0%, var(--saint-red-deep) 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(229, 53, 53, 0.35) !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+        background: linear-gradient(135deg, var(--saint-red-light) 0%, var(--saint-red) 100%) !important;
+        box-shadow: 0 6px 20px rgba(229, 53, 53, 0.5) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    span {
+        color: #ffffff !important;
+    }
+}
+
+/* ── Deposit button specifically ───────────────────────── */
+[class*='deposit'],
+[class*='Deposit'],
+a[href*='deposit'],
+button[data-testid*='deposit'] {
+    background: linear-gradient(135deg, #e53535 0%, #b91c1c 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(229, 53, 53, 0.4) !important;
+
+    span { color: #ffffff !important; }
+
+    &:hover {
+        background: linear-gradient(135deg, #ff6b6b 0%, #e53535 100%) !important;
+        box-shadow: 0 6px 20px rgba(229, 53, 53, 0.6) !important;
+    }
+}
+
+/* ── Run button ────────────────────────────────────────── */
+.toolbar__run-button,
+.dc-btn--secondary.toolbar__run-button,
+[class*='run-button'],
+#db-toolbar__run-button {
+    background: linear-gradient(135deg, #e53535 0%, #b91c1c 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 14px rgba(229, 53, 53, 0.4) !important;
+
+    &:hover {
+        background: linear-gradient(135deg, #ff6b6b 0%, #e53535 100%) !important;
+        box-shadow: 0 6px 20px rgba(229, 53, 53, 0.55) !important;
+    }
+}
+
+/* ── Reset button (run panel footer) ───────────────────── */
+.run-panel__footer-button,
+#db-run-panel__clear-button {
+    background: linear-gradient(135deg, #e53535 0%, #b91c1c 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 14px rgba(229, 53, 53, 0.35) !important;
+
+    span { color: #ffffff !important; }
+
+    &:hover {
+        background: linear-gradient(135deg, #ff6b6b 0%, #e53535 100%) !important;
+        box-shadow: 0 6px 20px rgba(229, 53, 53, 0.55) !important;
+        transform: translateY(-1px) !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   FREE BOTS PAGE — premium card layout
+   ══════════════════════════════════════════════════════════ */
+.free-bots-wrapper {
+    background: linear-gradient(160deg, #182a4a 0%, #1d3055 60%, #284070 100%);
+    min-height: 100vh;
+}
+
+.free-bots__header {
+    background: linear-gradient(135deg, #1d3055 0%, #284070 100%);
+    border-bottom: 1px solid rgba(229, 53, 53, 0.25);
+    padding: 2.4rem 3.2rem;
+
+    h1, h2, .free-bots__title {
+        background: linear-gradient(90deg, var(--saint-red) 0%, var(--saint-red-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+}
+
+.free-bots__card {
+    background: linear-gradient(145deg, #223a64 0%, #1d3055 100%);
+    border: 1px solid rgba(229, 53, 53, 0.2);
+    border-radius: 16px;
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(229, 53, 53, 0.05) inset;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--saint-red-deep), var(--saint-red), var(--saint-red-light));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+        border-color: rgba(229, 53, 53, 0.5);
+        box-shadow:
+            0 8px 40px rgba(0, 0, 0, 0.5),
+            0 0 20px rgba(229, 53, 53, 0.12);
+        transform: translateY(-3px);
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    .free-bots__card-name {
+        color: var(--saint-red-light);
+        font-weight: 700;
+    }
+
+    .free-bots__card-description {
+        color: #8fa3c0;
+    }
+
+    .free-bots__card-category {
+        background: rgba(229, 53, 53, 0.12);
+        color: var(--saint-red-light);
+        border: 1px solid rgba(229, 53, 53, 0.3);
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 2px 10px;
+    }
+
+    .free-bots__load-btn,
+    button {
+        background: linear-gradient(135deg, var(--saint-red) 0%, var(--saint-red-deep) 100%);
+        color: #ffffff;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 0.8rem 2rem;
+        box-shadow: 0 3px 12px rgba(229, 53, 53, 0.3);
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 5px 18px rgba(229, 53, 53, 0.5);
+            transform: translateY(-1px);
+        }
+    }
+}
+
+/* Score bars — red gradient */
+.free-bots__score-bar {
+    background: linear-gradient(90deg, var(--saint-red-deep) 0%, var(--saint-red) 100%) !important;
+    border-radius: 4px;
+}
+
+.free-bots__score-val {
+    color: var(--saint-red-light) !important;
+    font-weight: 700;
+}
+
+/* Analysis result panel */
+.free-bots__analysis-panel {
+    background: rgba(229, 53, 53, 0.06);
+    border: 1px solid rgba(229, 53, 53, 0.2);
+    border-radius: 12px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SPLASH / LOADING SCREEN
+   ══════════════════════════════════════════════════════════ */
+.barspinner,
+.dc-loading,
+[class*='loading'] {
+    .barspinner__rect,
+    .dc-loading__bar,
+    [class*='rect'],
+    [class*='bar'] {
+        background-color: var(--saint-red) !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SIDEBAR / TOOLBOX
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+    .flyout,
+    .flyout__content {
+        background: #1d3055 !important;
+        border-right: 1px solid rgba(229, 53, 53, 0.12) !important;
+    }
+
+    .flyout__header {
+        background: #223a64 !important;
+        border-bottom: 1px solid rgba(229, 53, 53, 0.15) !important;
+        color: var(--saint-red-light) !important;
+    }
+
+    .toolbox,
+    [class*='toolbox'] {
+        background: #1d3055 !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER (DARK THEME ONLY)
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+.footer,
+.app-footer,
+[class*='footer'] {
+    background: var(--saint-navy) !important;
+    border-top: 1px solid rgba(229, 53, 53, 0.15) !important;
+
+    span, a {
+        color: #7a90a8 !important;
+    }
+
+    a:hover {
+        color: var(--saint-red-light) !important;
+    }
+}
+}
+
+/* ══════════════════════════════════════════════════════════
+   MODALS & DIALOGS
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+    .dc-dialog__wrapper,
+    .deriv-modal,
+    [class*='modal__content'],
+    [class*='modal-container'] {
+        background: #223a64 !important;
+        border: 1px solid rgba(229, 53, 53, 0.2) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    .dc-dialog__header,
+    [class*='modal__header'] {
+        border-bottom: 1px solid rgba(229, 53, 53, 0.15) !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   NOTIFICATIONS / TOASTS
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+    .notification,
+    .toast,
+    [class*='snackbar'],
+    [class*='toast'] {
+        background: #223a64 !important;
+        border: 1px solid rgba(229, 53, 53, 0.25) !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+        color: #e8dfc8 !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCROLLBARS — red tint
+   ══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #182a4a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(229, 53, 53, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+        background: rgba(229, 53, 53, 0.55);
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   DASHBOARD CARDS & TABS
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+    .dashboard__tab-item,
+    .dc-tabs__item {
+        color: var(--text-general) !important;
+        font-weight: 500;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: #ffffff !important;
+            background: rgba(229, 53, 53, 0.08) !important;
+            outline: none !important;
+        }
+    }
+
+    .dc-tabs__active,
+    [class*='tab--active'],
+    [class*='tab-active'] {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        border-bottom: 2px solid var(--saint-red) !important;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: #ffffff !important;
+            outline: none !important;
+        }
+    }
+
+    .bot-dashboard {
+        background: #182a4a !important;
+    }
+
+    .strategy-card,
+    [class*='strategy-card'],
+    .dc-card,
+    [class*='dc-card'] {
+        background: #223a64 !important;
+        border: 1px solid rgba(229, 53, 53, 0.15) !important;
+        border-radius: 12px !important;
+
+        &:hover {
+            border-color: rgba(229, 53, 53, 0.4) !important;
+            box-shadow: 0 4px 20px rgba(229, 53, 53, 0.1) !important;
+        }
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   INPUT FIELDS
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+    input, select, textarea,
+    .dc-input, .dc-dropdown,
+    [class*='dc-input'],
+    [class*='input__field'] {
+        background: #1d3055 !important;
+        border-color: rgba(229, 53, 53, 0.2) !important;
+        color: #e8dfc8 !important;
+
+        &:focus {
+            border-color: var(--saint-red) !important;
+            box-shadow: 0 0 0 3px rgba(229, 53, 53, 0.12) !important;
+        }
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   ACCOUNT SWITCHER DROPDOWN — brighter text (DARK THEME ONLY)
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+/* Force ALL text inside the account switcher bright */
+.acc-switcher__wrapper,
+.acc-switcher,
+[class*='acc-switcher'] {
+    background: #1d3055 !important;
+}
+
+[class*='acc-switcher'] * {
+    color: #dce8f4 !important;
+}
+
+/* Clear white card sub-section backgrounds */
+.acc-switcher__list,
+.acc-switcher__accounts,
+.acc-switcher__account,
+.acc-switcher__traders-hub,
+.acc-switcher__footer,
+.acc-switcher__total,
+.acc-switcher__separator,
+.acc-switcher__wrapper {
+    background-color: transparent !important;
+}
+
+/* Account name / balance — pure white */
+[class*='acc-switcher'] [class*='loginid-text'],
+[class*='acc-switcher'] [class*='account-name'],
+[class*='acc-switcher'] [class*='balance'],
+[class*='acc-switcher'] [class*='list-title'],
+[class*='acc-switcher'] [class*='total'],
+[class*='acc-switcher'] [class*='separator'] {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* Account ID — slightly softer */
+[class*='acc-switcher'] [class*='__id'] {
+    color: #b8d4f0 !important;
+    font-weight: 500 !important;
+}
+
+/* "Looking for CFD accounts?" link */
+.acc-switcher__traders-hub a,
+.acc-switcher__traders-hub [class*='link'] {
+    color: #ff6b6b !important;
+    font-weight: 600 !important;
+}
+
+/* Manage accounts button */
+.acc-switcher__footer button,
+.acc-switcher__footer a,
+.acc-switcher__footer .dc-btn {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* Real / Demo tabs inside the switcher */
+.acc-switcher__wrapper .dc-tabs__item {
+    color: #dce8f4 !important;
+}
+
+.acc-switcher__wrapper .dc-tabs__item.dc-tabs__active,
+.acc-switcher__wrapper .dc-tabs__item[class*='active'] {
+    color: #ffffff !important;
+    border-bottom-color: var(--saint-red) !important;
+}
+
+/* Account info bar in header (balance + arrow) */
+.acc-info {
+    &__id,
+    &__balance,
+    &__loginid-text,
+    span {
+        color: #f0ede6 !important;
+    }
+}
+} /* end .theme--dark account switcher overrides */
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER ICONS & TEXT — force visible (DARK THEME ONLY)
+   ══════════════════════════════════════════════════════════ */
+.theme--dark {
+.app-footer {
+    /* All icon SVGs — exclude the language/flag icon */
+    :not(.app-footer__language) > svg path,
+    :not(.app-footer__language) > svg g path,
+    :not(.app-footer__language) > svg circle,
+    :not(.app-footer__language) > svg rect {
+        fill: #dce8f4 !important;
+    }
+
+    /* Stroke-based icons — exclude flag */
+    :not(.app-footer__language) > svg path[stroke],
+    :not(.app-footer__language) > svg g path[stroke] {
+        stroke: #dce8f4 !important;
+        fill: none !important;
+    }
+
+    /* Flag/language icon — restore natural colours */
+    .app-footer__language svg path,
+    .app-footer__language svg g path,
+    .app-footer__language svg circle,
+    .app-footer__language svg rect {
+        fill: unset !important;
+        stroke: unset !important;
+    }
+
+    /* Server time, language text, all footer text */
+    span, p, a, button, label {
+        color: #dce8f4 !important;
+    }
+
+    /* Network status dot — keep its own color (green = online) */
+    &__network-status {
+        &-online  { background-color: #22c55e !important; }
+        &-offline { background-color: #e53535 !important; }
+    }
+}
+} /* end .theme--dark footer overrides */
+
+/* ══════════════════════════════════════════════════════════
+   SELECTION HIGHLIGHT
+   ══════════════════════════════════════════════════════════ */
+::selection {
+    background: rgba(229, 53, 53, 0.3);
+    color: #ffffff;
+}

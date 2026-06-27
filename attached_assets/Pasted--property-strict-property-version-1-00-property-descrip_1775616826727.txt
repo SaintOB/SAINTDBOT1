@@ -1,0 +1,309 @@
+#property strict
+#property version   "1.00"
+#property description "HF XAUUSD MT5 Scalper: fast entries, small-profit exits, adaptive risk filters."
+
+#include <Trade/Trade.mqh>
+
+CTrade trade;
+
+input group "=== Core ==="
+input string InpAuthorName                = "Team.Saintfx HF Scalper 2026";
+input string InpSymbol                     = "XAUUSD";
+input ulong  InpMagic                      = 750014;
+input double InpLots                       = 0.02;
+input int    InpMaxOpenPositions           = 1;
+input int    InpMinSecondsBetweenTrades    = 2;
+
+input group "=== Entry Filters ==="
+input int    InpFastEMAPeriod              = 9;
+input int    InpSlowEMAPeriod              = 21;
+input int    InpRSIPeriod                  = 7;
+input double InpRSIBuyMin                  = 55.0;
+input double InpRSISellMax                 = 45.0;
+input int    InpMaxSpreadPoints            = 45;
+
+input group "=== Exits (Small Profit Focus) ==="
+input int    InpTakeProfitPoints           = 120;
+input int    InpStopLossPoints             = 260;
+input int    InpQuickProfitClosePoints     = 40;
+input bool   InpCloseOnOppositeSignal      = true;
+
+input group "=== Active Management ==="
+input int    InpBreakEvenTriggerPoints     = 65;
+input int    InpBreakEvenLockPoints        = 10;
+input int    InpTrailingStartPoints        = 90;
+input int    InpTrailingStepPoints         = 20;
+
+input group "=== Safety ==="
+input bool   InpUseDailyLossLimit          = true;
+input double InpDailyLossLimitCurrency     = 150.0;
+
+int      hFastEMA = INVALID_HANDLE;
+int      hSlowEMA = INVALID_HANDLE;
+int      hRSI     = INVALID_HANDLE;
+
+datetime g_last_trade_time = 0;
+int      g_day_of_year      = -1;
+double   g_day_start_equity = 0.0;
+bool     g_daily_halt       = false;
+
+string S() { return InpSymbol; }
+
+double Pt() { return SymbolInfoDouble(S(), SYMBOL_POINT); }
+
+bool IsNewTradingDay()
+{
+    MqlDateTime t;
+    TimeToStruct(TimeCurrent(), t);
+    if (g_day_of_year != t.day_of_year)
+    {
+        g_day_of_year      = t.day_of_year;
+        g_day_start_equity = AccountInfoDouble(ACCOUNT_EQUITY);
+        g_daily_halt       = false;
+        return true;
+    }
+    return false;
+}
+
+double DayPnL()
+{
+    return AccountInfoDouble(ACCOUNT_EQUITY) - g_day_start_equity;
+}
+
+bool SpreadOk()
+{
+    long spread = 0;
+    if (!SymbolInfoInteger(S(), SYMBOL_SPREAD, spread)) return false;
+    return (int)spread <= InpMaxSpreadPoints;
+}
+
+int CountOpenPositions()
+{
+    int count = 0;
+    for (int i = PositionsTotal() - 1; i >= 0; --i)
+    {
+        if (!PositionSelectByIndex(i)) continue;
+        string sym = PositionGetString(POSITION_SYMBOL);
+        long mg    = PositionGetInteger(POSITION_MAGIC);
+        if (sym == S() && (ulong)mg == InpMagic) count++;
+    }
+    return count;
+}
+
+bool GetPosition(double &open_price, double &sl, double &tp, long &type, ulong &ticket)
+{
+    for (int i = PositionsTotal() - 1; i >= 0; --i)
+    {
+        if (!PositionSelectByIndex(i)) continue;
+        string sym = PositionGetString(POSITION_SYMBOL);
+        long mg    = PositionGetInteger(POSITION_MAGIC);
+        if (sym != S() || (ulong)mg != InpMagic) continue;
+
+        open_price = PositionGetDouble(POSITION_PRICE_OPEN);
+        sl         = PositionGetDouble(POSITION_SL);
+        tp         = PositionGetDouble(POSITION_TP);
+        type       = PositionGetInteger(POSITION_TYPE);
+        ticket     = (ulong)PositionGetInteger(POSITION_TICKET);
+        return true;
+    }
+    return false;
+}
+
+bool ReadIndicatorLastTwo(const int handle, double &current, double &prev)
+{
+    double buff[2];
+    ArraySetAsSeries(buff, true);
+    if (CopyBuffer(handle, 0, 0, 2, buff) < 2) return false;
+    current = buff[0];
+    prev    = buff[1];
+    return true;
+}
+
+int Signal()
+{
+    double f0, f1, s0, s1, r0, r1;
+    if (!ReadIndicatorLastTwo(hFastEMA, f0, f1)) return 0;
+    if (!ReadIndicatorLastTwo(hSlowEMA, s0, s1)) return 0;
+    if (!ReadIndicatorLastTwo(hRSI, r0, r1)) return 0;
+
+    bool bullish_cross = (f1 <= s1 && f0 > s0 && r0 >= InpRSIBuyMin);
+    bool bearish_cross = (f1 >= s1 && f0 < s0 && r0 <= InpRSISellMax);
+
+    if (bullish_cross) return 1;
+    if (bearish_cross) return -1;
+    return 0;
+}
+
+void CloseByTicket(const ulong ticket)
+{
+    trade.PositionClose(ticket);
+}
+
+void ManageOpenPosition()
+{
+    double open_price, sl, tp;
+    long type;
+    ulong ticket;
+    if (!GetPosition(open_price, sl, tp, type, ticket)) return;
+
+    MqlTick tick;
+    if (!SymbolInfoTick(S(), tick)) return;
+
+    double point   = Pt();
+    double bid     = tick.bid;
+    double ask     = tick.ask;
+    double price   = (type == POSITION_TYPE_BUY) ? bid : ask;
+    double move_pts = (type == POSITION_TYPE_BUY)
+        ? (price - open_price) / point
+        : (open_price - price) / point;
+
+    if (move_pts >= InpQuickProfitClosePoints)
+    {
+        CloseByTicket(ticket);
+        return;
+    }
+
+    if (InpCloseOnOppositeSignal)
+    {
+        int sig = Signal();
+        if ((type == POSITION_TYPE_BUY && sig < 0) || (type == POSITION_TYPE_SELL && sig > 0))
+        {
+            CloseByTicket(ticket);
+            return;
+        }
+    }
+
+    double new_sl = sl;
+
+    if (move_pts >= InpBreakEvenTriggerPoints)
+    {
+        double be_sl = (type == POSITION_TYPE_BUY)
+            ? open_price + InpBreakEvenLockPoints * point
+            : open_price - InpBreakEvenLockPoints * point;
+
+        if (type == POSITION_TYPE_BUY)
+            new_sl = MathMax(new_sl, be_sl);
+        else if (new_sl == 0.0)
+            new_sl = be_sl;
+        else
+            new_sl = MathMin(new_sl, be_sl);
+    }
+
+    if (move_pts >= InpTrailingStartPoints)
+    {
+        double trail_sl = (type == POSITION_TYPE_BUY)
+            ? price - InpTrailingStepPoints * point
+            : price + InpTrailingStepPoints * point;
+
+        if (type == POSITION_TYPE_BUY)
+            new_sl = MathMax(new_sl, trail_sl);
+        else if (new_sl == 0.0)
+            new_sl = trail_sl;
+        else
+            new_sl = MathMin(new_sl, trail_sl);
+    }
+
+    if (new_sl != sl)
+        trade.PositionModify(ticket, NormalizeDouble(new_sl, (int)SymbolInfoInteger(S(), SYMBOL_DIGITS)), tp);
+}
+
+void TryOpenTrade()
+{
+    if (CountOpenPositions() >= InpMaxOpenPositions) return;
+    if ((int)(TimeCurrent() - g_last_trade_time) < InpMinSecondsBetweenTrades) return;
+    if (!SpreadOk()) return;
+
+    int sig = Signal();
+    if (sig == 0) return;
+
+    MqlTick tick;
+    if (!SymbolInfoTick(S(), tick)) return;
+
+    double point  = Pt();
+    int digits    = (int)SymbolInfoInteger(S(), SYMBOL_DIGITS);
+    double ask    = tick.ask;
+    double bid    = tick.bid;
+    double sl, tp;
+
+    trade.SetExpertMagicNumber(InpMagic);
+    trade.SetTypeFillingBySymbol(S());
+    trade.SetDeviationInPoints(20);
+
+    bool sent = false;
+    if (sig > 0)
+    {
+        sl = ask - InpStopLossPoints * point;
+        tp = ask + InpTakeProfitPoints * point;
+        sent = trade.Buy(InpLots, S(), ask, NormalizeDouble(sl, digits), NormalizeDouble(tp, digits), "HF_XAUUSD");
+    }
+    else if (sig < 0)
+    {
+        sl = bid + InpStopLossPoints * point;
+        tp = bid - InpTakeProfitPoints * point;
+        sent = trade.Sell(InpLots, S(), bid, NormalizeDouble(sl, digits), NormalizeDouble(tp, digits), "HF_XAUUSD");
+    }
+
+    if (sent)
+        g_last_trade_time = TimeCurrent();
+}
+
+int OnInit()
+{
+    if (!SymbolSelect(S(), true))
+    {
+        Print("Failed to select symbol: ", S());
+        return INIT_FAILED;
+    }
+
+    hFastEMA = iMA(S(), PERIOD_M1, InpFastEMAPeriod, 0, MODE_EMA, PRICE_CLOSE);
+    hSlowEMA = iMA(S(), PERIOD_M1, InpSlowEMAPeriod, 0, MODE_EMA, PRICE_CLOSE);
+    hRSI     = iRSI(S(), PERIOD_M1, InpRSIPeriod, PRICE_CLOSE);
+
+    if (hFastEMA == INVALID_HANDLE || hSlowEMA == INVALID_HANDLE || hRSI == INVALID_HANDLE)
+    {
+        Print("Indicator handle creation failed.");
+        return INIT_FAILED;
+    }
+
+    string load_banner = StringFormat("HF XAUUSD MT5 Scalper loaded | Owner: %s | Symbol: %s", InpAuthorName, S());
+    Print(load_banner);
+    Comment(load_banner);
+
+    IsNewTradingDay();
+    return INIT_SUCCEEDED;
+}
+
+void OnDeinit(const int reason)
+{
+    Comment("");
+    if (hFastEMA != INVALID_HANDLE) IndicatorRelease(hFastEMA);
+    if (hSlowEMA != INVALID_HANDLE) IndicatorRelease(hSlowEMA);
+    if (hRSI != INVALID_HANDLE) IndicatorRelease(hRSI);
+}
+
+void OnTick()
+{
+    IsNewTradingDay();
+
+    if (InpUseDailyLossLimit)
+    {
+        double pnl = DayPnL();
+        if (pnl <= -MathAbs(InpDailyLossLimitCurrency))
+        {
+            g_daily_halt = true;
+
+            for (int i = PositionsTotal() - 1; i >= 0; --i)
+            {
+                if (!PositionSelectByIndex(i)) continue;
+                if (PositionGetString(POSITION_SYMBOL) != S()) continue;
+                if ((ulong)PositionGetInteger(POSITION_MAGIC) != InpMagic) continue;
+                trade.PositionClose((ulong)PositionGetInteger(POSITION_TICKET));
+            }
+        }
+    }
+
+    if (g_daily_halt) return;
+
+    ManageOpenPosition();
+    TryOpenTrade();
+}

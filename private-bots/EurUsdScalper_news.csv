@@ -1,0 +1,9 @@
+# EUR/USD high-impact news fallback file.
+# Place a copy at <DataFolder>/MQL5/Files/news.csv
+# Format: yyyy.mm.dd HH:MM,CCY,IMPACT
+# CCY = EUR or USD; IMPACT is informational (filter only loads timestamps).
+# Times are broker server time.
+# Example entries (replace with real upcoming events):
+2026.04.16 12:30,USD,HIGH
+2026.04.17 09:00,EUR,HIGH
+2026.05.01 12:30,USD,HIGH

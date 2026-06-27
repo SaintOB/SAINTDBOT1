@@ -1,0 +1,78 @@
+.social-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 16px;
+    background: rgba(229, 53, 53, 0.06);
+    border-bottom: 1px solid rgba(229, 53, 53, 0.12);
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        color: #c41818;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+        animation: social-pulse 2.6s ease-in-out infinite;
+        will-change: transform, box-shadow;
+
+        @for $i from 1 through 8 {
+            &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 0.18}s; }
+        }
+
+        svg {
+            flex-shrink: 0;
+            opacity: 1;
+            filter: drop-shadow(0 0 1px rgba(196, 24, 24, 0.35));
+            transition: transform 0.22s ease;
+            animation: social-wiggle 3.4s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        &:hover {
+            color: #ffffff;
+            background: #e53535;
+            box-shadow: 0 0 18px rgba(229, 53, 53, 0.6);
+
+            svg {
+                filter: none;
+                opacity: 1;
+            }
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &__link, &__link svg { animation: none !important; }
+    }
+
+    &__sep {
+        width: 1px;
+        height: 14px;
+        background: rgba(229, 53, 53, 0.2);
+        border-radius: 1px;
+    }
+}
+
+@keyframes social-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(229, 53, 53, 0);
+        transform: translateY(0);
+    }
+    50% {
+        box-shadow: 0 0 14px 2px rgba(229, 53, 53, 0.35);
+        transform: translateY(-1.5px);
+    }
+}
+
+@keyframes social-wiggle {
+    0%, 88%, 100% { transform: rotate(0deg) scale(1); }
+    91% { transform: rotate(-10deg) scale(1.08); }
+    94% { transform: rotate(10deg) scale(1.08); }
+    97% { transform: rotate(-6deg) scale(1.04); }
+}

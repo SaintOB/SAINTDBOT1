@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SaintDBot — App Manager</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0e0e0e;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+  .wrap{display:flex;flex-direction:column;gap:20px;max-width:560px;width:100%}
+  .card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:28px}
+  .card.highlight{border-color:#c00}
+  h2{color:#ff4444;margin-bottom:8px;font-size:19px}
+  h3{color:#ff6666;margin-bottom:10px;font-size:16px}
+  p{color:#aaa;font-size:13px;line-height:1.6;margin-bottom:14px}
+  a{color:#ff6666}
+  label{color:#aaa;font-size:13px;display:block;margin-bottom:5px}
+  input{width:100%;padding:10px 14px;background:#111;border:1px solid #444;border-radius:6px;color:#fff;font-size:14px;margin-bottom:14px;font-family:monospace}
+  .btns{display:flex;gap:10px}
+  button{flex:1;padding:11px;background:#c00;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:bold;font-family:monospace;margin-top:4px}
+  button.secondary{background:#333}
+  button:disabled{background:#555;cursor:not-allowed}
+  .status{color:#ccc;font-size:13px;margin-top:14px;line-height:1.7;white-space:pre-wrap;display:none;padding:12px;background:#111;border-radius:6px;border:1px solid #333}
+  .ok{color:#4caf50}
+  .err{color:#ff5252}
+  .warn{color:#ffb300}
+  .divider{border:none;border-top:1px solid #333;margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- STEP 1: Verify & fix app 133597 -->
+  <div class="card highlight">
+    <h2>Step 1 — Verify &amp; Fix App 133598</h2>
+    <p>
+      App <strong style="color:#fff">133598</strong> must have its redirect URI set to exactly
+      <code style="color:#ff6666">https://teamsaintfx.com</code>.<br><br>
+      Paste your Admin API token, then click <strong>Check</strong>. If the URI is wrong the tool will fix it automatically.
+    </p>
+    <p style="background:#111;padding:10px 14px;border-radius:6px;border:1px solid #444;font-size:13px;margin-bottom:14px">
+      <strong style="color:#fff">Get your token:</strong><br>
+      1. Go to <a href="https://app.deriv.com/account/api-token" target="_blank" style="color:#ff6666">app.deriv.com → Account → API Token</a><br>
+      2. Tick <strong style="color:#fff">Admin</strong> scope<br>
+      3. Click Create, copy the token, paste below
+    </p>
+    <label>Admin API Token</label>
+    <input type="password" id="token_verify" placeholder="Paste Admin token here"/>
+    <div class="btns">
+      <button onclick="verifyApp()">Check &amp; Auto-Fix App 133598</button>
+    </div>
+    <div id="status_verify" class="status"></div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Fix permissions on App 133621 (the relay app visitors actually see) -->
+  <div class="card highlight">
+    <h2>Fix Visitor Permissions (App 133621)</h2>
+    <p style="background:#0a1a0a;padding:8px 14px;border-radius:6px;border:1px solid #2a6a2a;font-size:13px;margin-bottom:14px">
+      <strong style="color:#4caf50">Active relay app:</strong>
+      App <strong style="color:#fff">133621</strong> is the app currently in use. Manage its scopes here.
+    </p>
+    <p>
+      Visitors see <em>Trade · Manage account settings · Make withdrawals</em> because app
+      <strong style="color:#fff">133621</strong> was registered with all four scopes.<br><br>
+      Paste an <strong style="color:#fff">Admin API token</strong> for account CR2706667 below,
+      then click the button to reduce scopes to <strong style="color:#fff">Read profile + Trade only</strong>.
+    </p>
+    <p style="background:#111;padding:10px 14px;border-radius:6px;border:1px solid #444;font-size:13px;margin-bottom:14px">
+      <strong style="color:#fff">How to get an Admin token:</strong><br>
+      1. Go to <a href="https://app.deriv.com/account/api-token" target="_blank" style="color:#ff6666">app.deriv.com → Account → API Token</a><br>
+      2. Tick <strong style="color:#fff">Admin</strong> scope and click Create<br>
+      3. Copy the token and paste it below
+    </p>
+    <label>Admin API Token (for CR2706667)</label>
+    <input type="password" id="token_scopes" placeholder="Paste Admin token here"/>
+    <button onclick="fixScopes()" style="margin-top:0">Remove Withdraw &amp; Admin Permissions</button>
+    <div id="status_scopes" class="status"></div>
+  </div>
+
+</div>
+<script>
+var TEAM_APP_ID = 133598;
+var TEAM_REDIRECT = 'https://teamsaintfx.com';
+
+function log(id, msg, cls) {
+  var el = document.getElementById(id);
+  el.style.display = 'block';
+  var line = cls ? '<span class="' + cls + '">' + msg + '</span>\n' : msg + '\n';
+  el.innerHTML += line;
+}
+function clearLog(id) {
+  var el = document.getElementById(id);
+  el.style.display = 'none';
+  el.innerHTML = '';
+}
+
+// ── Verify / auto-fix app 133597 ───────────────────────────────────────────
+function verifyApp() {
+  var token = document.getElementById('token_verify').value.trim();
+  if (!token) { alert('Paste your Admin API token first.'); return; }
+  var btn = document.querySelector('#status_verify').previousElementSibling.querySelector('button');
+  clearLog('status_verify');
+  log('status_verify', 'Connecting to Deriv...');
+
+  var ws = new WebSocket('wss://ws.derivws.com/websockets/v3?app_id=36300');
+  var step = 'auth';
+
+  ws.onopen = function() {
+    log('status_verify', 'Connected. Authorizing...');
+    ws.send(JSON.stringify({authorize: token}));
+  };
+
+  ws.onmessage = function(e) {
+    var msg = JSON.parse(e.data);
+
+    if (msg.msg_type === 'authorize') {
+      if (msg.error) {
+        log('status_verify', '❌ Token rejected: ' + msg.error.message, 'err');
+        log('status_verify', '   → Go to app.deriv.com → Account → API Token', 'warn');
+        log('status_verify', '   → Create a NEW token with Admin scope ticked', 'warn');
+        log('status_verify', '   → Paste that token and try again', 'warn');
+        ws.close(); return;
+      }
+      log('status_verify', '✅ Authorized as ' + msg.authorize.loginid, 'ok');
+      log('status_verify', 'Fetching app ' + TEAM_APP_ID + ' details...');
+      step = 'get';
+      ws.send(JSON.stringify({app_get: TEAM_APP_ID}));
+      return;
+    }
+
+    if (msg.msg_type === 'app_get' && step === 'get') {
+      if (msg.error) {
+        log('status_verify', '❌ Could not fetch app: ' + msg.error.message, 'err');
+        log('status_verify', '   This means app ' + TEAM_APP_ID + ' does not exist or is not owned by this account.', 'warn');
+        ws.close(); return;
+      }
+      var current = msg.app_get.redirect_uri;
+      log('status_verify', 'Current redirect_uri: ' + current, current === TEAM_REDIRECT ? 'ok' : 'err');
+
+      if (current === TEAM_REDIRECT) {
+        log('status_verify', '✅ App 133597 is correctly registered!', 'ok');
+        log('status_verify', '   The issue is likely a cached old build in the browser.', 'warn');
+        log('status_verify', '   Ask visitors to do a hard refresh (Ctrl+Shift+R) on teamsaintfx.com.', 'warn');
+        ws.close(); return;
+      }
+
+      log('status_verify', '⚠️  Wrong redirect_uri — fixing now...', 'warn');
+      step = 'update';
+      ws.send(JSON.stringify({
+        app_update: TEAM_APP_ID,
+        name: msg.app_get.name || 'SaintDBot TeamSaintFX',
+        redirect_uri: TEAM_REDIRECT,
+        scopes: msg.app_get.scopes && msg.app_get.scopes.length ? msg.app_get.scopes : ['read','trade','payments','admin']
+      }));
+      return;
+    }
+
+    if (msg.msg_type === 'app_update' && step === 'update') {
+      if (msg.error) {
+        log('status_verify', '❌ Update failed: ' + msg.error.message, 'err');
+        ws.close(); return;
+      }
+      log('status_verify', '✅ redirect_uri updated to ' + msg.app_update.redirect_uri, 'ok');
+      log('status_verify', '✅ App 133597 is now fixed. No code deploy needed.', 'ok');
+      log('status_verify', '   Visitors should clear browser cache / hard-refresh teamsaintfx.com.', 'warn');
+      ws.close();
+    }
+  };
+
+  ws.onerror = function() {
+    log('status_verify', '❌ Connection error. Check your internet.', 'err');
+  };
+}
+
+// ── Fix scopes on app 133621 (remove payments + admin) ────────────────────
+function fixScopes() {
+  var token = document.getElementById('token_scopes').value.trim();
+  if (!token) { alert('Paste your Admin API token first.'); return; }
+  clearLog('status_scopes');
+  log('status_scopes', 'Connecting to Deriv...');
+
+  var RELAY_APP_ID = 133621;
+  var ws = new WebSocket('wss://ws.derivws.com/websockets/v3?app_id=36300');
+  var step = 'auth';
+  var authorizedAs = '';
+
+  ws.onopen = function() {
+    ws.send(JSON.stringify({authorize: token}));
+  };
+
+  ws.onmessage = function(e) {
+    var msg = JSON.parse(e.data);
+
+    if (msg.msg_type === 'authorize') {
+      if (msg.error) {
+        log('status_scopes', '❌ Token rejected: ' + msg.error.message, 'err');
+        log('status_scopes', '   → Get a fresh Admin token from app.deriv.com → Account → API Token', 'warn');
+        ws.close(); return;
+      }
+      authorizedAs = msg.authorize.loginid;
+      log('status_scopes', '✅ Authorized as ' + authorizedAs, 'ok');
+      log('status_scopes', 'Checking which apps are owned by ' + authorizedAs + '...');
+      step = 'list';
+      ws.send(JSON.stringify({app_list: 1}));
+      return;
+    }
+
+    if (msg.msg_type === 'app_list' && step === 'list') {
+      if (msg.error) {
+        log('status_scopes', '⚠️  Could not list apps: ' + msg.error.message + ' — trying app_get directly...', 'warn');
+        step = 'get';
+        ws.send(JSON.stringify({app_get: RELAY_APP_ID}));
+        return;
+      }
+      var apps = msg.app_list || [];
+      var ids = apps.map(function(a) { return a.app_id; });
+      log('status_scopes', 'Apps owned by ' + authorizedAs + ': ' + (ids.length ? ids.join(', ') : 'none'));
+      if (ids.indexOf(RELAY_APP_ID) === -1) {
+        log('status_scopes', '❌ App ' + RELAY_APP_ID + ' is NOT owned by ' + authorizedAs + '.', 'err');
+        log('status_scopes', '   ──────────────────────────────────────────────────', 'warn');
+        if (authorizedAs === 'CR2706667') {
+          log('status_scopes', '   ➡  Try using your OTHER account CR2824740 instead:', 'warn');
+          log('status_scopes', '   1. Go to app.deriv.com and switch to CR2824740', 'warn');
+          log('status_scopes', '   2. Account → API Token → create Admin token', 'warn');
+          log('status_scopes', '   3. Paste that token above and click the button again', 'warn');
+        } else {
+          log('status_scopes', '   ➡  Try using CR2706667\'s Admin token instead.', 'warn');
+        }
+        ws.close(); return;
+      }
+      log('status_scopes', '✅ App ' + RELAY_APP_ID + ' is owned by ' + authorizedAs + '. Fetching details...');
+      step = 'get';
+      ws.send(JSON.stringify({app_get: RELAY_APP_ID}));
+      return;
+    }
+
+    if (msg.msg_type === 'app_get' && step === 'get') {
+      if (msg.error) {
+        log('status_scopes', '❌ Could not read app: ' + msg.error.message, 'err');
+        if (msg.error.code === 'NotFound' || msg.error.message.toLowerCase().indexOf('not found') !== -1) {
+          log('status_scopes', '   App ' + RELAY_APP_ID + ' is not owned by ' + authorizedAs + '.', 'warn');
+          if (authorizedAs === 'CR2706667') {
+            log('status_scopes', '   ➡  Try your other account: log into app.deriv.com as CR2824740,', 'warn');
+            log('status_scopes', '      create an Admin API token there, paste it above and retry.', 'warn');
+          } else {
+            log('status_scopes', '   ➡  Try CR2706667\'s Admin token instead.', 'warn');
+          }
+        }
+        ws.close(); return;
+      }
+      var current = (msg.app_get.scopes || []).join(', ');
+      log('status_scopes', 'Current scopes: ' + current);
+      if (current === 'read, trade' || current === 'trade, read') {
+        log('status_scopes', '✅ Scopes are already correct (read + trade only). Nothing to change.', 'ok');
+        ws.close(); return;
+      }
+      log('status_scopes', 'Updating to: read, trade only...');
+      step = 'update';
+      ws.send(JSON.stringify({
+        app_update: RELAY_APP_ID,
+        name: msg.app_get.name || 'SaintDBot Production',
+        redirect_uri: msg.app_get.redirect_uri,
+        scopes: ['read', 'trade']
+      }));
+      return;
+    }
+
+    if (msg.msg_type === 'app_update' && step === 'update') {
+      if (msg.error) {
+        log('status_scopes', '❌ Update failed: ' + msg.error.message, 'err');
+        ws.close(); return;
+      }
+      var updated = (msg.app_update.scopes || []).join(', ');
+      log('status_scopes', '✅ Scopes updated to: ' + updated, 'ok');
+      log('status_scopes', '✅ Done! Visitors now only see "Read profile" and "Trade" on the login screen.', 'ok');
+      ws.close();
+    }
+  };
+
+  ws.onerror = function() {
+    log('status_scopes', '❌ Connection error. Check your internet.', 'err');
+  };
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+@use 'components/shared/styles/devices' as *;
+
+.dc-modal__container_tnc-status-update-modal-wrapper {
+    padding: 2.4rem;
+
+    @include mobile-screen {
+        padding: 1.6rem;
+    }
+}
+
+.tnc-status-update-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+    &__text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: stretch;
+    }
+
+    &__button {
+        align-self: flex-end;
+    }
+
+    @include mobile-screen {
+        gap: 1.6rem;
+    }
+}
+
+.tnc-link {
+    text-decoration: underline;
+    font-weight: normal;
+    color: var(--brand-red-coral);
+}
+
+/* Mobile: keep the Continue button visible. Long content was pushing
+   the button below the viewport on iPhones, leaving the user with a
+   modal they could see but not dismiss. */
+@media (max-width: 768px) {
+    .dc-modal__container_tnc-status-update-modal-wrapper {
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .tnc-status-update-modal {
+        max-height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+
+        &__button {
+            align-self: stretch;       /* full-width tap target on phones */
+            position: sticky;
+            bottom: 0;
+            background: inherit;
+            padding-top: 8px;
+        }
+    }
+}

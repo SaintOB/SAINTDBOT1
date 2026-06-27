@@ -1,0 +1,54 @@
+@use 'components/shared/styles/themes' as *;
+@import 'https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,700&display=swap&subset=cyrillic,cyrillic-ext,latin-ext,vietnamese';
+@import 'saintdbot-theme';
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--general-main-1);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* ── Global mobile touch improvements ────────────────── */
+button,
+a,
+[role='button'] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+input,
+select,
+textarea {
+    font-size: 16px;
+}
+
+/* iOS momentum scrolling for all scrollable areas */
+.free-bots-wrapper,
+.analysis-tool-wrapper,
+.dc-tabs__content,
+.run-panel,
+.db-drawer__tab-content {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* iOS safe-area padding for bottom navigation on notched devices */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .main {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+.icon-general-fill-path {
+    path {
+        fill: var(--text-general);
+    }
+}
+
+.icon-general-fill-g-path {
+    g {
+        path {
+            fill: var(--text-general);
+        }
+    }
+}

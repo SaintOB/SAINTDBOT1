@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saintdbot--saintob.replit.app/sitemap.xml

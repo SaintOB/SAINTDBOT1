@@ -1,0 +1,374 @@
+<g xmlns="http://www.w3.org/2000/svg" data-id="%q[f`)Z7]5#ljG6,Jt!c" class="blocklyDraggable blocklySelected" transform="translate(0, 7414)">
+  <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 1013.9350128173828 a 4 4 0 0,1 4,4  v 4  V 8  l 0,0  0,0  0,0  v 32  V 44  V 44 a 4 4 0 0,1 -4,4  h -1013.9350128173828 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+  <g data-id="?^rpc{UGj%uD^?.,vTx~" class="blocklyDraggable" style="display: none;" transform="translate(-12, 0)">
+    <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 380.895751953125 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -380.895751953125  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+    <g data-id="_$UT+~RoV0!G:y6tn2OY" class="blocklyDraggable" style="display: block;" transform="translate(253.18385314941406, 4)">
+      <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 131.71189880371094 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -131.71189880371094 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+      <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+        <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">% Win Per Stake</text>
+        <image style="display: none;"></image>
+        <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(135.71189880371094,4)"></image>
+      </g>
+    </g>
+    <g data-id="CNP_*.Isg~Z9^tUCkF9)" class="blocklyDraggable" transform="translate(0, 48)">
+      <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 363.35968017578125 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -363.35968017578125  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+      <g data-id="8_|I__v(paXLIh!Vr`zy" class="blocklyDraggable" style="display: block;" transform="translate(240.41583251953125, 4)">
+        <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 126.94384765625 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -126.94384765625 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+        <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+          <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">Ticks to analyze</text>
+          <image style="display: none;"></image>
+          <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(130.94384765625,4)"></image>
+        </g>
+      </g>
+      <g data-id="IkuiWrOhbR#q{AfhF;KP" class="blocklyDraggable" transform="translate(0, 48)">
+        <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 413.56773376464844 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -413.56773376464844  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+        <g data-id="e)w~JAMqQlncCZq4sn7?" class="blocklyDraggable" style="display: block;" transform="translate(165.1679229736328, 4)">
+          <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 252.39981079101562 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -252.39981079101562 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+          <g data-id="kc`[IM7`hVP#@hIFkptE" style="display: block;" transform="translate(176.99183654785156, 4)" class="">
+            <path class="blocklyPath" stroke="#acacac" fill="#fff" d=" m 16,0  h 8 a 16 16 0 0,1 16,16  v 0 a 16 16 0 0,1 -16,16  V 32  h -8 a 16 16 0 0,1 -16,-16  v 0 a 16 16 0 0,1 16,-16 z&#10;"></path>
+            <g class="blocklyEditableText" transform="translate(15.552001953125,6)" style="cursor: text;">
+              <rect rx="4" ry="4" x="0" y="0" height="20" width="8.89599609375" class="blocklyFieldRect" style="display: none;"></rect>
+              <text class="blocklyText" dominant-baseline="central" x="0" y="10">1</text>
+            </g>
+          </g>
+          <g data-id="5(l*vczdj#snx~YgZL/r" style="display: block;" transform="translate(248.39981079101562, 4)" class="">
+            <path class="blocklyPath" stroke="#acacac" fill="#fff" d=" m 16,0  h 8 a 16 16 0 0,1 16,16  v 0 a 16 16 0 0,1 -16,16  V 32  h -8 a 16 16 0 0,1 -16,-16  v 0 a 16 16 0 0,1 16,-16 z&#10;"></path>
+            <g class="blocklyEditableText" transform="translate(15.552001953125,6)" style="cursor: text;">
+              <rect rx="4" ry="4" x="0" y="0" height="20" width="8.89599609375" class="blocklyFieldRect" style="display: none;"></rect>
+              <text class="blocklyText" dominant-baseline="central" x="0" y="10">1</text>
+            </g>
+          </g>
+          <g transform="translate(12,10)">
+            <text class="blocklyText" dominant-baseline="central" x="0" y="10">random integer from</text>
+          </g>
+          <g transform="translate(224.99183654785156,10)">
+            <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+          </g>
+        </g>
+        <g data-id="l9;dX)S:6w?}?ooy+5}e" class="blocklyDraggable" transform="translate(0, 48)">
+          <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 238.6878662109375 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -238.6878662109375  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+          <g data-id="@S0uzf,wom/6CpKx;K0g" class="blocklyDraggable" style="display: block;" transform="translate(134.97596740722656, 4)">
+            <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 107.71189880371094 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -107.71189880371094 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+            <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+              <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">1st Over Digit</text>
+              <image style="display: none;"></image>
+              <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(111.71189880371094,4)"></image>
+            </g>
+          </g>
+          <g data-id="!%M7+~z0K2J))h#3wN-i" class="blocklyDraggable" transform="translate(0, 48)">
+            <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 243.7278594970703 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -243.7278594970703  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+            <g data-id="W.[rAFI7?b~djI@+ua37" class="blocklyDraggable" style="display: block;" transform="translate(134.97596740722656, 4)">
+              <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 112.75189208984375 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -112.75189208984375 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+              <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+                <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">2nd Over Digit</text>
+                <image style="display: none;"></image>
+                <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(116.75189208984375,4)"></image>
+              </g>
+            </g>
+            <g data-id="a$XyE-Bot6ON)x/kk^]x" class="blocklyDraggable" transform="translate(0, 48)">
+              <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 181.21592712402344 a 4 4 0 0,1 4,4  v 8  V 45  V 45 a 4 4 0 0,1 -4,4  h -181.21592712402344  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+              <g data-id="??Xei5ck1Mk1][10B/-d" class="blocklyDraggable" style="display: block;" transform="translate(134.68795776367188, 4)">
+                <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20.5,0  h 49.52796936035156 a 20.5 20.5 0 0,1 20.5,20.5  v 0 a 20.5 20.5 0 0,1 -20.5,20.5  V 41  h -49.52796936035156 a 20.5 20.5 0 0,1 -20.5,-20.5  v 0 a 20.5 20.5 0 0,1 20.5,-20.5 z&#10;"></path>
+                <g class="blocklyEditableText" transform="translate(12,4)" style="cursor: default;">
+                  <rect rx="4" ry="4" x="0" y="0" height="33" width="66.52796936035156" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                  <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">true</text>
+                  <image style="display: none;"></image>
+                  <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(46.52796936035156,10.5)"></image>
+                </g>
+              </g>
+              <g data-id="p$8lK-chC-!d$O}7|S;q" class="blocklyDraggable" transform="translate(0, 49)">
+                <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 187.10391235351562 a 4 4 0 0,1 4,4  v 8  V 45  V 45 a 4 4 0 0,1 -4,4  h -187.10391235351562  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                <g data-id="B~,LF$E0RSsecuHA?lC~" class="blocklyDraggable" style="display: block;" transform="translate(134.68795776367188, 4)">
+                  <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20.5,0  h 55.41595458984375 a 20.5 20.5 0 0,1 20.5,20.5  v 0 a 20.5 20.5 0 0,1 -20.5,20.5  V 41  h -55.41595458984375 a 20.5 20.5 0 0,1 -20.5,-20.5  v 0 a 20.5 20.5 0 0,1 20.5,-20.5 z&#10;"></path>
+                  <g class="blocklyEditableText" transform="translate(12,4)" style="cursor: default;">
+                    <rect rx="4" ry="4" x="0" y="0" height="33" width="72.41595458984375" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                    <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">false</text>
+                    <image style="display: none;"></image>
+                    <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(52.41595458984375,10.5)"></image>
+                  </g>
+                </g>
+                <g data-id="Aj[C$5LXJFxF)(s[djVH" class="blocklyDraggable" transform="translate(0, 49)">
+                  <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 250.99183654785156 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -250.99183654785156  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                  <g data-id="qJ*aC,Q0$JV7E|G:xuMj" class="blocklyDraggable" style="display: block;" transform="translate(209.1998748779297, 4)">
+                    <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 45.791961669921875 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -45.791961669921875 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+                    <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+                      <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">Profit</text>
+                      <image style="display: none;"></image>
+                      <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(49.791961669921875,4)"></image>
+                    </g>
+                  </g>
+                  <g data-id="blkSLSet_geumkYqvlSIB" class="blocklyDraggable" transform="translate(0, 48)">
+                    <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 323.7277374267578 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -323.7277374267578  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                    <g data-id=")Uavt$_Q(eL({uH3bh0," class="blocklyDraggable" style="display: block;" transform="translate(191.87188720703125, 4)">
+                      <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 135.85585021972656 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -135.85585021972656 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+                      <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+                        <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">StopLossAmount</text>
+                        <image style="display: none;"></image>
+                        <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(139.85585021972656,4)"></image>
+                      </g>
+                    </g>
+                    <g data-id="]Bp___UkJ86PN}I;4t?+" class="blocklyDraggable" transform="translate(0, 48)">
+                      <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 264.6717834472656 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -264.6717834472656  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                      <g data-id="IczKZ3YYE+o;?uVBVzTC" class="blocklyDraggable" style="display: block;" transform="translate(204.83184814453125, 4)">
+                        <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 63.839935302734375 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -63.839935302734375 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+                        <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+                          <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">Amount</text>
+                          <image style="display: none;"></image>
+                          <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(67.83993530273438,4)"></image>
+                        </g>
+                      </g>
+                      <g data-id="(2gCfKSK2uRRD:,,nibg" class="blocklyDraggable" transform="translate(0, 48)">
+                        <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 218.81585693359375 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -218.81585693359375  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                        <g data-id="-t[`@ZXFTt/n;5@WqHPz" class="blocklyDraggable" style="display: block;" transform="translate(158.97592163085938, 4)">
+                          <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 63.839935302734375 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -63.839935302734375 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+                          <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+                            <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">Amount</text>
+                            <image style="display: none;"></image>
+                            <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(67.83993530273438,4)"></image>
+                          </g>
+                        </g>
+                        <g data-id="{spnYfozTE:/MR8S-ILB" class="blocklyDraggable" transform="translate(0, 48)">
+                          <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 213.15184020996094 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -213.15184020996094  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                          <g data-id="(?=S.jI38Pj[nT2z2Lo)" class="blocklyDraggable" style="display: block;" transform="translate(197.7918701171875, 4)">
+                            <path class="blocklyPath" stroke="#acacac" fill="#fff" d=" m 20,0  h 19.359970092773438 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -19.359970092773438 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+                            <g class="blocklyEditableText" transform="translate(11,10)" style="cursor: text;">
+                              <rect rx="4" ry="4" x="0" y="0" height="20" width="37.35997009277344" class="blocklyFieldRect" style="display: none;"></rect>
+                              <text class="blocklyText" dominant-baseline="central" x="0" y="10">Even</text>
+                            </g>
+                          </g>
+                          <g data-id=".xBKkTF9AW8afBjnOpSX" class="blocklyDraggable" transform="translate(0, 48)">
+                            <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 317.9837341308594 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -317.9837341308594  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                            <g data-id="oMv$(FwMIP:d1f_,[(?s" class="blocklyDraggable" style="display: block;" transform="translate(235.3438262939453, 4)">
+                              <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 86.63990783691406 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -86.63990783691406 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+                              <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+                                <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">Mart Splits</text>
+                                <image style="display: none;"></image>
+                                <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(90.63990783691406,4)"></image>
+                              </g>
+                            </g>
+                            <g data-id="e/9l)#DQo8u,fv}c-/x7" class="blocklyDraggable" transform="translate(0, 48)">
+                              <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 363.0556945800781 a 4 4 0 0,1 4,4  v 8  V 44  V 44 a 4 4 0 0,1 -4,4  h -363.0556945800781  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z&#10;"></path>
+                              <g data-id="snIe0SlnOG`fpnurP~{W" class="blocklyDraggable" style="display: block;" transform="translate(236.86383056640625, 4)">
+                                <path class="blocklyPath" stroke="#acacac" fill="#e5e5e5" d=" m 20,0  h 130.19186401367188 a 20 20 0 0,1 20,20  v 0 a 20 20 0 0,1 -20,20  V 40  h -130.19186401367188 a 20 20 0 0,1 -20,-20  v 0 a 20 20 0 0,1 20,-20 z&#10;"></path>
+                                <g class="blocklyEditableText" transform="translate(12,10)" style="cursor: default;">
+                                  <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="0" y="10">Martingale Level</text>
+                                  <image style="display: none;"></image>
+                                  <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(134.19186401367188,4)"></image>
+                                </g>
+                              </g>
+                              <g transform="translate(8,14)">
+                                <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                              </g>
+                              <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+                                <rect rx="4" ry="4" x="0" y="0" height="33" width="157.4558563232422" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                                <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Martingale Stop</text>
+                                <image style="display: none;"></image>
+                                <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(137.4558563232422,10.5)"></image>
+                              </g>
+                              <g transform="translate(213.4558563232422,14)">
+                                <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                              </g>
+                            </g>
+                            <g transform="translate(8,14)">
+                              <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                            </g>
+                            <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+                              <rect rx="4" ry="4" x="0" y="0" height="33" width="155.93585205078125" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                              <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Martingale Split</text>
+                              <image style="display: none;"></image>
+                              <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(135.93585205078125,10.5)"></image>
+                            </g>
+                            <g transform="translate(211.93585205078125,14)">
+                              <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                            </g>
+                          </g>
+                          <g transform="translate(8,14)">
+                            <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                          </g>
+                          <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+                            <rect rx="4" ry="4" x="0" y="0" height="33" width="118.38389587402344" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                            <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Trade Type</text>
+                            <image style="display: none;"></image>
+                            <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(98.38389587402344,10.5)"></image>
+                          </g>
+                          <g transform="translate(174.38389587402344,14)">
+                            <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                          </g>
+                        </g>
+                        <g transform="translate(8,14)">
+                          <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                        </g>
+                        <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+                          <rect rx="4" ry="4" x="0" y="0" height="33" width="79.56794738769531" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                          <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Stake</text>
+                          <image style="display: none;"></image>
+                          <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(59.56794738769531,10.5)"></image>
+                        </g>
+                        <g transform="translate(135.5679473876953,14)">
+                          <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                        </g>
+                      </g>
+                      <g transform="translate(8,14)">
+                        <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                      </g>
+                      <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+                        <rect rx="4" ry="4" x="0" y="0" height="33" width="125.42387390136719" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                        <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Initial Stake</text>
+                        <image style="display: none;"></image>
+                        <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(105.42387390136719,10.5)"></image>
+                      </g>
+                      <g transform="translate(181.4238739013672,14)">
+                        <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                      </g>
+                    </g>
+                    <g transform="translate(8,14)">
+                      <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                    </g>
+                    <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+                      <rect rx="4" ry="4" x="0" y="0" height="33" width="112.46391296386719" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                      <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Stop Loss</text>
+                      <image style="display: none;"></image>
+                      <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(92.46391296386719,10.5)"></image>
+                    </g>
+                    <g transform="translate(168.4639129638672,14)">
+                      <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                    </g>
+                  </g>
+                  <g transform="translate(8,14)">
+                    <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                  </g>
+                  <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+                    <rect rx="4" ry="4" x="0" y="0" height="33" width="129.79190063476562" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                    <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Target Profit</text>
+                    <image style="display: none;"></image>
+                    <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(109.79190063476562,10.5)"></image>
+                  </g>
+                  <g transform="translate(185.79190063476562,14)">
+                    <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                  </g>
+                </g>
+                <g transform="translate(8,14.5)">
+                  <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+                </g>
+                <g class="blocklyEditableText" transform="translate(48,8)" style="cursor: default;">
+                  <rect rx="4" ry="4" x="0" y="0" height="33" width="55.27998352050781" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                  <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">S2</text>
+                  <image style="display: none;"></image>
+                  <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(35.27998352050781,10.5)"></image>
+                </g>
+                <g transform="translate(111.27998352050781,14.5)">
+                  <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+                </g>
+              </g>
+              <g transform="translate(8,14.5)">
+                <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+              </g>
+              <g class="blocklyEditableText" transform="translate(48,8)" style="cursor: default;">
+                <rect rx="4" ry="4" x="0" y="0" height="33" width="55.27998352050781" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+                <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">S1</text>
+                <image style="display: none;"></image>
+                <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(35.27998352050781,10.5)"></image>
+              </g>
+              <g transform="translate(111.27998352050781,14.5)">
+                <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+              </g>
+            </g>
+            <g transform="translate(8,14)">
+              <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+            </g>
+            <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+              <rect rx="4" ry="4" x="0" y="0" height="33" width="55.5679931640625" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+              <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">P2</text>
+              <image style="display: none;"></image>
+              <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(35.5679931640625,10.5)"></image>
+            </g>
+            <g transform="translate(111.5679931640625,14)">
+              <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+            </g>
+          </g>
+          <g transform="translate(8,14)">
+            <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+          </g>
+          <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+            <rect rx="4" ry="4" x="0" y="0" height="33" width="55.5679931640625" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+            <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">P1</text>
+            <image style="display: none;"></image>
+            <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(35.5679931640625,10.5)"></image>
+          </g>
+          <g transform="translate(111.5679931640625,14)">
+            <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+          </g>
+        </g>
+        <g transform="translate(8,14)">
+          <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+        </g>
+        <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+          <rect rx="4" ry="4" x="0" y="0" height="33" width="85.75994873046875" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+          <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Period</text>
+          <image style="display: none;"></image>
+          <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(65.75994873046875,10.5)"></image>
+        </g>
+        <g transform="translate(141.75994873046875,14)">
+          <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+        </g>
+      </g>
+      <g transform="translate(8,14)">
+        <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+      </g>
+      <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+        <rect rx="4" ry="4" x="0" y="0" height="33" width="161.0078582763672" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+        <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Ticks to Analyse</text>
+        <image style="display: none;"></image>
+        <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(141.0078582763672,10.5)"></image>
+      </g>
+      <g transform="translate(217.0078582763672,14)">
+        <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+      </g>
+    </g>
+    <g transform="translate(8,14)">
+      <text class="blocklyText" dominant-baseline="central" x="0" y="10">set</text>
+    </g>
+    <g class="blocklyEditableText" transform="translate(48,7.5)" style="cursor: default;">
+      <rect rx="4" ry="4" x="0" y="0" height="33" width="173.77587890625" class="blocklyFieldRect blocklyDropdownRect" stroke="#acacac" fill="transparent"></rect>
+      <text class="blocklyText blocklyDropdownText" dominant-baseline="central" text-anchor="start" x="8" y="16.5">Return % Number</text>
+      <image style="display: none;"></image>
+      <image height="12px" width="12px" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(153.77587890625,10.5)"></image>
+    </g>
+    <g transform="translate(229.77587890625,14)">
+      <text class="blocklyText" dominant-baseline="central" x="0" y="10">to</text>
+    </g>
+  </g>
+  <g style="display: none;">
+    <text class="blocklyText" dominant-baseline="central"></text>
+  </g>
+  <g class="blocklyEditableText" style="cursor: text; display: none;">
+    <rect rx="4" ry="4" x="0" y="0" height="0" width="0" class="blocklyFieldRect" stroke="#acacac" style="display: block;"></rect>
+    <text class="blocklyText" dominant-baseline="central"></text>
+  </g>
+  <g style="display: none;">
+    <text class="blocklyText" dominant-baseline="central"></text>
+  </g>
+  <g style="display: none;">
+    <image height="24px" width="24px" alt="+" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAC+0lEQVR4Ae2bA4xeURCFp7bdoGvjv3OC2m1Q24xW0cZJ3caqzdhJ3Vi1bdu2po1T3v95Nvu+E/N+z5hDMf4RExMTE4N0HmkqsZS34RAu4iG+8kd+hEs4xNuw1FTySKSTRvIbYyLW4xbEHr7JG8z47CakBVOMlXgHcRZ+w6tRSNGCOmY874e4D+83E1CHoqCwBWbzI4gPuY85hS0oVGrwDDyD+JgnZibVoHDgXByCBJBDnBvG8kfiPSSgvOfBFCg1sRASbHhRYIdSSn3eDgk+vD2lPvlPfks+AgknfCS/pd8XzTRchYSYq4Vp5B/ogNuQkHPbdPTv4LkMiSCXclr5curiOCSinMivS17hZZAIs5S8YfpDIs5Ack9OKzyJWoAfozW5BVsgCrKF3GG6QHQk0ZVcUBsXIe5Dv+FJ4aKLlx6UQtQICEodb3++qUmAb1BtcgJPh2gSgGAaOQEX1QlcouQxPSHqBMT0dH791yDg/H5Q1Ig/qhT4UNSIksGMgqgUEDPK+fOnKgFeRsmAM1oFcCap9y+IWgFJ4mXf9NMsYPqRDZRpFkCZXWCJaoElZIP3aBbgPWQDp50v0D2OBU+TDb6pWYBv2gWeqxZ4bhf4rlrgm13gk2qBT2QDTzUL4CnZ4BuaBfhGNbiM6r6R7SYbWFrVHyUqNAtwOdnAQM0CiQFkI7uJZoH8xmSHT2kV4FOUDFiqVQBLq8dnlaJG+KBRgD8WNaLkwGaVApsoWbiHSoEe1eDzuuIfHDzd6S+me6oE7lNtcgZXaBLgchczoZp+s1Jtck6iK0RHTJdqOWrwE7Tmx5CI8wStyT0YGLWA6V+lB554mR8jZ8ciEzjmywRpTitcUj30Z8d0VD52aSeREvbgayIlHj3+83TmbaEsf1tK/eCaG4uUj9/bSQzDO9UFCDucy/sC2fb7ODe8EtB0/0tA4dew5uivYdlfeibyAW9FOJ6EOpFXEXk1v1VeRbR/0zYTHJdBNZLI/KOO+4kf4RIfDqKOGxMTExMT8wNOZdb6YlKT2wAAAABJRU5ErkJggg==" style="cursor: pointer;"></image>
+  </g>
+  <g style="display: none;">
+    <image height="16px" width="16px" alt="" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/media/dropdown-arrow.svg" style="cursor: pointer;"></image>
+  </g>
+  <g class="blocklyIconGroup blockly-icon-comment" transform="translate(0, 0)" style="display: none;">
+    <circle class="blocklyIconShape" r="8" cx="8" cy="8"></circle>
+    <path class="blocklyIconSymbol" d="m6.8,10h2c0.003,-0.617 0.271,-0.962 0.633,-1.266 2.875,-2.4050.607,-5.534 -3.765,-3.874v1.7c3.12,-1.657 3.698,0.118 2.336,1.25-1.201,0.998 -1.201,1.528 -1.204,2.19z"></path>
+    <rect class="blocklyIconSymbol" x="6.8" y="10.78" height="2" width="2"></rect>
+  </g>
+  <g transform="translate(8,24)" style="display: none;">
+    <text class="blocklyText" dominant-baseline="central" x="0" y="10">function Starts with: 1st O...</text>
+  </g>
+  <g transform="translate(16,14)">
+    <text class="blocklyText" dominant-baseline="central" x="0" y="10">function</text>
+  </g>
+  <g transform="translate(86.51191711425781,14)">
+    <text class="blocklyText header__title" dominant-baseline="central" x="0" y="10">Starts (1st Over Digit, 2nd Over Digit, Amount, Profit, Ticks to analyze, Mart Splits, % Win Per Stake, Martingale Level)</text>
+  </g>
+  <g transform="translate(989.9350128173828,15.5)">
+    <image height="16px" width="16px" alt="Collapsed" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/media/dropdown-arrow.svg" style="cursor: pointer;"></image>
+  </g>
+</g>

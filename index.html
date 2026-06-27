@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/deriv-logo.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="/manifest.json" />
+
+        <!-- PWA Meta Tags -->
+        <meta name="theme-color" content="#f0b429" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="SaintDBot" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="msapplication-TileColor" content="#0a1628" />
+        <meta name="msapplication-tap-highlight" content="no" />
+
+        <!-- Apple Touch Icons -->
+        <link rel="apple-touch-icon" href="/assets/icons/pwa/icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/pwa/icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/pwa/icon-192x192.png" />
+        <meta name="title" content="SaintDBot — Automated Trading Bots for Deriv" />
+        <meta
+            name="description"
+            content="SaintDBot gives you ready-made, expert-built automated trading bots for the Deriv platform. Choose from Even/Odd, Rise/Fall, Digits strategies and more — no coding required."
+        />
+        <meta name="keywords" content="Deriv bot, automated trading bot, SaintDBot, trading strategy, even odd bot, rise fall bot, Deriv trading, binary trading bot" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://saintdbot--saintob.replit.app/" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://saintdbot--saintob.replit.app/" />
+        <meta property="og:title" content="SaintDBot — Automated Trading Bots for Deriv" />
+        <meta
+            property="og:description"
+            content="SaintDBot gives you ready-made, expert-built automated trading bots for the Deriv platform. Choose from Even/Odd, Rise/Fall, Digits strategies and more — no coding required."
+        />
+        <meta property="og:site_name" content="SaintDBot" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="SaintDBot — Automated Trading Bots for Deriv" />
+        <meta
+            name="twitter:description"
+            content="SaintDBot gives you ready-made, expert-built automated trading bots for the Deriv platform. No coding required."
+        />
+        <title>SaintDBot — Automated Trading Bots for Deriv</title>
+        <style>
+            :root {
+                font-size: 62.5%;
+            }
+            html, body {
+                margin: 0;
+                padding: 0;
+                border: none;
+                overflow: hidden;
+            }
+        </style>
+        <style>
+        #saintdbot-splash {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #04060f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* never let the splash eat taps on mobile, even while visible */
+            pointer-events: none;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+        }
+        #saintdbot-splash.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #splash-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .splash-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .splash-badge {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            letter-spacing: 6px;
+            color: #e53535;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeSlideDown 0.5s ease 0.2s forwards;
+        }
+        .splash-title {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(42px, 9vw, 88px);
+            font-weight: 900;
+            letter-spacing: 10px;
+            color: transparent;
+            background: linear-gradient(135deg, #ffffff 0%, #e53535 50%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: none;
+            position: relative;
+            opacity: 0;
+            animation: titleReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+            filter: drop-shadow(0 0 30px rgba(229,53,53,0.7));
+        }
+        .splash-title::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            top: -2px;
+            color: #b91c1c;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            background: none;
+            -webkit-text-fill-color: rgba(185,28,28,0.2);
+            animation: glitch 3s infinite 2s;
+        }
+        .splash-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(11px, 2vw, 14px);
+            letter-spacing: 4px;
+            color: #8899aa;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease 1.2s forwards;
+        }
+        .splash-motto {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(16px, 3vw, 24px);
+            letter-spacing: 5px;
+            color: #f0b429;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease 1.6s forwards;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            filter: drop-shadow(0 0 8px rgba(240,180,41,0.6));
+        }
+        .splash-key {
+            font-size: 1.3em;
+            display: inline-block;
+            animation: keyGlow 2s ease-in-out infinite 2.4s;
+        }
+        @keyframes keyGlow {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(240,180,41,0.5)); transform: rotate(-15deg); }
+            50%       { filter: drop-shadow(0 0 16px rgba(240,180,41,1));  transform: rotate(-15deg) scale(1.18); }
+        }
+        .splash-line {
+            width: min(220px, 75vw);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e53535, transparent);
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease 2.1s forwards;
+        }
+        .splash-status {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #e53535;
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease 2s forwards;
+        }
+        .splash-bar-wrap {
+            width: min(240px, 80vw);
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 2px;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeSlideUp 0.4s ease 2.2s forwards;
+        }
+        .splash-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #b91c1c, #e53535, #ff6b6b);
+            border-radius: 2px;
+            animation: barFill 3s cubic-bezier(0.4,0,0.2,1) 2.4s forwards;
+            box-shadow: 0 0 14px rgba(229,53,53,0.8);
+        }
+        .splash-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: #e53535;
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .splash-corner.tl { top: 30px; left: 30px; border-width: 2px 0 0 2px; }
+        .splash-corner.tr { top: 30px; right: 30px; border-width: 2px 2px 0 0; }
+        .splash-corner.bl { bottom: 30px; left: 30px; border-width: 0 0 2px 2px; }
+        .splash-corner.br { bottom: 30px; right: 30px; border-width: 0 2px 2px 0; }
+
+        @keyframes titleReveal {
+            0% { opacity: 0; transform: scale(0.85) translateY(10px); filter: drop-shadow(0 0 0px rgba(229,53,53,0)); }
+            60% { opacity: 1; transform: scale(1.04) translateY(-2px); filter: drop-shadow(0 0 60px rgba(229,53,53,1)); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: drop-shadow(0 0 30px rgba(229,53,53,0.7)); }
+        }
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes barFill {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        @keyframes glitch {
+            0%, 90%, 100% { clip-path: none; transform: none; opacity: 0; }
+            91% { clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%); transform: translate(-3px, 2px); opacity: 1; }
+            93% { clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%); transform: translate(3px, -2px); opacity: 1; }
+            95% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); transform: translate(-2px, 1px); opacity: 1; }
+            97% { clip-path: none; opacity: 0; }
+        }
+        </style>
+    </head>
+
+    <body class="body theme theme--dark">
+        <div id="saintdbot-splash">
+            <canvas id="splash-canvas"></canvas>
+            <div class="splash-corner tl"></div>
+            <div class="splash-corner tr"></div>
+            <div class="splash-corner bl"></div>
+            <div class="splash-corner br"></div>
+            <div class="splash-content">
+                <div class="splash-badge">⬡ AI TRADING SYSTEM v2.0 ⬡</div>
+                <div class="splash-title" data-text="SAINTDBOT">SAINTDBOT</div>
+                <div class="splash-subtitle">Intelligent Automated Trading Platform</div>
+                <div class="splash-motto">CONSISTENCY IS <span class="splash-key">🔑</span></div>
+                <div class="splash-line"></div>
+                <div class="splash-status">[ INITIALIZING NEURAL NETWORK... ]</div>
+                <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
+            </div>
+        </div>
+        <script>
+            (function() {
+                // Detect mobile / low-power devices so the animation doesn't hog the
+                // main thread on iOS Safari or low-end Android (which would delay React
+                // booting and make the page feel "frozen" right after login).
+                var isMobile = (
+                    /iPhone|iPad|iPod|Android|Mobile/i.test(navigator.userAgent) ||
+                    Math.min(window.innerWidth, window.innerHeight) < 768
+                );
+                var animFrame;
+
+                function dismissSplash() {
+                    var splash = document.getElementById('saintdbot-splash');
+                    if (splash) {
+                        splash.classList.add('hidden');
+                        setTimeout(function() {
+                            try { cancelAnimationFrame(animFrame); } catch (e) {}
+                            if (splash.parentNode) splash.parentNode.removeChild(splash);
+                        }, 900);
+                    }
+                }
+
+                /* CRITICAL: schedule the auto-dismiss BEFORE any other work so the
+                   splash never gets stuck even if the canvas / animation code
+                   throws (which has been seen in some Safari hardened modes,
+                   private-browsing, low-power mode, content-blockers, etc). */
+                if (window.location.pathname.startsWith('/course')) {
+                    dismissSplash();
+                } else {
+                    setTimeout(dismissSplash, 6000);
+                }
+                document.addEventListener('splashDismiss', dismissSplash);
+                document.addEventListener('touchstart', dismissSplash, { once: true, passive: true });
+                document.addEventListener('pointerdown', dismissSplash, { once: true, passive: true });
+                document.addEventListener('click', dismissSplash, { once: true });
+                document.addEventListener('visibilitychange', function () {
+                    if (document.visibilityState === 'visible') dismissSplash();
+                });
+                /* Also let the user tap the splash itself to skip it. */
+                var splashEl = document.getElementById('saintdbot-splash');
+                if (splashEl) splashEl.addEventListener('click', dismissSplash);
+
+                /* Animation is decorative — wrap in try/catch and bail silently
+                   if the browser refuses to give us a 2D context. */
+                var canvas, ctx, nodes = [];
+                var W, H;
+                try {
+                    canvas = document.getElementById('splash-canvas');
+                    ctx = canvas && canvas.getContext && canvas.getContext('2d');
+                    if (!ctx) return;
+                } catch (e) { return; }
+
+                var nodeCount = isMobile ? 22 : 60;
+                var linkDist = isMobile ? 110 : 160;
+
+                function resize() {
+                    W = canvas.width = window.innerWidth;
+                    H = canvas.height = window.innerHeight;
+                }
+                resize();
+                window.addEventListener('resize', resize);
+
+                for (var i = 0; i < nodeCount; i++) {
+                    nodes.push({
+                        x: Math.random() * window.innerWidth,
+                        y: Math.random() * window.innerHeight,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        r: Math.random() * 2 + 1,
+                        pulse: Math.random() * Math.PI * 2
+                    });
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, W, H);
+                    var t = Date.now() / 1000;
+
+                    for (var i = 0; i < nodes.length; i++) {
+                        var n = nodes[i];
+                        n.x += n.vx; n.y += n.vy;
+                        if (n.x < 0 || n.x > W) n.vx *= -1;
+                        if (n.y < 0 || n.y > H) n.vy *= -1;
+                        n.pulse += 0.03;
+
+                        for (var j = i + 1; j < nodes.length; j++) {
+                            var m = nodes[j];
+                            var dx = m.x - n.x, dy = m.y - n.y;
+                            var dist = Math.sqrt(dx*dx + dy*dy);
+                            if (dist < linkDist) {
+                                var alpha = (1 - dist/linkDist) * 0.3;
+                                var grad = ctx.createLinearGradient(n.x, n.y, m.x, m.y);
+                                grad.addColorStop(0, 'rgba(229,53,53,' + alpha + ')');
+                                grad.addColorStop(0.5, 'rgba(255,107,107,' + (alpha*0.6) + ')');
+                                grad.addColorStop(1, 'rgba(185,28,28,' + alpha + ')');
+                                ctx.beginPath();
+                                ctx.moveTo(n.x, n.y);
+                                ctx.lineTo(m.x, m.y);
+                                ctx.strokeStyle = grad;
+                                ctx.lineWidth = 0.6;
+                                ctx.stroke();
+                            }
+                        }
+
+                        var glow = Math.sin(n.pulse) * 0.4 + 0.6;
+                        var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 5);
+                        g.addColorStop(0, 'rgba(229,53,53,' + (glow * 0.9) + ')');
+                        g.addColorStop(1, 'rgba(229,53,53,0)');
+                        ctx.beginPath();
+                        ctx.arc(n.x, n.y, n.r * 5, 0, Math.PI * 2);
+                        ctx.fillStyle = g;
+                        ctx.fill();
+
+                        ctx.beginPath();
+                        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(255,200,200,' + (glow * 0.95) + ')';
+                        ctx.fill();
+                    }
+
+                    ctx.fillStyle = 'rgba(229,53,53,0.012)';
+                    var scanY = ((t * 80) % (H + 40)) - 20;
+                    ctx.fillRect(0, scanY, W, 2);
+
+                    animFrame = requestAnimationFrame(draw);
+                }
+                try { draw(); } catch (e) { /* animation failure is non-fatal */ }
+            })();
+        </script>
+        <div id="modal_root" class="modal-root"></div>
+        <div id="popup_root" class="popup-root"></div>
+        <div id="root"></div>
+        <!-- LiveChat script -->
+        <script type="text/javascript" defer>
+            window.__lc = window.__lc || {};
+            window.__lc.license = 12049137;
+            window.__lc.asyncInit = true;
+            (function (n, t, c) {
+                function i(n) {
+                    return e._h ? e._h.apply(null, n) : e._q.push(n);
+                }
+                var e = {
+                    _q: [],
+                    _h: null,
+                    _v: '2.0',
+                    on: function () {
+                        i(['on', c.call(arguments)]);
+                    },
+                    once: function () {
+                        i(['once', c.call(arguments)]);
+                    },
+                    off: function () {
+                        i(['off', c.call(arguments)]);
+                    },
+                    get: function () {
+                        if (!e._h) throw new Error('[LiveChatWidget] You can’t use getters before load.');
+                        return i(['get', c.call(arguments)]);
+                    },
+                    call: function () {
+                        i(['call', c.call(arguments)]);
+                    },
+                    init: function () {
+                        setTimeout(() => {
+                            var n = t.createElement('script');
+                            ((n.async = !0),
+                                (n.type = 'text/javascript'),
+                                (n.src = 'https://cdn.livechatinc.com/tracking.js'),
+                                t.head.appendChild(n));
+                        }, 3000);
+                    },
+                };
+                (!n.__lc.asyncInit && e.init(), (n.LiveChatWidget = n.LiveChatWidget || e));
+            })(window, document, [].slice);
+        </script>
+        <!-- End LiveChat script -->
+
+        <!-- Browser Service Worker Prevention -->
+        <script>
+            // Check browser compatibility and prevent service worker issues
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isFirefox = userAgent.includes('firefox');
+            const isSafari = userAgent.includes('safari') && !userAgent.includes('chrome');
+            const shouldSkipSW = isFirefox || isSafari;
+
+            if (shouldSkipSW) {
+                const browserName = isFirefox ? 'Firefox' : 'Safari';
+                console.log(
+                    `[HTML] ${browserName} detected - preventing service worker registration to avoid chunk loading issues`
+                );
+
+                // Cleanup any existing service workers
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker
+                        .getRegistrations()
+                        .then(registrations => {
+                            registrations.forEach(registration => {
+                                console.log(`[HTML] Unregistering existing SW for ${browserName}:`, registration.scope);
+                                registration.unregister();
+                            });
+                        })
+                        .catch(error => {
+                            console.error('[HTML] Failed to cleanup service workers:', error);
+                        });
+                }
+            }
+
+            // Check online/offline status
+            console.log('[HTML] Online status:', navigator.onLine);
+            window.addEventListener('online', () => {
+                console.log('[HTML] Back online');
+            });
+            window.addEventListener('offline', () => {
+                console.log('[HTML] Gone offline');
+            });
+
+            // Listen for service worker messages if registered by PWA utils (non-problematic browsers only)
+            if ('serviceWorker' in navigator && !shouldSkipSW) {
+                navigator.serviceWorker.addEventListener('message', event => {
+                    console.log('[HTML] Message from service worker:', event.data);
+                });
+            }
+        </script>
+    </body>
+</html>

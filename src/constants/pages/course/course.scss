@@ -1,0 +1,775 @@
+// ─── Course colour tokens (Team.SaintFX palette) ──────────────────────────
+// bg-deep   : #0a0a0a  (pure black – chart background in the promo image)
+// bg-card   : #111111  (lifted card surface)
+// red       : #e53535  (Team.Saint red)
+// red-dim   : rgba(229,53,53,x) for glows / borders
+// green     : #22c55e  (FX green)
+// green-dim : rgba(34,197,94,x)
+// white     : #ffffff
+// muted     : rgba(255,255,255,x)
+
+.course-standalone {
+    min-height: 100vh;
+    background: #0a0a0a;
+}
+
+// ─── Sticky header ────────────────────────────────────────────────────────────
+.course-standalone-header {
+    background: rgba(10, 10, 10, 0.96);
+    border-bottom: 1px solid rgba(229, 53, 53, 0.18);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    &__inner {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__brand {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    &__team {
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+    &__saint {
+        color: #e53535;
+    }
+
+    &__fx {
+        color: #22c55e;
+        font-style: italic;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &__label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #e53535;
+        background: rgba(229, 53, 53, 0.1);
+        border: 1px solid rgba(229, 53, 53, 0.28);
+        border-radius: 20px;
+        padding: 4px 14px;
+    }
+
+    &__logout {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.38);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 8px;
+        transition: all 0.2s;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.05);
+        }
+    }
+}
+
+// ─── Password gate ────────────────────────────────────────────────────────────
+.course-gate {
+    min-height: 100vh;
+    background: #0a0a0a;
+
+    &__body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 60px);
+        padding: 32px 24px;
+    }
+
+    &__card {
+        background: #111111;
+        border: 1px solid rgba(229, 53, 53, 0.22);
+        border-radius: 20px;
+        overflow: hidden;
+        max-width: 440px;
+        width: 100%;
+        box-shadow:
+            0 0 40px rgba(229, 53, 53, 0.06),
+            0 32px 64px rgba(0, 0, 0, 0.6);
+
+        &--shake {
+            animation: gate-shake 0.5s ease;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        object-position: center 30%;
+        display: block;
+    }
+
+    &__content {
+        padding: 28px 28px 32px;
+        text-align: center;
+    }
+
+    &__lock-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: rgba(229, 53, 53, 0.08);
+        border: 1px solid rgba(229, 53, 53, 0.25);
+        border-radius: 50%;
+        margin: 0 auto 20px;
+
+        svg {
+            stroke: #e53535;
+
+            circle {
+                fill: #e53535;
+            }
+        }
+    }
+
+    &__title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #fff;
+        margin: 0 0 8px;
+    }
+
+    &__subtitle {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.42);
+        margin: 0 0 24px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-size: 15px;
+        color: #fff;
+        outline: none;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+        text-align: center;
+        letter-spacing: 2px;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.22);
+            letter-spacing: 0;
+        }
+
+        &:focus {
+            border-color: rgba(229, 53, 53, 0.5);
+        }
+
+        &--error {
+            border-color: rgba(229, 53, 53, 0.6) !important;
+        }
+    }
+
+    &__error {
+        font-size: 13px;
+        color: #e53535;
+        margin: 0;
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        background: #e53535;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 13px 20px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.2s;
+        margin-top: 4px;
+
+        &:hover {
+            background: #cc2020;
+        }
+    }
+}
+
+@keyframes gate-shake {
+    0%, 100% { transform: translateX(0); }
+    15%       { transform: translateX(-8px); }
+    30%       { transform: translateX(8px); }
+    45%       { transform: translateX(-6px); }
+    60%       { transform: translateX(6px); }
+    75%       { transform: translateX(-4px); }
+    90%       { transform: translateX(4px); }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+.course-standalone-footer {
+    text-align: center;
+    padding: 40px 24px 32px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.18);
+    letter-spacing: 0.3px;
+}
+
+// ─── Course main layout ────────────────────────────────────────────────────────
+.course-page {
+    padding: 32px 24px 64px;
+    max-width: 900px;
+    margin: 0 auto;
+
+    &__hero {
+        position: relative;
+        margin-bottom: 40px;
+        border: 1px solid rgba(229, 53, 53, 0.22);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 40px rgba(229, 53, 53, 0.05);
+    }
+
+    &__hero-image-wrap {
+        position: relative;
+        width: 100%;
+        height: 240px;
+        overflow: hidden;
+
+        @media (max-width: 640px) {
+            height: 180px;
+        }
+    }
+
+    &__hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+
+    &__hero-image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,10,10,0.05) 0%, rgba(10,10,10,0.88) 100%);
+    }
+
+    &__hero-body {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 32px;
+        align-items: start;
+        padding: 28px 32px 32px;
+        background: rgba(17, 17, 17, 1);
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+            padding: 20px;
+        }
+    }
+
+    &__badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #e53535;
+        background: rgba(229, 53, 53, 0.08);
+        border: 1px solid rgba(229, 53, 53, 0.25);
+        border-radius: 20px;
+        padding: 4px 12px;
+        margin-bottom: 16px;
+    }
+
+    &__hero-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #fff;
+        margin: 0 0 12px;
+        line-height: 1.2;
+    }
+
+    &__hero-subtitle {
+        font-size: 15px;
+        color: rgba(255,255,255,0.5);
+        line-height: 1.6;
+        margin: 0 0 24px;
+    }
+
+    &__stats {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+    }
+
+    &__stat {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__stat-value {
+        font-size: 18px;
+        font-weight: 700;
+        color: #e53535;
+    }
+
+    &__stat-label {
+        font-size: 11px;
+        color: rgba(255,255,255,0.38);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__progress-card {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 14px;
+        padding: 20px 24px;
+        min-width: 220px;
+
+        @media (max-width: 640px) {
+            min-width: unset;
+        }
+    }
+
+    &__progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: rgba(255,255,255,0.45);
+        margin-bottom: 10px;
+    }
+
+    &__progress-pct {
+        font-weight: 700;
+        color: #22c55e;
+        font-size: 15px;
+    }
+
+    &__progress-bar {
+        background: rgba(255,255,255,0.07);
+        border-radius: 999px;
+        height: 6px;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+
+    &__progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #e53535, #22c55e);
+        border-radius: 999px;
+        transition: width 0.4s ease;
+    }
+
+    &__progress-note {
+        font-size: 12px;
+        color: rgba(255,255,255,0.32);
+        margin: 0 0 16px;
+    }
+
+    &__start-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #e53535;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 18px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        width: 100%;
+        justify-content: center;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #cc2020;
+        }
+    }
+
+    &__complete-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #22c55e;
+        font-size: 14px;
+        font-weight: 600;
+        justify-content: center;
+        padding: 8px;
+        background: rgba(34,197,94,0.08);
+        border-radius: 8px;
+    }
+
+    &__modules {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+// ─── Module cards ─────────────────────────────────────────────────────────────
+.course-module {
+    background: #111111;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: rgba(229, 53, 53, 0.22);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+        color: inherit;
+        gap: 16px;
+
+        &:hover {
+            background: rgba(255,255,255,0.02);
+        }
+    }
+
+    &__header-left {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: rgba(255,255,255,0.38);
+        flex-shrink: 0;
+    }
+
+    &__title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.3;
+    }
+
+    &__meta {
+        font-size: 12px;
+        color: rgba(255,255,255,0.38);
+    }
+
+    &__progress-ring {
+        position: relative;
+        width: 36px;
+        height: 36px;
+    }
+
+    &__progress-pct {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-weight: 700;
+        color: #22c55e;
+    }
+
+    &__lessons {
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    &__desc {
+        font-size: 13px;
+        color: rgba(255,255,255,0.4);
+        padding: 14px 24px 10px;
+        margin: 0;
+        line-height: 1.5;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+}
+
+// ─── Lesson rows ──────────────────────────────────────────────────────────────
+.course-lesson {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: rgba(255,255,255,0.02);
+    }
+
+    &--watched {
+        .course-lesson__num {
+            background: rgba(34,197,94,0.1);
+            color: #22c55e;
+            border-color: rgba(34,197,94,0.28);
+        }
+
+        .course-lesson__title {
+            color: rgba(255,255,255,0.38);
+            text-decoration: line-through;
+            text-decoration-color: rgba(255,255,255,0.18);
+        }
+    }
+
+    &__num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(229, 53, 53, 0.08);
+        border: 1px solid rgba(229, 53, 53, 0.22);
+        color: #e53535;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    &__info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    &__title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        line-height: 1.3;
+        transition: color 0.2s;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: rgba(255,255,255,0.32);
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    &__free-badge {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: #22c55e;
+        background: rgba(34,197,94,0.08);
+        border: 1px solid rgba(34,197,94,0.22);
+        border-radius: 4px;
+        padding: 2px 6px;
+    }
+
+    &__watched-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.32);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex-shrink: 0;
+
+        &:hover {
+            background: rgba(34,197,94,0.1);
+            border-color: rgba(34,197,94,0.28);
+            color: #22c55e;
+        }
+    }
+
+    &__play-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 7px 14px;
+        border-radius: 8px;
+        background: rgba(229, 53, 53, 0.1);
+        border: 1px solid rgba(229, 53, 53, 0.25);
+        color: #e53535;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+
+        &:hover {
+            background: rgba(229, 53, 53, 0.2);
+            border-color: rgba(229, 53, 53, 0.5);
+        }
+    }
+}
+
+// ─── Video player modal ────────────────────────────────────────────────────────
+.course-player {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(6px);
+    }
+
+    &__modal {
+        position: relative;
+        z-index: 1;
+        background: #111111;
+        border: 1px solid rgba(229, 53, 53, 0.22);
+        border-radius: 16px;
+        width: 100%;
+        max-width: 900px;
+        overflow: hidden;
+        box-shadow: 0 0 60px rgba(229, 53, 53, 0.08);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    &__title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        margin: 0;
+    }
+
+    &__close {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex-shrink: 0;
+
+        &:hover {
+            background: rgba(229,53,53,0.14);
+            border-color: rgba(229,53,53,0.35);
+            color: #e53535;
+        }
+    }
+
+    &__video-wrap {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background: #000;
+
+        iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: rgba(255,255,255,0.45);
+
+        p {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.65);
+            margin: 0;
+        }
+
+        span {
+            font-size: 13px;
+            color: rgba(255,255,255,0.32);
+            text-align: center;
+            max-width: 320px;
+        }
+    }
+
+    &__desc {
+        padding: 14px 20px;
+        font-size: 14px;
+        color: rgba(255,255,255,0.45);
+        margin: 0;
+        line-height: 1.5;
+    }
+}

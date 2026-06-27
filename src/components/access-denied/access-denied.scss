@@ -1,0 +1,110 @@
+.access-denied {
+    min-height: 100vh;
+    background: #070d1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+
+    &__card {
+        background: #0a1628;
+        border: 1px solid rgba(240, 180, 41, 0.2);
+        border-radius: 20px;
+        padding: 48px 40px;
+        max-width: 420px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 0 60px rgba(240, 180, 41, 0.06), 0 24px 48px rgba(0, 0, 0, 0.4);
+    }
+
+    &__lock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        background: rgba(240, 180, 41, 0.08);
+        border: 1px solid rgba(240, 180, 41, 0.2);
+        border-radius: 50%;
+        margin: 0 auto 24px;
+    }
+
+    &__title {
+        font-size: 26px;
+        font-weight: 700;
+        color: #fff;
+        margin: 0 0 12px;
+        letter-spacing: -0.3px;
+    }
+
+    &__subtitle {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.6;
+        margin: 0 0 28px;
+    }
+
+    &__account-box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    &__account-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+    }
+
+    &__account-id {
+        font-size: 20px;
+        font-weight: 700;
+        color: #f0b429;
+        font-family: monospace;
+        letter-spacing: 1px;
+    }
+
+    &__account-hint {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.35);
+        line-height: 1.5;
+    }
+
+    &__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(240, 180, 41, 0.1);
+        border: 1px solid rgba(240, 180, 41, 0.3);
+        color: #f0b429;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 12px 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 32px;
+
+        &:hover {
+            background: rgba(240, 180, 41, 0.18);
+            border-color: rgba(240, 180, 41, 0.5);
+        }
+    }
+
+    &__brand {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.15);
+        text-transform: uppercase;
+    }
+}

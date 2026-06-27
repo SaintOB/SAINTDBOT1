@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml is_dbot="true">
+  <variables>
+    <variable id="v6_StopLossAmount">StopLossAmount</variable>
+    <variable id="v6_Initial_Stake">Initial Stake</variable>
+    <variable id="v6_Period">Period</variable>
+    <variable id="v6_Prediction">Prediction</variable>
+    <variable id="v6_S1">S1</variable>
+    <variable id="v6_S2">S2</variable>
+    <variable id="v6_1st_Over_Digit">1st Over Digit</variable>
+    <variable id="v6_2nd_Over_Digit">2nd Over Digit</variable>
+    <variable id="v6_Amount">Amount</variable>
+    <variable id="v6_Profit">Profit</variable>
+    <variable id="v6_Ticks_to_analyze">Ticks to analyze</variable>
+    <variable id="v6_Mart_Splits">Mart Splits</variable>
+    <variable id="v6___Win_Per_Stake">% Win Per Stake</variable>
+    <variable id="v6_Martingale_Level">Martingale Level</variable>
+  </variables>
+
+  <block type="trade_definition" id="v6_trade_def" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="v6_market" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">1HZ10V</field>
+        <next>
+          <block type="trade_definition_tradetype" id="v6_tradetype" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="v6_contracttype" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="v6_candle" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="v6_restart_bs" collapsed="true" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="v6_restart_err" collapsed="true" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="procedures_callnoreturn" id="v6_call_starts">
+        <mutation name="Starts">
+          <arg name="1st Over Digit"/>
+          <arg name="2nd Over Digit"/>
+          <arg name="Amount"/>
+          <arg name="Profit"/>
+          <arg name="Ticks to analyze"/>
+          <arg name="Mart Splits"/>
+          <arg name="% Win Per Stake"/>
+          <arg name="Martingale Level"/>
+        </mutation>
+        <value name="ARG0"><block type="math_number" id="v6_a0"><field name="NUM">2</field></block></value>
+        <value name="ARG1"><block type="math_number" id="v6_a1"><field name="NUM">4</field></block></value>
+        <value name="ARG2"><block type="math_number" id="v6_a2"><field name="NUM">1</field></block></value>
+        <value name="ARG3"><block type="math_number" id="v6_a3"><field name="NUM">20</field></block></value>
+        <value name="ARG4"><block type="math_number" id="v6_a4"><field name="NUM">15</field></block></value>
+        <value name="ARG5"><block type="math_number" id="v6_a5"><field name="NUM">80</field></block></value>
+        <value name="ARG6"><block type="math_number" id="v6_a6"><field name="NUM">1</field></block></value>
+        <value name="ARG7"><block type="math_number" id="v6_a7"><field name="NUM">1</field></block></value>
+        <next>
+          <block type="variables_set" id="v6_vs_sl">
+            <field name="VAR">StopLossAmount</field>
+            <value name="VALUE">
+              <block type="math_number" id="v6_n_sl"><field name="NUM">20</field></block>
+            </value>
+            <next>
+              <block type="controls_if" id="v6_ci_stake">
+                <value name="IF0">
+                  <block type="logic_compare" id="v6_lc_stake">
+                    <field name="OP">LT</field>
+                    <value name="A"><block type="variables_get" id="v6_vg_is"><field name="VAR">Initial Stake</field></block></value>
+                    <value name="B"><block type="math_number" id="v6_n035"><field name="NUM">0.35</field></block></value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="v6_vs_is">
+                    <field name="VAR">Initial Stake</field>
+                    <value name="VALUE"><block type="math_number" id="v6_n035b"><field name="NUM">0.35</field></block></value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="v6_ci_s1">
+                    <value name="IF0">
+                      <block type="logic_compare" id="v6_lc_s1">
+                        <field name="OP">EQ</field>
+                        <value name="A"><block type="variables_get" id="v6_vg_s1"><field name="VAR">S1</field></block></value>
+                        <value name="B"><block type="logic_boolean" id="v6_lb_s1"><field name="BOOL">TRUE</field></block></value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="v6_trade_opts" collapsed="true" deletable="false" movable="false">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number_positive" id="v6_dur_shadow"><field name="NUM">5</field></shadow>
+          <block type="variables_get" id="v6_vg_period"><field name="VAR">Period</field></block>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive" id="v6_amt_shadow"><field name="NUM">1</field></shadow>
+          <block type="variables_get" id="v6_vg_is2"><field name="VAR">Initial Stake</field></block>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number" id="v6_pred_shadow"><field name="NUM">2</field></shadow>
+          <block type="variables_get" id="v6_vg_pred"><field name="VAR">Prediction</field></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+
+</xml>

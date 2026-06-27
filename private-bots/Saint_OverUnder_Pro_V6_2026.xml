@@ -1,0 +1,665 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="tp">TargetProfit</variable>
+    <variable id="sl">StopLossAmount</variable>
+    <variable id="stake">Stake</variable>
+    <variable id="init_s">InitialStake</variable>
+    <variable id="mg_split">MartingaleSplit</variable>
+    <variable id="ret_pct">ReturnPercent</variable>
+    <variable id="loss_c">LossCount</variable>
+    <variable id="total_l">TotalLost</variable>
+    <variable id="state">State</variable>
+    <variable id="pred">Prediction</variable>
+    <variable id="ticks_n">TicksToAnalyse</variable>
+    <variable id="di">DigitItem</variable>
+    <variable id="d0">D0</variable>
+    <variable id="d1">D1</variable>
+    <variable id="d2">D2</variable>
+    <variable id="d3">D3</variable>
+    <variable id="d4">D4</variable>
+    <variable id="d5">D5</variable>
+    <variable id="d6">D6</variable>
+    <variable id="d7">D7</variable>
+    <variable id="d8">D8</variable>
+    <variable id="d9">D9</variable>
+    <variable id="dl">DigitList</variable>
+    <variable id="oc0">OC0</variable>
+    <variable id="oc1">OC1</variable>
+    <variable id="oc2">OC2</variable>
+    <variable id="oc3">OC3</variable>
+    <variable id="oc4">OC4</variable>
+    <variable id="oc5">OC5</variable>
+    <variable id="oc6">OC6</variable>
+    <variable id="oc7">OC7</variable>
+    <variable id="oc8">OC8</variable>
+    <variable id="uc1">UC1</variable>
+    <variable id="uc2">UC2</variable>
+    <variable id="uc3">UC3</variable>
+    <variable id="uc4">UC4</variable>
+    <variable id="uc5">UC5</variable>
+    <variable id="uc6">UC6</variable>
+    <variable id="uc7">UC7</variable>
+    <variable id="uc8">UC8</variable>
+    <variable id="uc9">UC9</variable>
+    <variable id="contract_profit">ContractProfit</variable>
+  </variables>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TRADE DEFINITION
+       ═══════════════════════════════════════════════════════ -->
+  <block type="trade_definition" id="trade_def" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="market" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">R_50</field>
+        <next>
+          <block type="trade_definition_tradetype" id="tradetype" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="contracttype" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="candle" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="restart_bs" collapsed="true" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="restart_err" collapsed="true" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+
+    <!-- ── Initialization: original runtimeVariables ── -->
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="set_tp">
+        <field name="VAR" id="tp">TargetProfit</field>
+        <value name="VALUE"><block type="math_number" id="tp_n"><field name="NUM">20</field></block></value>
+        <next>
+          <block type="variables_set" id="set_sl">
+            <field name="VAR" id="sl">StopLossAmount</field>
+            <value name="VALUE"><block type="math_number" id="sl_n"><field name="NUM">5</field></block></value>
+            <next>
+              <block type="variables_set" id="set_init_s">
+                <field name="VAR" id="init_s">InitialStake</field>
+                <value name="VALUE"><block type="math_number" id="is_n"><field name="NUM">0.35</field></block></value>
+                <next>
+                  <block type="variables_set" id="set_stake">
+                    <field name="VAR" id="stake">Stake</field>
+                    <value name="VALUE"><block type="math_number" id="s_n"><field name="NUM">0.35</field></block></value>
+                    <next>
+                      <block type="variables_set" id="set_loss_c" collapsed="true">
+                        <field name="VAR" id="loss_c">LossCount</field>
+                        <value name="VALUE"><block type="math_number" id="lc_n"><field name="NUM">0</field></block></value>
+                        <next>
+                          <block type="variables_set" id="set_total_l" collapsed="true">
+                            <field name="VAR" id="total_l">TotalLost</field>
+                            <value name="VALUE"><block type="math_number" id="tl_n"><field name="NUM">0</field></block></value>
+                            <next>
+                              <block type="variables_set" id="set_mg_split" collapsed="true">
+                                <field name="VAR" id="mg_split">MartingaleSplit</field>
+                                <value name="VALUE"><block type="math_number" id="mgs_n"><field name="NUM">1</field></block></value>
+                                <next>
+                                  <block type="variables_set" id="set_ret_pct" collapsed="true">
+                                    <field name="VAR" id="ret_pct">ReturnPercent</field>
+                                    <value name="VALUE"><block type="math_number" id="rp_n"><field name="NUM">100</field></block></value>
+                                    <next>
+                                      <block type="variables_set" id="set_ticks" collapsed="true">
+                                        <field name="VAR" id="ticks_n">TicksToAnalyse</field>
+                                        <value name="VALUE"><block type="math_number" id="ta_n"><field name="NUM">15</field></block></value>
+                                        <next>
+                                          <block type="variables_set" id="set_state" collapsed="true">
+                                            <field name="VAR" id="state">State</field>
+                                            <value name="VALUE"><block type="text" id="s1_init"><field name="TEXT">S1</field></block></value>
+                                            <next>
+                                              <block type="variables_set" id="set_pred" collapsed="true">
+                                                <field name="VAR" id="pred">Prediction</field>
+                                                <value name="VALUE"><block type="math_number" id="pred_n"><field name="NUM">4</field></block></value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="trade_opts" collapsed="true">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number_positive" id="dur"><field name="NUM">1</field></shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive" id="amt"><field name="NUM">0.35</field></shadow>
+          <block type="variables_get" id="stake_get"><field name="VAR" id="stake">Stake</field></block>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number" id="pred_shadow"><field name="NUM">4</field></shadow>
+          <block type="variables_get" id="pred_get"><field name="VAR" id="pred">Prediction</field></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BEFORE PURCHASE — Digit frequency analysis engine
+       Faithfully converts original purchaseConditions logic
+       ═══════════════════════════════════════════════════════ -->
+  <block type="before_purchase" id="before" deletable="false" x="0" y="900">
+    <statement name="BEFOREPURCHASE_STACK">
+
+      <!-- Reset D0-D9 to 0 -->
+      <block type="variables_set" id="r_d0"><field name="VAR" id="d0">D0</field>
+        <value name="VALUE"><block type="math_number" id="d0z"><field name="NUM">0</field></block></value>
+        <next><block type="variables_set" id="r_d1"><field name="VAR" id="d1">D1</field>
+          <value name="VALUE"><block type="math_number" id="d1z"><field name="NUM">0</field></block></value>
+          <next><block type="variables_set" id="r_d2"><field name="VAR" id="d2">D2</field>
+            <value name="VALUE"><block type="math_number" id="d2z"><field name="NUM">0</field></block></value>
+            <next><block type="variables_set" id="r_d3"><field name="VAR" id="d3">D3</field>
+              <value name="VALUE"><block type="math_number" id="d3z"><field name="NUM">0</field></block></value>
+              <next><block type="variables_set" id="r_d4"><field name="VAR" id="d4">D4</field>
+                <value name="VALUE"><block type="math_number" id="d4z"><field name="NUM">0</field></block></value>
+                <next><block type="variables_set" id="r_d5"><field name="VAR" id="d5">D5</field>
+                  <value name="VALUE"><block type="math_number" id="d5z"><field name="NUM">0</field></block></value>
+                  <next><block type="variables_set" id="r_d6"><field name="VAR" id="d6">D6</field>
+                    <value name="VALUE"><block type="math_number" id="d6z"><field name="NUM">0</field></block></value>
+                    <next><block type="variables_set" id="r_d7"><field name="VAR" id="d7">D7</field>
+                      <value name="VALUE"><block type="math_number" id="d7z"><field name="NUM">0</field></block></value>
+                      <next><block type="variables_set" id="r_d8"><field name="VAR" id="d8">D8</field>
+                        <value name="VALUE"><block type="math_number" id="d8z"><field name="NUM">0</field></block></value>
+                        <next><block type="variables_set" id="r_d9"><field name="VAR" id="d9">D9</field>
+                          <value name="VALUE"><block type="math_number" id="d9z"><field name="NUM">0</field></block></value>
+
+                          <!-- Get last TicksToAnalyse (15) digits -->
+                          <next><block type="variables_set" id="set_dl"><field name="VAR" id="dl">DigitList</field>
+                            <value name="VALUE">
+                              <block type="lists_getSublist" id="sub15">
+                                <mutation at1="true" at2="false"></mutation>
+                                <field name="WHERE1">FROM_END</field>
+                                <field name="WHERE2">LAST</field>
+                                <value name="LIST"><block type="lastDigitList" id="ldl"></block></value>
+                                <value name="AT1"><shadow type="math_number" id="at1n"><field name="NUM">15</field></shadow></value>
+                              </block>
+                            </value>
+
+                            <!-- Count each digit 0-9 with single forEach pass -->
+                            <next><block type="controls_forEach" id="count_loop">
+                              <field name="VAR" id="di">DigitItem</field>
+                              <value name="LIST"><block type="variables_get" id="dl_g"><field name="VAR" id="dl">DigitList</field></block></value>
+                              <statement name="DO">
+                                <block type="controls_if" id="digit_cls">
+                                  <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="8"></mutation>
+                                  <value name="IF0"><block type="logic_compare" id="c0"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di0"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n0"><field name="NUM">0</field></block></value></block></value>
+                                  <statement name="DO0"><block type="math_change" id="i0"><field name="VAR" id="d0">D0</field><value name="DELTA"><shadow type="math_number" id="o0"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF1"><block type="logic_compare" id="c1"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di1"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n1"><field name="NUM">1</field></block></value></block></value>
+                                  <statement name="DO1"><block type="math_change" id="i1"><field name="VAR" id="d1">D1</field><value name="DELTA"><shadow type="math_number" id="o1"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF2"><block type="logic_compare" id="c2"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di2"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n2"><field name="NUM">2</field></block></value></block></value>
+                                  <statement name="DO2"><block type="math_change" id="i2"><field name="VAR" id="d2">D2</field><value name="DELTA"><shadow type="math_number" id="o2"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF3"><block type="logic_compare" id="c3"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di3"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n3"><field name="NUM">3</field></block></value></block></value>
+                                  <statement name="DO3"><block type="math_change" id="i3"><field name="VAR" id="d3">D3</field><value name="DELTA"><shadow type="math_number" id="o3"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF4"><block type="logic_compare" id="c4"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di4"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n4"><field name="NUM">4</field></block></value></block></value>
+                                  <statement name="DO4"><block type="math_change" id="i4"><field name="VAR" id="d4">D4</field><value name="DELTA"><shadow type="math_number" id="o4"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF5"><block type="logic_compare" id="c5"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di5"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n5"><field name="NUM">5</field></block></value></block></value>
+                                  <statement name="DO5"><block type="math_change" id="i5"><field name="VAR" id="d5">D5</field><value name="DELTA"><shadow type="math_number" id="o5"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF6"><block type="logic_compare" id="c6"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di6"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n6"><field name="NUM">6</field></block></value></block></value>
+                                  <statement name="DO6"><block type="math_change" id="i6"><field name="VAR" id="d6">D6</field><value name="DELTA"><shadow type="math_number" id="o6"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF7"><block type="logic_compare" id="c7"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di7"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n7"><field name="NUM">7</field></block></value></block></value>
+                                  <statement name="DO7"><block type="math_change" id="i7"><field name="VAR" id="d7">D7</field><value name="DELTA"><shadow type="math_number" id="o7"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <value name="IF8"><block type="logic_compare" id="c8"><field name="OP">EQ</field><value name="A"><block type="variables_get" id="di8"><field name="VAR" id="di">DigitItem</field></block></value><value name="B"><block type="math_number" id="n8"><field name="NUM">8</field></block></value></block></value>
+                                  <statement name="DO8"><block type="math_change" id="i8"><field name="VAR" id="d8">D8</field><value name="DELTA"><shadow type="math_number" id="o8"><field name="NUM">1</field></shadow></value></block></statement>
+                                  <statement name="ELSE"><block type="math_change" id="i9"><field name="VAR" id="d9">D9</field><value name="DELTA"><shadow type="math_number" id="o9"><field name="NUM">1</field></shadow></value></block></statement>
+                                </block>
+                              </statement>
+
+                              <!-- Compute Over counts: OC0=15-D0, OC1=OC0-D1, ..., OC8=D9 -->
+                              <next>
+                                <block type="variables_set" id="s_oc0"><field name="VAR" id="oc0">OC0</field>
+                                  <value name="VALUE"><block type="math_arithmetic" id="oc0c"><field name="OP">MINUS</field><value name="A"><block type="math_number" id="f15a"><field name="NUM">15</field></block></value><value name="B"><block type="variables_get" id="d0ga"><field name="VAR" id="d0">D0</field></block></value></block></value>
+                                  <next><block type="variables_set" id="s_oc1"><field name="VAR" id="oc1">OC1</field>
+                                    <value name="VALUE"><block type="math_arithmetic" id="oc1c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="oc0ga"><field name="VAR" id="oc0">OC0</field></block></value><value name="B"><block type="variables_get" id="d1ga"><field name="VAR" id="d1">D1</field></block></value></block></value>
+                                    <next><block type="variables_set" id="s_oc2"><field name="VAR" id="oc2">OC2</field>
+                                      <value name="VALUE"><block type="math_arithmetic" id="oc2c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="oc1ga"><field name="VAR" id="oc1">OC1</field></block></value><value name="B"><block type="variables_get" id="d2ga"><field name="VAR" id="d2">D2</field></block></value></block></value>
+                                      <next><block type="variables_set" id="s_oc3"><field name="VAR" id="oc3">OC3</field>
+                                        <value name="VALUE"><block type="math_arithmetic" id="oc3c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="oc2ga"><field name="VAR" id="oc2">OC2</field></block></value><value name="B"><block type="variables_get" id="d3ga"><field name="VAR" id="d3">D3</field></block></value></block></value>
+                                        <next><block type="variables_set" id="s_oc4"><field name="VAR" id="oc4">OC4</field>
+                                          <value name="VALUE"><block type="math_arithmetic" id="oc4c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="oc3ga"><field name="VAR" id="oc3">OC3</field></block></value><value name="B"><block type="variables_get" id="d4ga"><field name="VAR" id="d4">D4</field></block></value></block></value>
+                                          <next><block type="variables_set" id="s_oc5"><field name="VAR" id="oc5">OC5</field>
+                                            <value name="VALUE"><block type="math_arithmetic" id="oc5c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="oc4ga"><field name="VAR" id="oc4">OC4</field></block></value><value name="B"><block type="variables_get" id="d5ga"><field name="VAR" id="d5">D5</field></block></value></block></value>
+                                            <next><block type="variables_set" id="s_oc6"><field name="VAR" id="oc6">OC6</field>
+                                              <value name="VALUE"><block type="math_arithmetic" id="oc6c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="oc5ga"><field name="VAR" id="oc5">OC5</field></block></value><value name="B"><block type="variables_get" id="d6ga"><field name="VAR" id="d6">D6</field></block></value></block></value>
+                                              <next><block type="variables_set" id="s_oc7"><field name="VAR" id="oc7">OC7</field>
+                                                <value name="VALUE"><block type="math_arithmetic" id="oc7c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="oc6ga"><field name="VAR" id="oc6">OC6</field></block></value><value name="B"><block type="variables_get" id="d7ga"><field name="VAR" id="d7">D7</field></block></value></block></value>
+                                                <next><block type="variables_set" id="s_oc8"><field name="VAR" id="oc8">OC8</field>
+                                                  <value name="VALUE"><block type="variables_get" id="d9ga_oc8"><field name="VAR" id="d9">D9</field></block></value>
+
+                                                  <!-- Compute Under counts: UC9=15-D9, UC8=UC9-D8, ..., UC1=D0 -->
+                                                  <next><block type="variables_set" id="s_uc9"><field name="VAR" id="uc9">UC9</field>
+                                                    <value name="VALUE"><block type="math_arithmetic" id="uc9c"><field name="OP">MINUS</field><value name="A"><block type="math_number" id="f15b"><field name="NUM">15</field></block></value><value name="B"><block type="variables_get" id="d9gb"><field name="VAR" id="d9">D9</field></block></value></block></value>
+                                                    <next><block type="variables_set" id="s_uc8"><field name="VAR" id="uc8">UC8</field>
+                                                      <value name="VALUE"><block type="math_arithmetic" id="uc8c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="uc9gb"><field name="VAR" id="uc9">UC9</field></block></value><value name="B"><block type="variables_get" id="d8gb"><field name="VAR" id="d8">D8</field></block></value></block></value>
+                                                      <next><block type="variables_set" id="s_uc7"><field name="VAR" id="uc7">UC7</field>
+                                                        <value name="VALUE"><block type="math_arithmetic" id="uc7c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="uc8gb"><field name="VAR" id="uc8">UC8</field></block></value><value name="B"><block type="variables_get" id="d7gb"><field name="VAR" id="d7">D7</field></block></value></block></value>
+                                                        <next><block type="variables_set" id="s_uc6"><field name="VAR" id="uc6">UC6</field>
+                                                          <value name="VALUE"><block type="math_arithmetic" id="uc6c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="uc7gb"><field name="VAR" id="uc7">UC7</field></block></value><value name="B"><block type="variables_get" id="d6gb"><field name="VAR" id="d6">D6</field></block></value></block></value>
+                                                          <next><block type="variables_set" id="s_uc5"><field name="VAR" id="uc5">UC5</field>
+                                                            <value name="VALUE"><block type="math_arithmetic" id="uc5c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="uc6gb"><field name="VAR" id="uc6">UC6</field></block></value><value name="B"><block type="variables_get" id="d5gb"><field name="VAR" id="d5">D5</field></block></value></block></value>
+                                                            <next><block type="variables_set" id="s_uc4"><field name="VAR" id="uc4">UC4</field>
+                                                              <value name="VALUE"><block type="math_arithmetic" id="uc4c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="uc5gb"><field name="VAR" id="uc5">UC5</field></block></value><value name="B"><block type="variables_get" id="d4gb"><field name="VAR" id="d4">D4</field></block></value></block></value>
+                                                              <next><block type="variables_set" id="s_uc3"><field name="VAR" id="uc3">UC3</field>
+                                                                <value name="VALUE"><block type="math_arithmetic" id="uc3c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="uc4gb"><field name="VAR" id="uc4">UC4</field></block></value><value name="B"><block type="variables_get" id="d3gb"><field name="VAR" id="d3">D3</field></block></value></block></value>
+                                                                <next><block type="variables_set" id="s_uc2"><field name="VAR" id="uc2">UC2</field>
+                                                                  <value name="VALUE"><block type="math_arithmetic" id="uc2c"><field name="OP">MINUS</field><value name="A"><block type="variables_get" id="uc3gb"><field name="VAR" id="uc3">UC3</field></block></value><value name="B"><block type="variables_get" id="d2gb"><field name="VAR" id="d2">D2</field></block></value></block></value>
+                                                                  <next><block type="variables_set" id="s_uc1"><field name="VAR" id="uc1">UC1</field>
+                                                                    <value name="VALUE"><block type="variables_get" id="d0gb_uc1"><field name="VAR" id="d0">D0</field></block></value>
+
+                                                                    <!-- State S1 (Over) or S2 (Under) -->
+                                                                    <next>
+                                                                      <block type="controls_if" id="state_chk">
+                                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                                                        <value name="IF0">
+                                                                          <block type="logic_compare" id="is_s1">
+                                                                            <field name="OP">EQ</field>
+                                                                            <value name="A"><block type="variables_get" id="state_ga"><field name="VAR" id="state">State</field></block></value>
+                                                                            <value name="B"><block type="text" id="s1_t"><field name="TEXT">S1</field></block></value>
+                                                                          </block>
+                                                                        </value>
+
+                                                                        <!-- S1: Over thresholds pred 0→8, first match sets Prediction -->
+                                                                        <statement name="DO0">
+                                                                          <block type="controls_if" id="over_t">
+                                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="7" else="1"></mutation>
+                                                                            <!-- pred=0: Over0Percent>=90% → OC0>=14 -->
+                                                                            <value name="IF0"><block type="logic_compare" id="oc0c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc0g"><field name="VAR" id="oc0">OC0</field></block></value><value name="B"><block type="math_number" id="t14a"><field name="NUM">14</field></block></value></block></value>
+                                                                            <statement name="DO0"><block type="variables_set" id="p0s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p0n"><field name="NUM">0</field></block></value></block></statement>
+                                                                            <!-- pred=1: Over1Percent>=80% → OC1>=12 -->
+                                                                            <value name="IF1"><block type="logic_compare" id="oc1c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc1g"><field name="VAR" id="oc1">OC1</field></block></value><value name="B"><block type="math_number" id="t12a"><field name="NUM">12</field></block></value></block></value>
+                                                                            <statement name="DO1"><block type="variables_set" id="p1s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p1n"><field name="NUM">1</field></block></value></block></statement>
+                                                                            <!-- pred=2: Over2Percent>=70% → OC2>=11 -->
+                                                                            <value name="IF2"><block type="logic_compare" id="oc2c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc2g"><field name="VAR" id="oc2">OC2</field></block></value><value name="B"><block type="math_number" id="t11a"><field name="NUM">11</field></block></value></block></value>
+                                                                            <statement name="DO2"><block type="variables_set" id="p2s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p2n"><field name="NUM">2</field></block></value></block></statement>
+                                                                            <!-- pred=3: Over3Percent>=60% → OC3>=9 -->
+                                                                            <value name="IF3"><block type="logic_compare" id="oc3c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc3g"><field name="VAR" id="oc3">OC3</field></block></value><value name="B"><block type="math_number" id="t9a"><field name="NUM">9</field></block></value></block></value>
+                                                                            <statement name="DO3"><block type="variables_set" id="p3s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p3n"><field name="NUM">3</field></block></value></block></statement>
+                                                                            <!-- pred=4: Over4Percent>=50% → OC4>=8 -->
+                                                                            <value name="IF4"><block type="logic_compare" id="oc4c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc4g"><field name="VAR" id="oc4">OC4</field></block></value><value name="B"><block type="math_number" id="t8a"><field name="NUM">8</field></block></value></block></value>
+                                                                            <statement name="DO4"><block type="variables_set" id="p4s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p4n"><field name="NUM">4</field></block></value></block></statement>
+                                                                            <!-- pred=5: Over5Percent>=40% → OC5>=6 -->
+                                                                            <value name="IF5"><block type="logic_compare" id="oc5c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc5g"><field name="VAR" id="oc5">OC5</field></block></value><value name="B"><block type="math_number" id="t6a"><field name="NUM">6</field></block></value></block></value>
+                                                                            <statement name="DO5"><block type="variables_set" id="p5s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p5n"><field name="NUM">5</field></block></value></block></statement>
+                                                                            <!-- pred=6: Over6Percent>=30% → OC6>=5 -->
+                                                                            <value name="IF6"><block type="logic_compare" id="oc6c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc6g"><field name="VAR" id="oc6">OC6</field></block></value><value name="B"><block type="math_number" id="t5a"><field name="NUM">5</field></block></value></block></value>
+                                                                            <statement name="DO6"><block type="variables_set" id="p6s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p6n"><field name="NUM">6</field></block></value></block></statement>
+                                                                            <!-- pred=7: Over7Percent>=20% → OC7>=3 -->
+                                                                            <value name="IF7"><block type="logic_compare" id="oc7c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="oc7g"><field name="VAR" id="oc7">OC7</field></block></value><value name="B"><block type="math_number" id="t3a"><field name="NUM">3</field></block></value></block></value>
+                                                                            <statement name="DO7"><block type="variables_set" id="p7s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p7n"><field name="NUM">7</field></block></value></block></statement>
+                                                                            <!-- pred=8 fallback: Over8Percent>=10% → OC8>=2, nearly always true -->
+                                                                            <statement name="ELSE"><block type="variables_set" id="p8s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="p8n"><field name="NUM">8</field></block></value></block></statement>
+                                                                          </block>
+                                                                          <next>
+                                                                            <block type="purchase" id="buy_over">
+                                                                              <field name="PURCHASE_LIST">DIGITOVER</field>
+                                                                            </block>
+                                                                          </next>
+                                                                        </statement>
+
+                                                                        <!-- S2: Under thresholds pred 9→1, first match sets Prediction -->
+                                                                        <statement name="ELSE">
+                                                                          <block type="controls_if" id="under_t">
+                                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="7" else="1"></mutation>
+                                                                            <!-- pred=9: Under9Percent>=90% → UC9>=14 -->
+                                                                            <value name="IF0"><block type="logic_compare" id="uc9c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc9g"><field name="VAR" id="uc9">UC9</field></block></value><value name="B"><block type="math_number" id="t14b"><field name="NUM">14</field></block></value></block></value>
+                                                                            <statement name="DO0"><block type="variables_set" id="u9s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u9n"><field name="NUM">9</field></block></value></block></statement>
+                                                                            <!-- pred=8: Under8Percent>=80% → UC8>=12 -->
+                                                                            <value name="IF1"><block type="logic_compare" id="uc8c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc8g"><field name="VAR" id="uc8">UC8</field></block></value><value name="B"><block type="math_number" id="t12b"><field name="NUM">12</field></block></value></block></value>
+                                                                            <statement name="DO1"><block type="variables_set" id="u8s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u8n"><field name="NUM">8</field></block></value></block></statement>
+                                                                            <!-- pred=7: Under7Percent>=70% → UC7>=11 -->
+                                                                            <value name="IF2"><block type="logic_compare" id="uc7c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc7g"><field name="VAR" id="uc7">UC7</field></block></value><value name="B"><block type="math_number" id="t11b"><field name="NUM">11</field></block></value></block></value>
+                                                                            <statement name="DO2"><block type="variables_set" id="u7s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u7n"><field name="NUM">7</field></block></value></block></statement>
+                                                                            <!-- pred=6: Under6Percent>=60% → UC6>=9 -->
+                                                                            <value name="IF3"><block type="logic_compare" id="uc6c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc6g"><field name="VAR" id="uc6">UC6</field></block></value><value name="B"><block type="math_number" id="t9b"><field name="NUM">9</field></block></value></block></value>
+                                                                            <statement name="DO3"><block type="variables_set" id="u6s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u6n"><field name="NUM">6</field></block></value></block></statement>
+                                                                            <!-- pred=5: Under5Percent>=50% → UC5>=8 -->
+                                                                            <value name="IF4"><block type="logic_compare" id="uc5c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc5g"><field name="VAR" id="uc5">UC5</field></block></value><value name="B"><block type="math_number" id="t8b"><field name="NUM">8</field></block></value></block></value>
+                                                                            <statement name="DO4"><block type="variables_set" id="u5s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u5n"><field name="NUM">5</field></block></value></block></statement>
+                                                                            <!-- pred=4: Under4Percent>=40% → UC4>=6 -->
+                                                                            <value name="IF5"><block type="logic_compare" id="uc4c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc4g"><field name="VAR" id="uc4">UC4</field></block></value><value name="B"><block type="math_number" id="t6b"><field name="NUM">6</field></block></value></block></value>
+                                                                            <statement name="DO5"><block type="variables_set" id="u4s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u4n"><field name="NUM">4</field></block></value></block></statement>
+                                                                            <!-- pred=3: Under3Percent>=30% → UC3>=5 -->
+                                                                            <value name="IF6"><block type="logic_compare" id="uc3c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc3g"><field name="VAR" id="uc3">UC3</field></block></value><value name="B"><block type="math_number" id="t5b"><field name="NUM">5</field></block></value></block></value>
+                                                                            <statement name="DO6"><block type="variables_set" id="u3s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u3n"><field name="NUM">3</field></block></value></block></statement>
+                                                                            <!-- pred=2: Under2Percent>=20% → UC2>=3 -->
+                                                                            <value name="IF7"><block type="logic_compare" id="uc2c_t"><field name="OP">GTE</field><value name="A"><block type="variables_get" id="uc2g"><field name="VAR" id="uc2">UC2</field></block></value><value name="B"><block type="math_number" id="t3b"><field name="NUM">3</field></block></value></block></value>
+                                                                            <statement name="DO7"><block type="variables_set" id="u2s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u2n"><field name="NUM">2</field></block></value></block></statement>
+                                                                            <!-- pred=1 fallback: Under1Percent>=10% → UC1>=2 -->
+                                                                            <statement name="ELSE"><block type="variables_set" id="u1s"><field name="VAR" id="pred">Prediction</field><value name="VALUE"><block type="math_number" id="u1n"><field name="NUM">1</field></block></value></block></statement>
+                                                                          </block>
+                                                                          <next>
+                                                                            <block type="purchase" id="buy_under">
+                                                                              <field name="PURCHASE_LIST">DIGITUNDER</field>
+                                                                            </block>
+                                                                          </next>
+                                                                        </statement>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block></next>
+                                                                </block></next>
+                                                              </block></next>
+                                                            </block></next>
+                                                          </block></next>
+                                                        </block></next>
+                                                      </block></next>
+                                                    </block></next>
+                                                  </block></next>
+                                                </block></next>
+                                              </block></next>
+                                            </block></next>
+                                          </block></next>
+                                        </block></next>
+                                      </block></next>
+                                    </block>
+                                  </next>
+                                </block>
+                              </next>
+                            </block></next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+</next>
+  </block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+    </statement>
+  </block>
+
+  <!-- ═══════════════════════════════════════════════════════
+       AFTER PURCHASE
+       Faithfully converts original restartTradingConditions:
+
+       onResult win:
+         LossCount = 0
+         TotalLost = TotalLost - ContractProfit (min 0)
+         switchState S2→S1
+         InitialStake = 0.35
+         Stake = InitialStake
+
+       onResult loss:
+         LossCount += 1
+         TotalLost += Stake
+         switchState S1→S2
+         InitialStake = (TotalLost / ReturnPercent) / MartingaleSplit
+         stakeControl: if InitialStake < Stake → InitialStake = Stake
+         Stake = InitialStake
+
+       riskStops:
+         if TotalProfitLoss <= -StopLossAmount → stop
+         if TotalProfitLoss >= TargetProfit    → stop
+       continueTrading: true
+       ═══════════════════════════════════════════════════════ -->
+  <block type="after_purchase" id="after" x="780" y="60">
+    <statement name="AFTERPURCHASE_STACK">
+
+      <block type="controls_if" id="win_loss_chk">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="is_win" collapsed="true">
+            <field name="CHECK_RESULT">win</field>
+          </block>
+        </value>
+
+        <!-- ── onResult win ── -->
+        <statement name="DO0">
+          <!-- LossCount = 0 -->
+          <block type="variables_set" id="win_lc">
+            <field name="VAR" id="loss_c">LossCount</field>
+            <value name="VALUE"><block type="math_number" id="lc_zero"><field name="NUM">0</field></block></value>
+            <next>
+              <!-- TotalLost = TotalLost - ContractProfit (ContractProfit = read_details index 4) -->
+              <block type="variables_set" id="win_cp">
+                <field name="VAR" id="contract_profit">ContractProfit</field>
+                <value name="VALUE">
+                  <block type="read_details" id="rd_profit">
+                    <field name="DETAIL_INDEX">4</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="win_tl">
+                    <field name="VAR" id="total_l">TotalLost</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic" id="tl_sub">
+                        <field name="OP">MINUS</field>
+                        <value name="A"><block type="variables_get" id="tl_ga"><field name="VAR" id="total_l">TotalLost</field></block></value>
+                        <value name="B"><block type="variables_get" id="cp_ga"><field name="VAR" id="contract_profit">ContractProfit</field></block></value>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- if TotalLost < 0: TotalLost = 0 -->
+                      <block type="controls_if" id="tl_min0">
+                        <value name="IF0">
+                          <block type="logic_compare" id="tl_lt0">
+                            <field name="OP">LT</field>
+                            <value name="A"><block type="variables_get" id="tl_gb"><field name="VAR" id="total_l">TotalLost</field></block></value>
+                            <value name="B"><block type="math_number" id="zero_tl"><field name="NUM">0</field></block></value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="tl_zero">
+                            <field name="VAR" id="total_l">TotalLost</field>
+                            <value name="VALUE"><block type="math_number" id="tl_zero_n"><field name="NUM">0</field></block></value>
+                          </block>
+                        </statement>
+                        <next>
+                          <!-- switchState S2→S1 -->
+                          <block type="variables_set" id="win_state">
+                            <field name="VAR" id="state">State</field>
+                            <value name="VALUE"><block type="text" id="s1_win"><field name="TEXT">S1</field></block></value>
+                            <next>
+                              <!-- InitialStake = 0.35 -->
+                              <block type="variables_set" id="win_is">
+                                <field name="VAR" id="init_s">InitialStake</field>
+                                <value name="VALUE"><block type="math_number" id="is_win_n"><field name="NUM">0.35</field></block></value>
+                                <next>
+                                  <!-- Stake = InitialStake -->
+                                  <block type="variables_set" id="win_stake">
+                                    <field name="VAR" id="stake">Stake</field>
+                                    <value name="VALUE"><block type="variables_get" id="is_win_g"><field name="VAR" id="init_s">InitialStake</field></block></value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+
+        <!-- ── onResult loss ── -->
+        <statement name="ELSE">
+          <!-- LossCount += 1 -->
+          <block type="math_change" id="loss_inc" collapsed="true">
+            <field name="VAR" id="loss_c">LossCount</field>
+            <value name="DELTA"><shadow type="math_number" id="one_lc"><field name="NUM">1</field></shadow></value>
+            <next>
+              <!-- TotalLost += Stake -->
+              <block type="variables_set" id="tl_add">
+                <field name="VAR" id="total_l">TotalLost</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic" id="tl_plus">
+                    <field name="OP">ADD</field>
+                    <value name="A"><block type="variables_get" id="tl_gc"><field name="VAR" id="total_l">TotalLost</field></block></value>
+                    <value name="B"><block type="variables_get" id="stake_gc"><field name="VAR" id="stake">Stake</field></block></value>
+                  </block>
+                </value>
+                <next>
+                  <!-- switchState S1→S2 -->
+                  <block type="controls_if" id="state_flip" collapsed="true">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="flip_cmp">
+                        <field name="OP">EQ</field>
+                        <value name="A"><block type="variables_get" id="state_flip_g"><field name="VAR" id="state">State</field></block></value>
+                        <value name="B"><block type="text" id="s1_flip"><field name="TEXT">S1</field></block></value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="set_s2"><field name="VAR" id="state">State</field><value name="VALUE"><block type="text" id="s2_t"><field name="TEXT">S2</field></block></value></block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="variables_set" id="set_s1_back"><field name="VAR" id="state">State</field><value name="VALUE"><block type="text" id="s1_back"><field name="TEXT">S1</field></block></value></block>
+                    </statement>
+                    <next>
+                      <!-- InitialStake = (TotalLost / ReturnPercent) / MartingaleSplit -->
+                      <block type="variables_set" id="loss_is" collapsed="true">
+                        <field name="VAR" id="init_s">InitialStake</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id="is_div_mgs">
+                            <field name="OP">DIVIDE</field>
+                            <value name="A">
+                              <block type="math_arithmetic" id="tl_div_rp">
+                                <field name="OP">DIVIDE</field>
+                                <value name="A"><block type="variables_get" id="tl_gd"><field name="VAR" id="total_l">TotalLost</field></block></value>
+                                <value name="B"><block type="variables_get" id="rp_gd"><field name="VAR" id="ret_pct">ReturnPercent</field></block></value>
+                              </block>
+                            </value>
+                            <value name="B"><block type="variables_get" id="mgs_gd"><field name="VAR" id="mg_split">MartingaleSplit</field></block></value>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- stakeControl: if InitialStake < Stake → InitialStake = Stake -->
+                          <block type="controls_if" id="stake_ctrl" collapsed="true">
+                            <value name="IF0">
+                              <block type="logic_compare" id="is_lt_s">
+                                <field name="OP">LT</field>
+                                <value name="A"><block type="variables_get" id="is_gsc"><field name="VAR" id="init_s">InitialStake</field></block></value>
+                                <value name="B"><block type="variables_get" id="s_gsc"><field name="VAR" id="stake">Stake</field></block></value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set" id="is_eq_s">
+                                <field name="VAR" id="init_s">InitialStake</field>
+                                <value name="VALUE"><block type="variables_get" id="s_gsc2"><field name="VAR" id="stake">Stake</field></block></value>
+                              </block>
+                            </statement>
+                            <next>
+                              <!-- Stake = InitialStake -->
+                              <block type="variables_set" id="loss_stake" collapsed="true">
+                                <field name="VAR" id="stake">Stake</field>
+                                <value name="VALUE"><block type="variables_get" id="is_gfinal"><field name="VAR" id="init_s">InitialStake</field></block></value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+
+        <!-- ── riskStops + continueTrading ── -->
+        <next>
+          <block type="controls_if" id="risk_stops">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1" else="1"></mutation>
+            <!-- if TotalProfitLoss >= TargetProfit → stop -->
+            <value name="IF0">
+              <block type="logic_compare" id="tp_cmp" collapsed="true">
+                <field name="OP">GTE</field>
+                <value name="A"><block type="total_profit" id="tp_profit_a"></block></value>
+                <value name="B"><block type="variables_get" id="tp_b"><field name="VAR" id="tp">TargetProfit</field></block></value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="text_print" id="tp_print" editable="false">
+                <value name="TEXT"><shadow type="text" id="tp_msg"><field name="TEXT">$ TARGET PROFIT HIT - TEAM.SAINTFX O/U PRO V6 - BANK IT !</field></shadow></value>
+                <next>
+                  <block type="variables_set" id="tp_stop" collapsed="true">
+                    <field name="VAR" id="stake">Stake</field>
+                    <value name="VALUE"><block type="logic_null" id="tp_null"></block></value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <!-- if TotalProfitLoss <= -StopLossAmount → stop -->
+            <value name="IF1">
+              <block type="logic_compare" id="sl_cmp" collapsed="true">
+                <field name="OP">LTE</field>
+                <value name="A"><block type="total_profit" id="sl_profit_a"></block></value>
+                <value name="B">
+                  <block type="math_single" id="neg_sl">
+                    <field name="OP">NEG</field>
+                    <value name="NUM"><block type="variables_get" id="sl_b"><field name="VAR" id="sl">StopLossAmount</field></block></value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="text_print" id="sl_print" editable="false">
+                <value name="TEXT"><shadow type="text" id="sl_msg"><field name="TEXT">! STOP LOSS HIT - WALK AWAY - NO REVENGE TRADING !</field></shadow></value>
+                <next>
+                  <block type="variables_set" id="sl_stop" collapsed="true">
+                    <field name="VAR" id="stake">Stake</field>
+                    <value name="VALUE"><block type="logic_null" id="sl_null"></block></value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <!-- continueTrading: true -->
+            <statement name="ELSE">
+              <block type="trade_again" id="trade_again"></block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -1,0 +1,299 @@
+.risk-disclaimer {
+    &__trigger {
+        position: fixed;
+        bottom: 48px;
+        left: 16px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px 10px 16px;
+        background: linear-gradient(135deg, #e53535 0%, #b91c1c 100%);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        border-radius: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 18px rgba(229, 53, 53, 0.5);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        letter-spacing: 0.3px;
+        animation: rd-social-pulse 2.6s ease-in-out infinite;
+        will-change: transform, box-shadow;
+
+        svg {
+            stroke: #ffffff;
+            flex-shrink: 0;
+        }
+
+        &:hover {
+            background: linear-gradient(135deg, #ff6b6b 0%, #e53535 100%);
+            box-shadow: 0 6px 20px rgba(229, 53, 53, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* Mobile: same icon + "Disclaimer" label as desktop, just sized
+           down and re-anchored to the top-left next to the hamburger. */
+        @media (max-width: 768px) {
+            position: fixed;
+            top: 12px;
+            left: 52px;
+            bottom: auto;
+            right: auto;
+            padding: 5px 12px 5px 10px;
+            gap: 6px;
+            font-size: 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(229, 53, 53, 0.45);
+
+            svg { width: 14px; height: 14px; }
+
+            &:active { transform: scale(0.96); }
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &__trigger { animation: none !important; }
+    }
+
+    &__backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        backdrop-filter: blur(3px);
+        animation: riskFadeIn 0.18s ease;
+    }
+
+    &__modal {
+        background: #0d1e36;
+        border: 1px solid rgba(229, 53, 53, 0.25);
+        border-radius: 16px;
+        width: 100%;
+        max-width: 560px;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow:
+            0 24px 80px rgba(0, 0, 0, 0.7),
+            0 0 0 1px rgba(229, 53, 53, 0.08) inset;
+        animation: riskSlideUp 0.22s ease;
+        overflow: hidden;
+    }
+
+    &__modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid rgba(229, 53, 53, 0.15);
+        flex-shrink: 0;
+    }
+
+    &__modal-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        h2 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #f5f0e8;
+            margin: 0;
+            line-height: 1.3;
+        }
+    }
+
+    &__modal-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(229, 53, 53, 0.15);
+        border: 1px solid rgba(229, 53, 53, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        svg {
+            stroke: #e53535;
+        }
+    }
+
+    &__close {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.07);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: background 0.15s ease;
+
+        svg {
+            stroke: rgba(255, 255, 255, 0.6);
+        }
+
+        &:hover {
+            background: rgba(229, 53, 53, 0.2);
+
+            svg {
+                stroke: #ff6b6b;
+            }
+        }
+    }
+
+    &__modal-body {
+        padding: 20px 24px;
+        overflow-y: auto;
+        flex: 1;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(229, 53, 53, 0.3);
+            border-radius: 2px;
+        }
+    }
+
+    &__intro {
+        font-size: 13px;
+        line-height: 1.65;
+        color: #b8c4d4;
+        margin: 0 0 18px;
+    }
+
+    &__section-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #f5f0e8;
+        margin: 0 0 10px;
+    }
+
+    &__risk-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        li {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #b8c4d4;
+            padding-left: 14px;
+            position: relative;
+
+            &::before {
+                content: '•';
+                position: absolute;
+                left: 0;
+                color: #e53535;
+                font-weight: 700;
+            }
+
+            strong {
+                color: #e8dfc8;
+                font-weight: 600;
+            }
+        }
+    }
+
+    &__consideration-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        li {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #b8c4d4;
+            padding-left: 14px;
+            position: relative;
+
+            &::before {
+                content: '–';
+                position: absolute;
+                left: 0;
+                color: rgba(255, 255, 255, 0.35);
+            }
+        }
+    }
+
+    &__acknowledgement {
+        font-size: 12.5px;
+        line-height: 1.65;
+        color: #8fa3c0;
+        font-style: italic;
+        background: rgba(229, 53, 53, 0.06);
+        border: 1px solid rgba(229, 53, 53, 0.15);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin: 0;
+    }
+
+    &__modal-footer {
+        padding: 16px 24px 20px;
+        border-top: 1px solid rgba(229, 53, 53, 0.12);
+        flex-shrink: 0;
+    }
+
+    &__accept-btn {
+        width: 100%;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #e53535 0%, #b91c1c 100%);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(229, 53, 53, 0.4);
+        transition: all 0.2s ease;
+        letter-spacing: 0.2px;
+
+        &:hover {
+            background: linear-gradient(135deg, #ff6b6b 0%, #e53535 100%);
+            box-shadow: 0 6px 22px rgba(229, 53, 53, 0.55);
+            transform: translateY(-1px);
+        }
+    }
+}
+
+@keyframes rd-social-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(229, 53, 53, 0);
+        transform: translateY(0);
+    }
+    50% {
+        box-shadow: 0 0 14px 2px rgba(229, 53, 53, 0.35);
+        transform: translateY(-1.5px);
+    }
+}
+
+@keyframes riskFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes riskSlideUp {
+    from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
