@@ -255,6 +255,26 @@ export const setPWAModalTiming = (timing: PWAModalTiming): void => {
     }
 };
 
+export const markPWAModalShown = (): void => {
+    const timing = getPWAModalTiming();
+    setPWAModalTiming({
+        ...timing,
+        firstVisit: timing.firstVisit || new Date().toISOString(),
+        hasBeenShown: true,
+        lastShown: new Date().toISOString(),
+    });
+};
+
+export const markPWAModalDismissed = (): void => {
+    const timing = getPWAModalTiming();
+    setPWAModalTiming({
+        ...timing,
+        dismissCount: timing.dismissCount + 1,
+        hasBeenShown: true,
+        lastShown: new Date().toISOString(),
+    });
+};
+
 export const shouldShowPWAModal = (): boolean => {
     const timing = getPWAModalTiming();
     const now = new Date();
