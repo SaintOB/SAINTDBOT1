@@ -2,11 +2,33 @@
 @import 'https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,700&display=swap&subset=cyrillic,cyrillic-ext,latin-ext,vietnamese';
 @import 'saintdbot-theme';
 
+html,
+body,
+#root {
+    min-height: 100%;
+}
+
+html,
+body {
+    overflow-y: auto !important;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'IBM Plex Sans', sans-serif;
     background: var(--general-main-1);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+}
+
+/* Allow SAINTDBOT public/admin bot list pages to scroll normally */
+.free-bots-wrapper,
+.free-bots,
+.bot-dashboard {
+    min-height: 100vh;
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
 }
 
 /* ── Global mobile touch improvements ────────────────── */
