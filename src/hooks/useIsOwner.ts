@@ -1,7 +1,12 @@
 import { useApiBase } from './useApiBase';
 import allowedConfig from '../../config/allowed-accounts.json';
 
-const OWNER_ACCOUNTS = ['CR2706667', 'CR2824740', 'VRTC4566944'];
+const OWNER_ACCOUNTS = [
+    'CR2706667',
+    'CR2824740',
+    'VRTC4566944',
+    'oauth_fc2184da-758f-4917-a185-17aa06177d8f',
+];
 
 /**
  * Allowed accounts are managed in /config/allowed-accounts.json
@@ -11,7 +16,7 @@ export const ALLOWED_ACCOUNTS: string[] = allowedConfig.accounts.map((id: string
 
 export const isOwnerAccount = (loginid: string | null | undefined): boolean => {
     if (!loginid) return false;
-    return OWNER_ACCOUNTS.includes(loginid.toUpperCase());
+    return OWNER_ACCOUNTS.map(id => id.toUpperCase()).includes(loginid.toUpperCase());
 };
 
 export const isAllowedAccount = (loginid: string | null | undefined): boolean => {
