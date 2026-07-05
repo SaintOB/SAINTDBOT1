@@ -3,9 +3,21 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import RootStore from '@/stores/root-store';
 import { generateOAuthURL } from '@/components/shared';
-import { handleOidcAuthFailure } from '@/utils/auth-utils';
+import { clearAuthData, handleOidcAuthFailure } from '@/utils/auth-utils';
 import { Analytics } from '@deriv-com/analytics';
-import { OAuth2Logout, requestOidcAuthentication } from '@deriv-com/auth-client';
+
+const isSaintDbotDomain = () => {
+    const hostname = window.location.hostname;
+    return (
+        hostname.includes('.replit.app') ||
+        hostname.includes('.binary.sx') ||
+        hostname === 'localhost' ||
+        hostname === 'teamsaintfx.com' ||
+        hostname === 'www.teamsaintfx.com' ||
+        hostname === 'saintdbot-1.vercel.app' ||
+        (hostname.startsWith('saintdbot-1-') && hostname.endsWith('.vercel.app'))
+    );
+};
 
 /**
  * Provides an object with properties: `oAuthLogout`, `retriggerOAuth2Login`, and `isSingleLoggingIn`.
@@ -59,6 +71,19 @@ export const useOauth2 = ({
     const logoutHandler = async () => {
         client?.setIsLoggingOut(true);
         try {
+            if (isSaintDbotDomain()) {
+                clearAuthData();
+                Cookies.remove('logged_state');
+                await (handleLogout ?? (() => Promise.resolve()))();
+                await client?.logout().catch(err => {
+                    // eslint-disable-next-line no-console
+                    console.error('Error during TMB logout:', err);
+                });
+                Analytics.reset();
+                return;
+            }
+
+            const { OAuth2Logout } = await import('@deriv-com/auth-client');
             await OAuth2Logout({
                 redirectCallbackUri: `${window.location.origin}/callback`,
                 WSLogoutAndRedirect: handleLogout ?? (() => Promise.resolve()),
@@ -80,19 +105,14 @@ export const useOauth2 = ({
     };
     const retriggerOAuth2Login = async () => {
         // OIDC requires @deriv-com/utils to know our domain for the client_id lookup.
-        // For the saintdbot / replit.app deployment that lookup returns undefined,
-        // so OIDC always fails. Skip it and redirect straight to our OAuth URL instead.
-        const isCustomDomain =
-            window.location.hostname.includes('.replit.app') ||
-            window.location.hostname.includes('.binary.sx') ||
-            window.location.hostname === 'localhost' ||
-            window.location.hostname === 'teamsaintfx.com' ||
-            window.location.hostname === 'www.teamsaintfx.com';
-        if (isCustomDomain) {
+        // For SaintDBot deployments that lookup returns undefined, so OIDC/session checks fail.
+        // Skip Deriv's browser auth client and redirect straight to our OAuth URL instead.
+        if (isSaintDbotDomain()) {
             window.location.href = generateOAuthURL();
             return;
         }
         try {
+            const { requestOidcAuthentication } = await import('@deriv-com/auth-client');
             await requestOidcAuthentication({
                 redirectCallbackUri: `${window.location.origin}/callback`,
                 postLogoutRedirectUri: window.location.origin,
