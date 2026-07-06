@@ -38,37 +38,55 @@ const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => {
     return <Suspense fallback={<ChunkLoader message={getLoadingMessage()} />}>{children}</Suspense>;
 };
 
+const AppProviders = ({ children }: { children: React.ReactNode }) => (
+    <SuspenseWrapper>
+        <TranslationProvider defaultLang='EN' i18nInstance={i18nInstance}>
+            <StoreProvider>
+                <RoutePromptDialog />
+                <CoreStoreProvider>{children}</CoreStoreProvider>
+            </StoreProvider>
+        </TranslationProvider>
+    </SuspenseWrapper>
+);
+
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
             <Route path='register-app' element={<RegisterApp />} />
             <Route
+                path='custom-bots'
+                element={
+                    <AppProviders>
+                        <FreeBots />
+                    </AppProviders>
+                }
+            />
+            <Route
+                path='free-bots'
+                element={
+                    <AppProviders>
+                        <FreeBots />
+                    </AppProviders>
+                }
+            />
+            <Route
                 path='/'
                 element={
-                    <SuspenseWrapper>
-                        <TranslationProvider defaultLang='EN' i18nInstance={i18nInstance}>
-                            <StoreProvider>
-                                <RoutePromptDialog />
-                                <CoreStoreProvider>
-                                    <Layout />
-                                </CoreStoreProvider>
-                            </StoreProvider>
-                        </TranslationProvider>
-                    </SuspenseWrapper>
+                    <AppProviders>
+                        <Layout />
+                    </AppProviders>
                 }
             >
                 {/* All child routes will be passed as children to Layout */}
                 <Route index element={<AppRoot />} />
                 <Route path='endpoint' element={<Endpoint />} />
                 <Route path='/callback' element={<CallbackPage />} />
-                <Route path='free-bots' element={<FreeBots />} />
                 <Route path='analysis-tool' element={<AnalysisTool />} />
                 {/* Clean tab routes — no hash, no underscores */}
                 <Route path='dashboard' element={<AppRoot />} />
                 <Route path='bot-builder' element={<AppRoot />} />
                 <Route path='chart' element={<AppRoot />} />
                 <Route path='tutorial' element={<AppRoot />} />
-                <Route path='custom-bots' element={<FreeBots />} />
             </Route>
         </>
     )
@@ -110,13 +128,6 @@ function App() {
                     element.style.height = 'auto';
                     element.style.overflowY = 'visible';
                 });
-
-            document.querySelectorAll<HTMLElement>('.dc-tabs__item, .dc-tabs__active').forEach(element => {
-                element.style.height = '4.8rem';
-                element.style.minHeight = '4.8rem';
-                element.style.maxHeight = '4.8rem';
-                element.style.flex = '0 0 auto';
-            });
 
             document.querySelectorAll<HTMLElement>('.app-footer, .risk-disclaimer').forEach(element => {
                 element.style.display = 'none';
