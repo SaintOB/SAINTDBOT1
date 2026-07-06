@@ -68,7 +68,7 @@ const router = createBrowserRouter(
                 <Route path='bot-builder' element={<AppRoot />} />
                 <Route path='chart' element={<AppRoot />} />
                 <Route path='tutorial' element={<AppRoot />} />
-                <Route path='custom-bots' element={<AppRoot />} />
+                <Route path='custom-bots' element={<FreeBots />} />
             </Route>
         </>
     )
