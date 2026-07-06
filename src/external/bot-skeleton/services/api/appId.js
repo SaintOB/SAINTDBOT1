@@ -4,6 +4,14 @@ import DerivAPIBasic from '@deriv/deriv-api/dist/DerivAPIBasic';
 import { getInitialLanguage } from '@deriv-com/translations';
 import APIMiddleware from './api-middleware';
 
+const safeParse = value => {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch {
+        return null;
+    }
+};
+
 export const generateDerivApiInstance = () => {
     const cleanedServer = getSocketURL().replace(/[^a-zA-Z0-9.]/g, '');
     const cleanedAppId = getAppId()?.replace?.(/[^a-zA-Z0-9]/g, '') ?? getAppId();
@@ -23,16 +31,31 @@ export const getLoginId = () => {
 };
 
 export const V2GetActiveToken = () => {
+    const active_loginid = getLoginId();
+    const accountsList = safeParse(localStorage.getItem('accountsList'));
+
+    if (active_loginid && accountsList?.[active_loginid]) {
+        return accountsList[active_loginid];
+    }
+
+    const clientAccounts = safeParse(localStorage.getItem('clientAccounts'));
+    if (active_loginid && clientAccounts?.[active_loginid]?.token) {
+        return clientAccounts[active_loginid].token;
+    }
+
     const token = localStorage.getItem('authToken');
     if (token && token !== 'null') return token;
     return null;
 };
 
 export const V2GetActiveClientId = () => {
-    const token = V2GetActiveToken();
+    const active_loginid = getLoginId();
+    if (active_loginid) return active_loginid;
 
+    const token = V2GetActiveToken();
     if (!token) return null;
-    const account_list = JSON.parse(localStorage.getItem('accountsList'));
+
+    const account_list = safeParse(localStorage.getItem('accountsList'));
     if (account_list && account_list !== 'null') {
         const active_clientId = Object.keys(account_list).find(key => account_list[key] === token);
         return active_clientId;
@@ -42,8 +65,8 @@ export const V2GetActiveClientId = () => {
 
 export const getToken = () => {
     const active_loginid = getLoginId();
-    const client_accounts = JSON.parse(localStorage.getItem('accountsList')) ?? undefined;
-    const active_account = (client_accounts && client_accounts[active_loginid]) || {};
+    const client_accounts = safeParse(localStorage.getItem('accountsList')) ?? undefined;
+    const active_account = (client_accounts && client_accounts[active_loginid]) || V2GetActiveToken() || undefined;
     return {
         token: active_account ?? undefined,
         account_id: active_loginid ?? undefined,
