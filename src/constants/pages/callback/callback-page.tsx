@@ -40,6 +40,33 @@ const pickLoginId = (data: any): string => {
     );
 };
 
+const saveLogin = (loginid: string, token: string, currency = 'USD') => {
+    const clientAccounts: Record<string, any> = {
+        [loginid]: {
+            loginid,
+            token,
+            currency,
+            is_disabled: 0,
+        },
+    };
+
+    const accountsList: Record<string, string> = {
+        [loginid]: token,
+    };
+
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('active_loginid', loginid);
+    localStorage.setItem('clientAccounts', JSON.stringify(clientAccounts));
+    localStorage.setItem('accountsList', JSON.stringify(accountsList));
+    localStorage.setItem('callback_token', JSON.stringify({ loginid, token_saved: true, currency }));
+
+    Cookies.set('logged_state', 'true', {
+        expires: 30,
+        sameSite: 'Lax',
+        secure: window.location.protocol === 'https:',
+    });
+};
+
 const getLoginIdFromProfile = async (accessToken: string) => {
     const response = await fetch('/api/deriv/oauth/profile', {
         method: 'POST',
@@ -69,19 +96,28 @@ const getLoginIdFromProfile = async (accessToken: string) => {
 const CallbackPage = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const oauthCode = queryParams.get('code');
+    const legacyToken = queryParams.get('token1') || queryParams.get('token');
+    const legacyLoginId = queryParams.get('acct1') || queryParams.get('loginid') || queryParams.get('account');
+    const legacyCurrency = queryParams.get('cur1') || queryParams.get('currency') || 'USD';
+
+    if (legacyToken && legacyLoginId) {
+        saveLogin(legacyLoginId, legacyToken, legacyCurrency);
+        window.location.replace('/free-bots');
+        return null;
+    }
 
     if (!oauthCode) {
         return (
             <div style={{ padding: '40px', textAlign: 'center' }}>
                 <h2>Deriv Login</h2>
-                <p>No new OAuth login code was found.</p>
-                <p>If you already logged in, return to the bot page and continue.</p>
+                <p>No login token was found.</p>
+                <p>Please return to the bot page and click Log in with Deriv again.</p>
                 <Button
                     onClick={() => {
-                        window.location.href = '/free-bots';
+                        window.location.href = '/custom-bots';
                     }}
                 >
-                    Return to Bot
+                    Return to Bot Login
                 </Button>
             </div>
         );
@@ -164,50 +200,11 @@ const CallbackPage = () => {
 
                     const realCurrency = profile.currency || profile.account_list?.[0]?.currency || profile.accounts?.[0]?.currency || 'USD';
 
-                    const clientAccounts: Record<string, any> = {
-                        [realLoginId]: {
-                            loginid: realLoginId,
-                            token: accessToken,
-                            currency: realCurrency,
-                            is_disabled: 0,
-                        },
-                    };
-
-                    const accountsList: Record<string, string> = {
-                        [realLoginId]: accessToken,
-                    };
-
-                    accountList.forEach((account: any) => {
-                        const loginid = account?.loginid || account?.login_id;
-                        if (!loginid) return;
-                        accountsList[loginid] = accessToken;
-                        clientAccounts[loginid] = {
-                            loginid,
-                            token: accessToken,
-                            currency: account.currency || realCurrency || 'USD',
-                            is_disabled: 0,
-                        };
-                    });
-
-                    const oauthDebug = {
-                        tokenResponseKeys: Object.keys(data || {}),
-                        profileResult,
-                        decodedAccessToken,
-                        decodedIdToken,
-                    };
-
-                    localStorage.setItem('authToken', accessToken);
-                    localStorage.setItem('active_loginid', realLoginId);
-                    localStorage.setItem('clientAccounts', JSON.stringify(clientAccounts));
-                    localStorage.setItem('accountsList', JSON.stringify(accountsList));
-                    localStorage.setItem('callback_token', JSON.stringify(profileResult));
-                    localStorage.setItem('deriv_oauth_debug', JSON.stringify(oauthDebug));
-
-                    Cookies.set('logged_state', 'true', {
-                        expires: 30,
-                        sameSite: 'Lax',
-                        secure: window.location.protocol === 'https:',
-                    });
+                    saveLogin(realLoginId, accessToken, realCurrency);
+                    localStorage.setItem(
+                        'deriv_oauth_debug',
+                        JSON.stringify({ tokenResponseKeys: Object.keys(data || {}), profileResult, decodedAccessToken, decodedIdToken })
+                    );
 
                     sessionStorage.removeItem('deriv_oauth_code_verifier');
                     sessionStorage.removeItem('deriv_oauth_state');
@@ -236,7 +233,7 @@ const CallbackPage = () => {
 
                 <Button
                     onClick={() => {
-                        window.location.href = '/';
+                        window.location.href = '/custom-bots';
                     }}
                 >
                     Return to Login
