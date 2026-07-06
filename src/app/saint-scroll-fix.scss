@@ -2,79 +2,35 @@
 
 html,
 body,
-#root,
-.layout,
-.main-body,
-.bot-dashboard,
-#id-free-bots,
-#id-free-bots .free-bots-wrapper,
-#id-free-bots .free-bots,
-#id-analysis-tool,
-#id-analysis-tool .analysis-tool-wrapper {
-    max-height: none !important;
-    overflow-y: visible !important;
-}
-
-html,
-body,
-#root,
-.layout,
-.main-body,
-.bot-dashboard,
-#id-free-bots,
-#id-free-bots .free-bots-wrapper,
-#id-free-bots .free-bots {
-    height: auto !important;
-}
-
-html,
-body,
 #root {
     min-height: 100% !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
 }
 
-.layout,
-.main-body,
-.bot-dashboard,
 #id-free-bots,
 #id-free-bots .free-bots-wrapper,
-#id-free-bots .free-bots {
+#id-free-bots .free-bots,
+.free-bots {
+    max-height: none !important;
+    height: auto !important;
     min-height: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
 }
 
 #id-free-bots,
 #id-free-bots .free-bots-wrapper,
-#id-free-bots .free-bots {
+#id-free-bots .free-bots,
+.free-bots {
     display: block !important;
-    overflow-x: hidden !important;
     padding-bottom: 12rem !important;
 }
 
-.main {
-    padding-top: 0.6rem !important;
-}
-
-.main .dc-tabs__list {
-    min-height: 4.8rem !important;
-    align-items: center !important;
-}
-
-.main .dc-tabs__item,
-.main .dc-tabs__active {
-    height: 4.8rem !important;
-    min-height: 4.8rem !important;
-    max-height: 4.8rem !important;
-    flex: 0 0 auto !important;
-}
-
-#id-free-bots .free-bots {
-    margin-top: 0 !important;
-}
-
-.app-footer,
-.run-panel,
-.main__run-strategy-wrapper {
-    pointer-events: auto;
+.bot-dashboard:has(.free-bots),
+.main-body:has(.free-bots),
+.layout:has(.free-bots) {
+    max-height: none !important;
+    height: auto !important;
+    overflow-y: visible !important;
 }
