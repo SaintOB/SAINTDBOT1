@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import RootStore from '@/stores/root-store';
-import { generateOAuthURL } from '@/components/shared';
+import { getNewDerivOAuthUrl } from '@/components/shared';
 import { clearAuthData, handleOidcAuthFailure } from '@/utils/auth-utils';
 import { Analytics } from '@deriv-com/analytics';
 
@@ -104,11 +104,10 @@ export const useOauth2 = ({
         }
     };
     const retriggerOAuth2Login = async () => {
-        // OIDC requires @deriv-com/utils to know our domain for the client_id lookup.
-        // For SaintDBot deployments that lookup returns undefined, so OIDC/session checks fail.
-        // Skip Deriv's browser auth client and redirect straight to our OAuth URL instead.
+        // SaintDBot callback expects the new code+PKCE Deriv login flow.
+        // Do not use the old oauth.deriv.com app_id redirect here.
         if (isSaintDbotDomain()) {
-            window.location.href = generateOAuthURL();
+            window.location.href = await getNewDerivOAuthUrl();
             return;
         }
         try {
