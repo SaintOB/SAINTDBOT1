@@ -34,3 +34,34 @@ body,
     height: auto !important;
     overflow-y: visible !important;
 }
+
+/* Bot Builder panel spacing */
+.bot-builder ~ .run-panel__container,
+.run-panel__container {
+    top: 8.8rem !important;
+    height: calc(100vh - 8.8rem) !important;
+}
+
+.run-panel__content {
+    height: 100% !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.run-panel-tab__content {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+}
+
+.run-panel__footer {
+    margin-top: auto !important;
+    padding-bottom: 1.2rem !important;
+}
+
+.run-panel__footer-button {
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+}
