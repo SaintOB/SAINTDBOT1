@@ -1,12 +1,12 @@
 .bot {
-    --bot-content-height: calc(100vh - 140px);
+    --bot-content-height: auto;
     --bot-content-width: calc(100vw - 366px);
-    --drawer-content-height: calc(100vh - 394px);
-    --drawer-content-height-no-stat: calc(100vh - 233px);
-    --drawer-scroll-height: calc(100vh - 365px);
-    --drawer-content-height-mobile: calc(100% - 233px);
-    --tab-content-height: calc(100vh - 16.6rem);
-    --tab-content-height-mobile: calc(100vh - 12.6rem);
+    --drawer-content-height: auto;
+    --drawer-content-height-no-stat: auto;
+    --drawer-scroll-height: auto;
+    --drawer-content-height-mobile: auto;
+    --tab-content-height: auto;
+    --tab-content-height-mobile: auto;
     --zindex-drawer: 5;
     --zindex-modal: 6;
     --zindex-draggable-modal: 7;
@@ -14,7 +14,19 @@
 
     &-dashboard {
         background: var(--general-section-1);
+        min-height: calc(100vh - 8.5rem);
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding-bottom: 10rem;
     }
+}
+
+.bot-dashboard,
+.bot-dashboard > *,
+.main-body,
+.layout {
+    max-height: none !important;
 }
 
 .modal-root {
