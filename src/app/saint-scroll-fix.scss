@@ -1,8 +1,4 @@
-/* SaintDBot scroll fix
-   The bot list is shown inside Deriv's tab layout. After loading a bot and
-   navigating back, some parent containers keep viewport-height + hidden
-   overflow, which cuts off the cards. These overrides keep normal scrolling
-   available on the Saint Bots pages. */
+/* SaintDBot scroll fix */
 
 html,
 body,
@@ -10,12 +6,6 @@ body,
 .layout,
 .main-body,
 .bot-dashboard,
-.main,
-.main__container,
-.main__container > div:first-child,
-.main .dc-tabs,
-.main .dc-tabs__content,
-.main [class*='dc-tabs__content'],
 #id-free-bots,
 #id-free-bots .free-bots-wrapper,
 #id-free-bots .free-bots,
@@ -31,12 +21,6 @@ body,
 .layout,
 .main-body,
 .bot-dashboard,
-.main,
-.main__container,
-.main__container > div:first-child,
-.main .dc-tabs,
-.main .dc-tabs__content,
-.main [class*='dc-tabs__content'],
 #id-free-bots,
 #id-free-bots .free-bots-wrapper,
 #id-free-bots .free-bots {
@@ -54,31 +38,39 @@ body,
 .layout,
 .main-body,
 .bot-dashboard,
-.main,
-.main__container,
-.main .dc-tabs,
-.main .dc-tabs__content,
 #id-free-bots,
 #id-free-bots .free-bots-wrapper,
 #id-free-bots .free-bots {
     min-height: 0 !important;
 }
 
-.main,
-.main__container,
-.main .dc-tabs,
-.main .dc-tabs__content,
-#id-free-bots,
-#id-free-bots .free-bots-wrapper,
-#id-free-bots .free-bots {
-    overflow-x: hidden !important;
-}
-
 #id-free-bots,
 #id-free-bots .free-bots-wrapper,
 #id-free-bots .free-bots {
     display: block !important;
+    overflow-x: hidden !important;
     padding-bottom: 12rem !important;
+}
+
+.main {
+    padding-top: 0.6rem !important;
+}
+
+.main .dc-tabs__list {
+    min-height: 4.8rem !important;
+    align-items: center !important;
+}
+
+.main .dc-tabs__item,
+.main .dc-tabs__active {
+    height: 4.8rem !important;
+    min-height: 4.8rem !important;
+    max-height: 4.8rem !important;
+    flex: 0 0 auto !important;
+}
+
+#id-free-bots .free-bots {
+    margin-top: 0 !important;
 }
 
 .app-footer,
