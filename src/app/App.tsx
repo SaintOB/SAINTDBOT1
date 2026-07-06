@@ -91,6 +91,51 @@ function App() {
     }, []);
 
     React.useEffect(() => {
+        const resetSaintBotsLayout = () => {
+            const path = window.location.pathname;
+            const isSaintBotsPage = path.includes('free-bots') || path.includes('custom-bots');
+            if (!isSaintBotsPage) return;
+
+            document.documentElement.style.overflowY = 'auto';
+            document.documentElement.style.height = 'auto';
+            document.body.style.overflowY = 'auto';
+            document.body.style.height = 'auto';
+
+            document
+                .querySelectorAll<HTMLElement>(
+                    '#root, .layout, .main-body, .bot-dashboard, .main, .main__container, .dc-tabs, .dc-tabs__content, [class*=dc-tabs__content], #id-free-bots, .free-bots-wrapper, .free-bots'
+                )
+                .forEach(element => {
+                    element.style.maxHeight = 'none';
+                    element.style.height = 'auto';
+                    element.style.overflowY = 'visible';
+                });
+
+            document.querySelectorAll<HTMLElement>('.dc-tabs__item, .dc-tabs__active').forEach(element => {
+                element.style.height = '4.8rem';
+                element.style.minHeight = '4.8rem';
+                element.style.maxHeight = '4.8rem';
+                element.style.flex = '0 0 auto';
+            });
+
+            document.querySelectorAll<HTMLElement>('.app-footer, .risk-disclaimer').forEach(element => {
+                element.style.display = 'none';
+            });
+        };
+
+        resetSaintBotsLayout();
+        const interval = window.setInterval(resetSaintBotsLayout, 300);
+        window.addEventListener('pageshow', resetSaintBotsLayout);
+        window.addEventListener('popstate', resetSaintBotsLayout);
+
+        return () => {
+            window.clearInterval(interval);
+            window.removeEventListener('pageshow', resetSaintBotsLayout);
+            window.removeEventListener('popstate', resetSaintBotsLayout);
+        };
+    }, []);
+
+    React.useEffect(() => {
         const accounts_list = localStorage.getItem('accountsList');
         const client_accounts = localStorage.getItem('clientAccounts');
         const url_params = new URLSearchParams(window.location.search);
