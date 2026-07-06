@@ -54,14 +54,31 @@ body,
     height: auto !important;
     min-height: 0 !important;
     overflow-y: auto !important;
+    padding-bottom: 0 !important;
 }
 
 .run-panel__footer {
     margin-top: auto !important;
-    padding-bottom: 1.2rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0.8rem !important;
 }
 
-.run-panel__footer-button {
+.run-panel__footer-button,
+.run-panel__clear-button {
     margin-top: auto !important;
     margin-bottom: 0 !important;
+}
+
+.run-panel__content .dc-tabs {
+    height: 100% !important;
+}
+
+.run-panel__content .dc-tabs__content {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.run-panel__stat {
+    margin-bottom: 1.2rem !important;
 }
