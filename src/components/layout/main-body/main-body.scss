@@ -1,8 +1,6 @@
 .main-body {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+    flex: 1 0 auto;
+    min-height: calc(100vh - 8.5rem);
+    overflow: visible;
     padding-bottom: 9rem;
-    -webkit-overflow-scrolling: touch;
 }
