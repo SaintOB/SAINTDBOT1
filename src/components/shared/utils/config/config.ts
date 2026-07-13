@@ -10,11 +10,11 @@ export const APP_IDS = {
     PRODUCTION: 65555,
     PRODUCTION_BE: 65556,
     PRODUCTION_ME: 65557,
-    SAINTDBOT: 133598, // registered redirect: https://saintdbot-1.vercel.app (trade only)
-    TEAMSAINTFX: 133598, // registered redirect: https://teamsaintfx.com  (read+trade only)
+    SAINTDBOT: 133598,
+    TEAMSAINTFX: 133598,
 };
 export const OAUTH_CLIENT_IDS = {
-    TEAMSAINTFX: '32OGVtMBW9fF9IgLLgMYh',
+    TEAMSAINTFX: '33FCBGiyjs6CSnISZHJT3',
 };
 
 export const livechat_license_id = 12049137;
@@ -31,7 +31,6 @@ export const domain_app_ids = {
     'dbot.deriv.com': APP_IDS.PRODUCTION,
     'dbot.deriv.be': APP_IDS.PRODUCTION_BE,
     'dbot.deriv.me': APP_IDS.PRODUCTION_ME,
-
     'saintdbot--saintob.replit.app': APP_IDS.SAINTDBOT,
     'saintdbot-1.vercel.app': APP_IDS.SAINTDBOT,
     'teamsaintfx.com': APP_IDS.TEAMSAINTFX,
@@ -47,6 +46,11 @@ export const isProduction = () => {
     return new RegExp(`^(${all_domains.join('|')})$`, 'i').test(window.location.hostname);
 };
 
+export const isLocal = () => /localhost(:\d+)?$/i.test(window.location.hostname);
+
+const isTeamSaintFxDeploy = () =>
+    window.location.hostname === 'teamsaintfx.com' || window.location.hostname === 'www.teamsaintfx.com';
+
 export const isTestLink = () => {
     const hostname = window.location.hostname;
     return (
@@ -54,23 +58,18 @@ export const isTestLink = () => {
         window.location.origin?.includes('bot-65f.pages.dev') ||
         window.location.origin?.includes('.replit.app') ||
         isSaintDbotVercelHost(hostname) ||
-        hostname === 'teamsaintfx.com' ||
-        hostname === 'www.teamsaintfx.com' ||
+        isTeamSaintFxDeploy() ||
         isLocal()
     );
 };
 
-export const isLocal = () => /localhost(:\d+)?$/i.test(window.location.hostname);
-
-// True on all SaintDBot-owned domains
 export const isSaintDbotDeploy = () => {
     const hostname = window.location.hostname;
     return (
         hostname.includes('.replit.app') ||
         hostname.includes('.binary.sx') ||
         isSaintDbotVercelHost(hostname) ||
-        hostname === 'teamsaintfx.com' ||
-        hostname === 'www.teamsaintfx.com'
+        isTeamSaintFxDeploy()
     );
 };
 
@@ -95,16 +94,9 @@ const getDefaultServerURL = () => {
     return server_url;
 };
 
-const isTeamSaintFxDeploy = () =>
-    window.location.hostname === 'teamsaintfx.com' || window.location.hostname === 'www.teamsaintfx.com';
-
 export const getDefaultAppIdAndUrl = () => {
     const server_url = getDefaultServerURL();
 
-    // teamsaintfx.com uses its own dedicated Deriv app (133598) which has
-    // https://teamsaintfx.com registered as the redirect URI. Tokens issued by
-    // that app must be authorized with the same app_id — using 133621 here would
-    // cause an InvalidToken error.
     if (isTeamSaintFxDeploy()) {
         return { app_id: APP_IDS.TEAMSAINTFX, server_url };
     }
@@ -132,10 +124,8 @@ export const getAppId = () => {
     } else if (isStaging()) {
         app_id = APP_IDS.STAGING;
     } else if (isTeamSaintFxDeploy()) {
-        // Must match the OAuth app (133598) — tokens are issued for TEAMSAINTFX
         app_id = APP_IDS.TEAMSAINTFX;
     } else if (isSaintDbotDeploy()) {
-        // Deployed site: must match the OAuth app_id so authorize succeeds
         app_id = APP_IDS.SAINTDBOT;
     } else if (isTestLink()) {
         app_id = APP_IDS.LOCALHOST;
@@ -166,7 +156,7 @@ export const checkAndSetEndpointFromUrl = () => {
             url_params.delete('qa_server');
             url_params.delete('app_id');
 
-            if (/^(^(www\.)?qa[0-9]{1,4}\.deriv.dev|(.*)\.derivws\.com)$/.test(qa_server) && /^[a-zA-Z0-9]+$/.test(app_id)) {
+            if (/^(^(www\.)?qa[0-9]{1,4}\.deriv\.dev|(.*)\.derivws\.com)$/.test(qa_server) && /^[a-zA-Z0-9]+$/.test(app_id)) {
                 localStorage.setItem('config.app_id', app_id);
                 localStorage.setItem('config.server_url', qa_server.replace(/"/g, ''));
             }
@@ -193,46 +183,24 @@ export const getDebugServiceWorker = () => {
 };
 
 export const generateOAuthURL = () => {
-    // Always build the OAuth URL from scratch for our deployment to avoid any
-    // library quirks (empty app_id, wrong redirect_uri, etc.)
     const hostname = window.location.hostname;
     const isSaintDbotDomain =
         hostname.includes('.replit.app') ||
         hostname.includes('.binary.sx') ||
         isSaintDbotVercelHost(hostname) ||
-        hostname === 'teamsaintfx.com' ||
-        hostname === 'www.teamsaintfx.com' ||
+        isTeamSaintFxDeploy() ||
         hostname === 'localhost';
 
     if (isSaintDbotDomain) {
-        const isTeamSaintFxDomain = hostname === 'teamsaintfx.com' || hostname === 'www.teamsaintfx.com';
-
-        if (isTeamSaintFxDomain) {
-            // teamsaintfx.com has its own Deriv OAuth app (133598) with
-            // https://teamsaintfx.com registered as the redirect URI.
-            // Go straight to Deriv — no relay needed. Deriv redirects back
-            // to teamsaintfx.com automatically after login.
-            const url = new URL('https://oauth.deriv.com/oauth2/authorize');
-            url.searchParams.set('app_id', String(APP_IDS.TEAMSAINTFX));
-            url.searchParams.set('l', 'en');
-            url.searchParams.set('brand', 'deriv');
-            url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
-            return url.toString();
-        }
-
-        // SaintDBot uses its own registered Deriv app directly.
-        // For Vercel preview URLs, always return to the production domain that is
-        // registered in the Deriv app settings.
-        const redirectOrigin = isSaintDbotVercelHost(hostname) ? 'https://saintdbot-1.vercel.app' : window.location.origin;
-        const url = new URL('https://oauth.deriv.com/oauth2/authorize');
-        url.searchParams.set('app_id', String(APP_IDS.SAINTDBOT));
-        url.searchParams.set('l', 'en');
-        url.searchParams.set('brand', 'deriv');
-        url.searchParams.set('redirect_uri', redirectOrigin);
+        const redirectUri = `${window.location.origin}/callback`;
+        const url = new URL('https://auth.deriv.com/oauth2/auth');
+        url.searchParams.set('client_id', OAUTH_CLIENT_IDS.TEAMSAINTFX);
+        url.searchParams.set('response_type', 'code');
+        url.searchParams.set('redirect_uri', redirectUri);
+        url.searchParams.set('scope', 'trade');
         return url.toString();
     }
 
-    // For all other domains fall through to the library + patch
     try {
         const { getOauthURL } = URLUtils;
         const oauth_url = getOauthURL();
@@ -269,7 +237,6 @@ export const generateOAuthURL = () => {
 
         return original_url.toString();
     } catch {
-        // Ultimate fallback
-        return `https://oauth.deriv.com/oauth2/authorize?app_id=${APP_IDS.SAINTDBOT}&l=en&brand=deriv&redirect_uri=https://saintdbot-1.vercel.app`;
+        return `https://auth.deriv.com/oauth2/auth?client_id=${OAUTH_CLIENT_IDS.TEAMSAINTFX}&response_type=code&redirect_uri=https://teamsaintfx.com/callback&scope=trade`;
     }
 };
