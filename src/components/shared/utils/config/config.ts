@@ -193,11 +193,11 @@ export const generateOAuthURL = () => {
 
     if (isSaintDbotDomain) {
         const redirectUri = `${window.location.origin}/callback`;
-        const url = new URL('https://auth.deriv.com/oauth2/auth');
-        url.searchParams.set('client_id', OAUTH_CLIENT_IDS.TEAMSAINTFX);
-        url.searchParams.set('response_type', 'code');
+        const url = new URL('https://oauth.deriv.com/oauth2/authorize');
+        url.searchParams.set('app_id', String(APP_IDS.TEAMSAINTFX));
+        url.searchParams.set('l', 'en');
+        url.searchParams.set('brand', 'deriv');
         url.searchParams.set('redirect_uri', redirectUri);
-        url.searchParams.set('scope', 'trade');
         return url.toString();
     }
 
@@ -237,6 +237,6 @@ export const generateOAuthURL = () => {
 
         return original_url.toString();
     } catch {
-        return `https://auth.deriv.com/oauth2/auth?client_id=${OAUTH_CLIENT_IDS.TEAMSAINTFX}&response_type=code&redirect_uri=https://teamsaintfx.com/callback&scope=trade`;
+        return `https://oauth.deriv.com/oauth2/authorize?app_id=${APP_IDS.TEAMSAINTFX}&l=en&brand=deriv&redirect_uri=https://teamsaintfx.com/callback`;
     }
 };
