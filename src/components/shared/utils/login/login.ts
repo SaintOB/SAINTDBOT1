@@ -7,7 +7,7 @@ export const getNewDerivOAuthUrl = async () => {
     url.searchParams.set('app_id', String(SAINTDBOT_APP_ID));
     url.searchParams.set('l', 'en');
     url.searchParams.set('brand', 'deriv');
-    url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
+    url.searchParams.set('redirect_uri', window.location.origin);
     return url.toString();
 };
 
