@@ -38,7 +38,6 @@ export const getNewDerivOAuthUrl = async () => {
     url.searchParams.set('client_id', DERIV_CLIENT_ID);
     url.searchParams.set('response_type', 'code');
     url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
-    url.searchParams.set('scope', 'read trade account_management trading_information');
     url.searchParams.set('state', state);
     url.searchParams.set('code_challenge', codeChallenge);
     url.searchParams.set('code_challenge_method', 'S256');
