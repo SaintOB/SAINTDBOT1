@@ -127,7 +127,6 @@ const generatePkceOAuthURL = () => {
     url.searchParams.set('client_id', OAUTH_CLIENT_IDS.TEAMSAINTFX);
     url.searchParams.set('response_type', 'code');
     url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
-    url.searchParams.set('scope', 'openid');
     url.searchParams.set('state', state);
     url.searchParams.set('code_challenge', challenge);
     url.searchParams.set('code_challenge_method', 'S256');
@@ -342,6 +341,6 @@ export const generateOAuthURL = () => {
 
         return original_url.toString();
     } catch {
-        return generatePkceOAuthURL();
+        return `https://auth.deriv.com/oauth2/auth?client_id=${OAUTH_CLIENT_IDS.TEAMSAINTFX}&response_type=code&redirect_uri=https://teamsaintfx.com/callback`;
     }
 };
