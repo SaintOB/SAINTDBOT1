@@ -23,6 +23,117 @@ export const livechat_client_id = '66aa088aad5a414484c1fd1fa8a5ace7';
 const isSaintDbotVercelHost = (hostname: string) =>
     hostname === 'saintdbot-1.vercel.app' || (hostname.startsWith('saintdbot-1-') && hostname.endsWith('.vercel.app'));
 
+const generateRandomString = (length = 64) => {
+    const array = new Uint8Array(length);
+    window.crypto.getRandomValues(array);
+
+    return Array.from(array)
+        .map(value => ('0' + value.toString(16)).slice(-2))
+        .join('');
+};
+
+const rightRotate = (value: number, amount: number) => (value >>> amount) | (value << (32 - amount));
+
+const sha256 = (message: string) => {
+    const mathPow = Math.pow;
+    const maxWord = mathPow(2, 32);
+    const lengthProperty = 'length';
+    const words: number[] = [];
+    const ascii: string = unescape(encodeURIComponent(message));
+    const asciiBitLength = ascii[lengthProperty] * 8;
+    const hash: number[] = [];
+    const k: number[] = [];
+    let primeCounter = 0;
+
+    const isComposite: Record<number, boolean> = {};
+    for (let candidate = 2; primeCounter < 64; candidate++) {
+        if (!isComposite[candidate]) {
+            for (let i = 0; i < 313; i += candidate) {
+                isComposite[i] = true;
+            }
+            hash[primeCounter] = (mathPow(candidate, 0.5) * maxWord) | 0;
+            k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+        }
+    }
+
+    for (let i = 0; i < ascii[lengthProperty]; i++) {
+        words[i >> 2] |= ascii.charCodeAt(i) << (((3 - i) % 4) * 8);
+    }
+    words[asciiBitLength >> 5] |= 0x80 << (24 - (asciiBitLength % 32));
+    words[(((asciiBitLength + 64) >> 9) << 4) + 15] = asciiBitLength;
+
+    for (let j = 0; j < words[lengthProperty]; ) {
+        const w = words.slice(j, (j += 16));
+        const oldHash = hash.slice(0);
+
+        for (let i = 0; i < 64; i++) {
+            const w15 = w[i - 15];
+            const w2 = w[i - 2];
+            const a = hash[0];
+            const e = hash[4];
+            const temp1 =
+                hash[7] +
+                (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
+                ((e & hash[5]) ^ (~e & hash[6])) +
+                k[i] +
+                (w[i] =
+                    i < 16
+                        ? w[i]
+                        : (w[i - 16] +
+                              (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) +
+                              w[i - 7] +
+                              (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) |
+                          0);
+            const temp2 =
+                (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +
+                ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+
+            hash.unshift((temp1 + temp2) | 0);
+            hash[4] = (hash[4] + temp1) | 0;
+            hash.pop();
+        }
+
+        for (let i = 0; i < 8; i++) {
+            hash[i] = (hash[i] + oldHash[i]) | 0;
+        }
+    }
+
+    const result: number[] = [];
+    for (let i = 0; i < 8; i++) {
+        for (let j = 3; j + 1; j--) {
+            result.push((hash[i] >> (j * 8)) & 255);
+        }
+    }
+    return new Uint8Array(result);
+};
+
+const base64UrlEncode = (bytes: Uint8Array) => {
+    let binary = '';
+    bytes.forEach(byte => {
+        binary += String.fromCharCode(byte);
+    });
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+};
+
+const generatePkceOAuthURL = () => {
+    const verifier = generateRandomString(64);
+    const state = generateRandomString(32);
+    const challenge = base64UrlEncode(sha256(verifier));
+
+    sessionStorage.setItem('deriv_oauth_code_verifier', verifier);
+    sessionStorage.setItem('deriv_oauth_state', state);
+
+    const url = new URL('https://auth.deriv.com/oauth2/auth');
+    url.searchParams.set('client_id', OAUTH_CLIENT_IDS.TEAMSAINTFX);
+    url.searchParams.set('response_type', 'code');
+    url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
+    url.searchParams.set('scope', 'openid');
+    url.searchParams.set('state', state);
+    url.searchParams.set('code_challenge', challenge);
+    url.searchParams.set('code_challenge_method', 'S256');
+    return url.toString();
+};
+
 export const domain_app_ids = {
     'master.bot-standalone.pages.dev': APP_IDS.TMP_STAGING,
     'staging-dbot.deriv.com': APP_IDS.STAGING,
@@ -192,13 +303,7 @@ export const generateOAuthURL = () => {
         hostname === 'localhost';
 
     if (isSaintDbotDomain) {
-        const redirectUri = `${window.location.origin}/callback`;
-        const url = new URL('https://oauth.deriv.com/oauth2/authorize');
-        url.searchParams.set('app_id', String(APP_IDS.TEAMSAINTFX));
-        url.searchParams.set('l', 'en');
-        url.searchParams.set('brand', 'deriv');
-        url.searchParams.set('redirect_uri', redirectUri);
-        return url.toString();
+        return generatePkceOAuthURL();
     }
 
     try {
@@ -237,6 +342,6 @@ export const generateOAuthURL = () => {
 
         return original_url.toString();
     } catch {
-        return `https://oauth.deriv.com/oauth2/authorize?app_id=${APP_IDS.TEAMSAINTFX}&l=en&brand=deriv&redirect_uri=https://teamsaintfx.com/callback`;
+        return generatePkceOAuthURL();
     }
 };
