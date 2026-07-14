@@ -1,13 +1,48 @@
 import { CookieStorage, isStorageSupported, LocalStore } from '../storage/storage';
 
-const SAINTDBOT_APP_ID = 133598;
+const DERIV_CLIENT_ID = '33FCBGiyjs6CSnISZHJT3';
+
+const generateRandomString = (length = 64) => {
+    const array = new Uint8Array(length);
+    window.crypto.getRandomValues(array);
+
+    return Array.from(array)
+        .map(value => ('0' + value.toString(16)).slice(-2))
+        .join('');
+};
+
+const base64UrlEncode = (buffer: ArrayBuffer) => {
+    return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+};
+
+const generateCodeChallenge = async (verifier: string) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(verifier);
+    const digest = await window.crypto.subtle.digest('SHA-256', data);
+
+    return base64UrlEncode(digest);
+};
 
 export const getNewDerivOAuthUrl = async () => {
-    const url = new URL('https://oauth.deriv.com/oauth2/authorize');
-    url.searchParams.set('app_id', String(SAINTDBOT_APP_ID));
-    url.searchParams.set('l', 'en');
-    url.searchParams.set('brand', 'deriv');
-    url.searchParams.set('redirect_uri', window.location.origin);
+    const codeVerifier = generateRandomString(64);
+    const codeChallenge = await generateCodeChallenge(codeVerifier);
+    const state = generateRandomString(32);
+
+    sessionStorage.setItem('deriv_oauth_code_verifier', codeVerifier);
+    sessionStorage.setItem('deriv_oauth_state', state);
+
+    const url = new URL('https://auth.deriv.com/oauth2/auth');
+    url.searchParams.set('client_id', DERIV_CLIENT_ID);
+    url.searchParams.set('response_type', 'code');
+    url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
+    url.searchParams.set('scope', 'read trade account_management trading_information');
+    url.searchParams.set('state', state);
+    url.searchParams.set('code_challenge', codeChallenge);
+    url.searchParams.set('code_challenge_method', 'S256');
+
     return url.toString();
 };
 
