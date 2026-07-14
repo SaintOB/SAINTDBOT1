@@ -58,6 +58,14 @@ export const useOauth2 = ({
     }, []);
 
     useEffect(() => {
+        if (isSaintDbotDomain()) {
+            // SaintDBot uses its own PKCE login button and callback handler.
+            // Do not let Deriv Bot's old silent SSO/SLO logic fire in the background,
+            // because it calls the packaged auth-client without our client_id and causes loops.
+            setIsSingleLoggingIn(false);
+            return;
+        }
+
         const willEventuallySSO = loggedState === 'true' && !isClientAccountsPopulated;
         const willEventuallySLO = loggedState === 'false' && isClientAccountsPopulated;
 
