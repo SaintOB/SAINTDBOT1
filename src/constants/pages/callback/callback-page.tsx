@@ -40,13 +40,14 @@ const pickLoginId = (data: any): string => {
     );
 };
 
-const saveLogin = (loginid: string, token: string, currency = 'USD') => {
+const saveLogin = (loginid: string, token: string, currency = 'USD', isModernOAuth = false) => {
     const clientAccounts: Record<string, any> = {
         [loginid]: {
             loginid,
             token,
             currency,
             is_disabled: 0,
+            is_oauth2: isModernOAuth,
         },
     };
 
@@ -58,7 +59,15 @@ const saveLogin = (loginid: string, token: string, currency = 'USD') => {
     localStorage.setItem('active_loginid', loginid);
     localStorage.setItem('clientAccounts', JSON.stringify(clientAccounts));
     localStorage.setItem('accountsList', JSON.stringify(accountsList));
-    localStorage.setItem('callback_token', JSON.stringify({ loginid, token_saved: true, currency }));
+    localStorage.setItem('callback_token', JSON.stringify({ loginid, token_saved: true, currency, is_oauth2: isModernOAuth }));
+
+    if (isModernOAuth) {
+        // The upgraded OAuth2 access token is not the old Deriv Bot session token.
+        // Keeping logged_state=true makes the legacy Deriv auth-client try silent auth and throw missing client_id errors.
+        Cookies.remove('logged_state');
+        document.cookie = 'logged_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        return;
+    }
 
     Cookies.set('logged_state', 'true', {
         expires: 30,
@@ -101,7 +110,7 @@ const CallbackPage = () => {
     const legacyCurrency = queryParams.get('cur1') || queryParams.get('currency') || 'USD';
 
     if (legacyToken && legacyLoginId) {
-        saveLogin(legacyLoginId, legacyToken, legacyCurrency);
+        saveLogin(legacyLoginId, legacyToken, legacyCurrency, false);
         window.location.replace('/free-bots');
         return null;
     }
@@ -200,7 +209,7 @@ const CallbackPage = () => {
 
                     const realCurrency = profile.currency || profile.account_list?.[0]?.currency || profile.accounts?.[0]?.currency || 'USD';
 
-                    saveLogin(realLoginId, accessToken, realCurrency);
+                    saveLogin(realLoginId, accessToken, realCurrency, true);
                     localStorage.setItem(
                         'deriv_oauth_debug',
                         JSON.stringify({ tokenResponseKeys: Object.keys(data || {}), profileResult, decodedAccessToken, decodedIdToken })
