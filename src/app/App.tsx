@@ -1,7 +1,7 @@
 import { initSurvicate } from '../public-path';
 import { lazy, Suspense } from 'react';
 import React from 'react';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from 'react-router-dom';
 import ChunkLoader from '@/components/loader/chunk-loader';
 import RoutePromptDialog from '@/components/route-prompt-dialog';
 import { crypto_currencies_display_order, fiat_currencies_display_order } from '@/components/shared';
@@ -53,6 +53,7 @@ const router = createBrowserRouter(
     createRoutesFromElements(
         <>
             <Route path='register-app' element={<RegisterApp />} />
+            <Route path='bot-builder' element={<Navigate to='/?from=saint-bots#bot-builder' replace />} />
             <Route
                 path='custom-bots'
                 element={
@@ -84,7 +85,6 @@ const router = createBrowserRouter(
                 <Route path='analysis-tool' element={<AnalysisTool />} />
                 {/* Clean tab routes — no hash, no underscores */}
                 <Route path='dashboard' element={<AppRoot />} />
-                <Route path='bot-builder' element={<AppRoot />} />
                 <Route path='chart' element={<AppRoot />} />
                 <Route path='tutorial' element={<AppRoot />} />
             </Route>
