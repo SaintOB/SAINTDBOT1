@@ -102,6 +102,10 @@ const getLoginIdFromProfile = async (accessToken: string) => {
     return data;
 };
 
+const redirectToBots = () => {
+    window.location.replace(`/free-bots?login=success&t=${Date.now()}`);
+};
+
 const CallbackPage = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const oauthCode = queryParams.get('code');
@@ -111,7 +115,7 @@ const CallbackPage = () => {
 
     if (legacyToken && legacyLoginId) {
         saveLogin(legacyLoginId, legacyToken, legacyCurrency, false);
-        window.location.replace('/free-bots');
+        redirectToBots();
         return null;
     }
 
@@ -135,6 +139,7 @@ const CallbackPage = () => {
     const NewOAuthCallback = () => {
         const [status, setStatus] = useState('Connecting your Deriv account...');
         const [error, setError] = useState('');
+        const [isSuccess, setIsSuccess] = useState(false);
 
         useEffect(() => {
             const exchangeCode = async () => {
@@ -218,8 +223,9 @@ const CallbackPage = () => {
                     sessionStorage.removeItem('deriv_oauth_code_verifier');
                     sessionStorage.removeItem('deriv_oauth_state');
 
-                    setStatus(`Login successful. Login ID: ${realLoginId}`);
-                    window.location.href = '/free-bots';
+                    setIsSuccess(true);
+                    setStatus(`Login successful. Opening Saint Bots...`);
+                    window.setTimeout(redirectToBots, 300);
                 } catch (err) {
                     console.error('[Deriv OAuth Error]', err);
 
@@ -242,10 +248,14 @@ const CallbackPage = () => {
 
                 <Button
                     onClick={() => {
+                        if (isSuccess) {
+                            redirectToBots();
+                            return;
+                        }
                         window.location.href = '/custom-bots';
                     }}
                 >
-                    Return to Login
+                    {isSuccess ? 'Continue to Saint Bots' : 'Return to Login'}
                 </Button>
             </div>
         );
