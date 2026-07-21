@@ -42,6 +42,12 @@ type TApiBaseApi = {
     };
 } & ReturnType<typeof generateDerivApiInstance>;
 
+const isSaintDbotDomain = () =>
+    window.location.hostname.includes('.replit.app') ||
+    window.location.hostname.includes('.binary.sx') ||
+    window.location.hostname === 'teamsaintfx.com' ||
+    window.location.hostname === 'www.teamsaintfx.com';
+
 class APIBase {
     api: TApiBaseApi | null = null;
     token: string = '';
@@ -156,6 +162,39 @@ class APIBase {
         }
     };
 
+    async allowSaintDbotMarketDataWithoutLegacyAuthorize(reason?: unknown) {
+        const loginid = V2GetActiveClientId() || localStorage.getItem('active_loginid') || 'oauth_user';
+        const currency = 'USD';
+        const fallbackAuthData = {
+            loginid,
+            currency,
+            account_list: [
+                {
+                    loginid,
+                    currency,
+                    is_disabled: 0,
+                },
+            ],
+        } as unknown as TAuthData;
+
+        console.warn('[Auth] Legacy authorize is unavailable for the current SaintDBot token. Loading public market data instead.', reason);
+
+        this.account_info = fallbackAuthData;
+        this.account_id = loginid;
+        setAccountList(fallbackAuthData.account_list || []);
+        setAuthData(fallbackAuthData);
+        setIsAuthorized(true);
+        this.is_authorized = true;
+
+        if (!this.has_active_symbols) {
+            this.active_symbols_promise = (this as any).getActiveSymbols?.();
+            await this.active_symbols_promise;
+        }
+
+        setIsAuthorizing(false);
+        return null;
+    }
+
     async authorizeAndSubscribe() {
         const token = V2GetActiveToken();
         if (!token || !this.api) return;
@@ -165,30 +204,22 @@ class APIBase {
         setIsAuthorized(false);
 
         const is_tmb_enabled = window.is_tmb_enabled === true;
-
-        const isSaintDbotDomain =
-            window.location.hostname.includes('.replit.app') ||
-            window.location.hostname.includes('.binary.sx') ||
-            window.location.hostname === 'teamsaintfx.com' ||
-            window.location.hostname === 'www.teamsaintfx.com';
+        const saint_domain = isSaintDbotDomain();
 
         try {
             const { authorize, error } = await this.api.authorize(this.token);
 
             if (error) {
+                if (saint_domain) {
+                    return this.allowSaintDbotMarketDataWithoutLegacyAuthorize(error);
+                }
+
                 if (error.code === 'InvalidToken' && Cookies.get('logged_state') === 'true' && !is_tmb_enabled) {
                     globalObserver.emit('InvalidToken', {
                         error,
                     });
-                } else if (!isSaintDbotDomain) {
-                    clearAuthData();
                 } else {
-                    console.warn(
-                        '[Auth] InvalidToken on SaintDBot domain — keeping session and allowing bot page to load'
-                    );
-                    setIsAuthorized(true);
-                    setIsAuthorizing(false);
-                    return null;
+                    clearAuthData();
                 }
 
                 setIsAuthorizing(false);
@@ -213,15 +244,13 @@ class APIBase {
             // this.getSelfExclusion(); commented this so we dont call it from two places
         } catch (e) {
             console.error('Authorization failed:', e);
-            this.is_authorized = false;
-            const isSaintDbotDomain =
-                window.location.hostname.includes('.replit.app') ||
-                window.location.hostname.includes('.binary.sx') ||
-                window.location.hostname === 'teamsaintfx.com' ||
-                window.location.hostname === 'www.teamsaintfx.com';
-            if (!isSaintDbotDomain) {
-                clearAuthData();
+
+            if (isSaintDbotDomain()) {
+                return this.allowSaintDbotMarketDataWithoutLegacyAuthorize(e);
             }
+
+            this.is_authorized = false;
+            clearAuthData();
             setIsAuthorized(false);
             globalObserver.emit('Error', e);
         } finally {
@@ -296,7 +325,7 @@ class APIBase {
         // Resetting timeout resolvers
         const global_timeouts = globalObserver.getState('global_timeouts') ?? [];
 
-        global_timeouts.forEach((_: unknown, i: number) => {
+        global_timeouts.forEach((_: unknown, i) => {
             clearTimeout(i);
         });
     }
