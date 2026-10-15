@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { generateOAuthURL } from '@/components/shared';
-import { APP_IDS, OAUTH_CLIENT_IDS } from '@/components/shared/utils/config/config';
+import { OAUTH_CLIENT_IDS } from '@/components/shared/utils/config/config';
 import { clearAuthData } from '@/utils/auth-utils';
 import './splash-login.scss';
 
@@ -108,7 +108,6 @@ const SplashLogin = () => {
         url.searchParams.set('response_type', 'code');
         url.searchParams.set('redirect_uri', `${window.location.origin}/callback`);
         url.searchParams.set('scope', 'trade');
-        url.searchParams.set('app_id', String(APP_IDS.TEAMSAINTFX));
         url.searchParams.set('state', state);
         url.searchParams.set('code_challenge', codeChallenge);
         url.searchParams.set('code_challenge_method', 'S256');
