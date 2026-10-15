@@ -3,7 +3,7 @@
     "private": true,
     "version": "0.0.1",
     "engines": {
-        "node": "20.x"
+        "node": "24.x"
     },
     "scripts": {
         "start": "node scripts/oauth-redirect-server.js & rsbuild dev -o",
